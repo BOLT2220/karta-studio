@@ -8,16 +8,16 @@ export const About = () => {
     <PageShell code="P.03 / ABOUT" title="ABOUT">
       <section className="mb-16 slide-up">
         <div className="flex items-end justify-between border-b-[3px] border-foreground pb-4 mb-8">
-          <h1 className="font-display text-7xl md:text-[10rem] leading-[0.85] text-accent">
+          <h1 className="font-display text-5xl md:text-8xl leading-[0.9] text-accent">
             PROFILE
           </h1>
-          <span className="font-tech text-[11px] tracking-[0.3em]">// 履歴</span>
+          <span className="font-tech text-[11px] tracking-[0.3em]">// RECORD</span>
         </div>
 
         <div className="border-[3px] border-foreground">
           {ROWS_PROFILE.map((label, i) => (
             <div key={label} className="grid grid-cols-12 border-b-2 border-foreground last:border-b-0 min-h-[88px]">
-              <div className="col-span-4 md:col-span-3 border-r-2 border-foreground bg-foreground text-background flex items-center justify-between px-4 md:px-6 font-display text-2xl md:text-4xl">
+              <div className="col-span-4 md:col-span-3 border-r-2 border-foreground bg-foreground text-background flex items-center justify-between px-4 md:px-6 font-display text-xl md:text-2xl">
                 <span>{label}</span>
                 <span className="font-tech text-xs text-accent">0{i + 1}</span>
               </div>
@@ -33,16 +33,16 @@ export const About = () => {
 
       <section className="slide-up" style={{ animationDelay: "0.15s" }}>
         <div className="flex items-end justify-between border-b-[3px] border-foreground pb-4 mb-8">
-          <h2 className="font-display text-7xl md:text-[10rem] leading-[0.85] text-accent">
+          <h2 className="font-display text-5xl md:text-8xl leading-[0.9] text-accent">
             VISION
           </h2>
-          <span className="font-tech text-[11px] tracking-[0.3em]">// 思想</span>
+          <span className="font-tech text-[11px] tracking-[0.3em]">// DOCTRINE</span>
         </div>
 
         <div className="border-[3px] border-foreground">
           {ROWS_VISION.map((label, i) => (
             <div key={label} className="grid grid-cols-12 border-b-2 border-foreground last:border-b-0 min-h-[110px]">
-              <div className="col-span-4 md:col-span-3 border-r-2 border-foreground bg-foreground text-background flex items-center justify-between px-4 md:px-6 font-display text-2xl md:text-4xl">
+              <div className="col-span-4 md:col-span-3 border-r-2 border-foreground bg-foreground text-background flex items-center justify-between px-4 md:px-6 font-display text-xl md:text-2xl">
                 <span>{label}</span>
                 <span className="font-tech text-xs text-accent">V.{i + 1}</span>
               </div>

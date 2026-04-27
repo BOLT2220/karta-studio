@@ -20,19 +20,19 @@ export const Header = ({ active, onNavigate }: Props) => {
         {/* Logo */}
         <button
           onClick={() => onNavigate("home")}
-          className="group relative flex items-center gap-3 px-6 py-4 border-r-[3px] border-foreground hover:bg-foreground hover:text-background transition-colors"
+          className="group relative flex items-center gap-2 px-5 py-3 border-r-[3px] border-foreground hover:bg-foreground hover:text-background transition-colors"
         >
-          <span className="font-display text-3xl md:text-4xl leading-none glitch-text" data-text="KARTA">
+          <span className="font-display text-2xl md:text-3xl leading-none glitch-text" data-text="KARTA">
             KARTA
           </span>
-          <span className="font-display text-3xl md:text-4xl leading-none text-accent">
+          <span className="font-display text-2xl md:text-3xl leading-none text-accent">
             ●
           </span>
-          <span className="font-display text-3xl md:text-4xl leading-none glitch-text" data-text="STUDIO">
+          <span className="font-display text-2xl md:text-3xl leading-none glitch-text" data-text="STUDIO">
             STUDIO
           </span>
           <span className="hidden md:block font-tech text-[10px] tracking-[0.3em] text-accent ml-2">
-            / 火 / EST.
+            / EST. /
           </span>
         </button>
 
@@ -73,9 +73,9 @@ export const Header = ({ active, onNavigate }: Props) => {
               {[
                 "INTERNAL PORTAL // PRODUCTION COMMITTEE",
                 "BUILD 04.27 // FRAME 24FPS",
-                "KARTA STUDIO 火 ANIMATION DIVISION",
+                "KARTA STUDIO // ANIMATION DIVISION",
                 "SECURE CHANNEL // RAW RENDER",
-                "監督 // 演出 // 作画",
+                "DIRECTOR // STORYBOARD // KEY ANIMATION",
               ].map((t, j) => (
                 <span key={j} className="px-8 flex items-center gap-3">
                   <span className="text-accent">▲</span>{t}

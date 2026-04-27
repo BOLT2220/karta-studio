@@ -8,11 +8,11 @@ export const Contact = () => {
   return (
     <PageShell code="P.05 / CONTACT" title="CONTACT">
       <div className="flex items-end justify-between border-b-[3px] border-foreground pb-4 mb-10">
-        <h1 className="font-display text-7xl md:text-[12rem] leading-[0.85]">
+        <h1 className="font-display text-5xl md:text-8xl leading-[0.9]">
           CON<span className="text-accent">/</span>TACT
         </h1>
         <span className="font-tech text-[11px] tracking-[0.3em] hidden md:block">
-          TRANSMIT / 通信
+          TRANSMIT
         </span>
       </div>
 
@@ -56,7 +56,7 @@ export const Contact = () => {
             type="submit"
             onMouseEnter={() => setGlitch(true)}
             onMouseLeave={() => setGlitch(false)}
-            className="relative w-full bg-accent text-background font-display text-6xl md:text-9xl py-10 hover:bg-foreground transition-colors overflow-hidden"
+            className="relative w-full bg-accent text-background font-display text-4xl md:text-7xl py-8 hover:bg-foreground transition-colors overflow-hidden"
           >
             <span className="glitch-text" data-text="SEND ▲">SEND ▲</span>
             {glitch && (
