@@ -17,7 +17,7 @@ export const Background = () => {
 
       {/* Floating tech tags */}
       <span className="floating-tag top-[18%] left-[4%]">// FRAME_001</span>
-      <span className="floating-tag top-[68%] left-[2%]" style={{ animationDelay: "1.2s" }}>// CH_火</span>
+      <span className="floating-tag top-[68%] left-[2%]" style={{ animationDelay: "1.2s" }}>// CH_FIRE</span>
       <span className="floating-tag top-[28%] right-[3%]" style={{ animationDelay: "0.8s" }}>RENDER ▲ 24fps</span>
       <span className="floating-tag bottom-[12%] right-[5%]" style={{ animationDelay: "2s" }}>SEC // KARTA</span>
 
