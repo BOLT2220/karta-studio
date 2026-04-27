@@ -1,16 +1,35 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+import { useState } from "react";
+import { Background } from "@/components/karta/Background";
+import { Header } from "@/components/karta/Header";
+import { Footer } from "@/components/karta/Footer";
+import { Home } from "@/pages/karta/Home";
+import { Works } from "@/pages/karta/Works";
+import { About } from "@/pages/karta/About";
+import { Blog } from "@/pages/karta/Blog";
+import { Contact } from "@/pages/karta/Contact";
 
-// IMPORTANT: Fully REPLACE this with your own code
-const PlaceholderIndex = () => {
-  // PLACEHOLDER: Replace this entire return statement with the user's app.
-  // The inline background color is intentionally not part of the design system.
+export type PageId = "home" | "works" | "about" | "blog" | "contact";
+
+const Index = () => {
+  const [page, setPage] = useState<PageId>("home");
+
+  const handleNavigate = (p: PageId) => {
+    setPage(p);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
   return (
-    <div className="flex min-h-screen items-center justify-center" style={{ backgroundColor: '#fcfbf8' }}>
-      <img data-lovable-blank-page-placeholder="REMOVE_THIS" src="/placeholder.svg" alt="Your app will live here!" />
+    <div className="relative min-h-screen bg-background text-foreground">
+      <Background />
+      <Header active={page} onNavigate={handleNavigate} />
+      {page === "home" && <Home />}
+      {page === "works" && <Works />}
+      {page === "about" && <About />}
+      {page === "blog" && <Blog />}
+      {page === "contact" && <Contact />}
+      <Footer />
     </div>
   );
 };
-
-const Index = PlaceholderIndex;
 
 export default Index;
