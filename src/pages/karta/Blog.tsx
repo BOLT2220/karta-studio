@@ -4,11 +4,11 @@ export const Blog = () => {
   return (
     <PageShell code="P.04 / BLOG" title="BLOG">
       <div className="flex items-end justify-between border-b-[3px] border-foreground pb-4 mb-10">
-        <h1 className="font-display text-7xl md:text-[12rem] leading-[0.85]">
+        <h1 className="font-display text-5xl md:text-8xl leading-[0.9]">
           NEWS<span className="text-accent">.</span>
         </h1>
         <span className="font-tech text-[11px] tracking-[0.3em] hidden md:block">
-          DISPATCH / 報告
+          DISPATCH
         </span>
       </div>
 

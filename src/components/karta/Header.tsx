@@ -73,21 +73,14 @@ export const Header = ({ active, onNavigate }: Props) => {
               {[
                 "INTERNAL PORTAL // PRODUCTION COMMITTEE",
                 "BUILD 04.27 // FRAME 24FPS",
-                "KARTA STUDIO 火 ANIMATION DIVISION",
+                "KARTA STUDIO // ANIMATION DIVISION",
                 "SECURE CHANNEL // RAW RENDER",
-                "監督 // 演出 // 作画",
+                "DIRECTOR // STORYBOARD // KEY ANIMATION",
               ].map((t, j) => (
                 <span key={j} className="px-8 flex items-center gap-3">
                   <span className="text-accent">▲</span>{t}
                 </span>
               ))}
-            </div>
-          ))}
-        </div>
-      </div>
-    </header>
-  );
-};
             </div>
           ))}
         </div>

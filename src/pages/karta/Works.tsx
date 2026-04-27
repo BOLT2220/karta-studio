@@ -8,11 +8,11 @@ export const Works = () => {
   return (
     <PageShell code="P.02 / WORKS" title="WORKS">
       <div className="flex items-end justify-between border-b-[3px] border-foreground pb-4 mb-10">
-        <h1 className="font-display text-7xl md:text-[12rem] leading-[0.85]">
+        <h1 className="font-display text-5xl md:text-8xl leading-[0.9]">
           WORKS<span className="text-accent">.</span>
         </h1>
         <span className="font-tech text-[11px] tracking-[0.3em] hidden md:block">
-          ARCHIVE / 作品集
+          ARCHIVE
         </span>
       </div>
 
@@ -25,7 +25,7 @@ export const Works = () => {
               <button
                 key={f}
                 onClick={() => setFilter(f)}
-                className={`group relative text-left w-full px-4 py-5 border-b-2 border-foreground last:border-b-0 font-display text-4xl md:text-6xl leading-none transition-all duration-300 ${
+                className={`group relative text-left w-full px-4 py-4 border-b-2 border-foreground last:border-b-0 font-display text-2xl md:text-3xl leading-none transition-all duration-300 ${
                   filter === f
                     ? "bg-foreground text-accent"
                     : "text-accent hover:bg-accent hover:text-background hover:scale-[1.03] hover:translate-x-2"
