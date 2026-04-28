@@ -1,7 +1,13 @@
 import { PageShell } from "@/components/karta/PageShell";
 import { useState } from "react";
 
-const SIDE_ROWS = ["MAIL", "STUDIO", "PRESS", "RECRUIT", "SOCIAL"];
+const SIDE_ROWS: { label: string; value?: string }[] = [
+  { label: "MAIL", value: "contact@kartastudio.com" },
+  { label: "HQ", value: "Delhi, India" },
+  { label: "PRESS" },
+  { label: "RECRUIT" },
+  { label: "SOCIAL" },
+];
 
 export const Contact = () => {
   const [glitch, setGlitch] = useState(false);
@@ -73,15 +79,21 @@ export const Contact = () => {
           <div className="font-tech text-[11px] tracking-[0.35em] text-accent mb-4">▲ CHANNELS</div>
           <div className="border-[3px] border-foreground">
             {SIDE_ROWS.map((r, i) => (
-              <div key={r} className="border-b-2 border-foreground last:border-b-0">
+              <div key={r.label} className="border-b-2 border-foreground last:border-b-0">
                 <div className="bg-foreground text-background px-4 py-3 flex items-center justify-between font-display text-xl">
-                  <span>{r}</span>
+                  <span>{r.label}</span>
                   <span className="font-tech text-[10px] text-accent">C.{i + 1}</span>
                 </div>
                 <div className="p-3">
-                  <div className="h-12 pulse-wire flex items-center px-3 font-tech text-[10px] tracking-[0.3em] text-foreground/40">
-                    ▸ EMPTY
-                  </div>
+                  {r.value ? (
+                    <div className="h-12 border-2 border-accent flex items-center px-3 font-tech text-[11px] tracking-[0.2em] break-all">
+                      {r.value}
+                    </div>
+                  ) : (
+                    <div className="h-12 pulse-wire flex items-center px-3 font-tech text-[10px] tracking-[0.3em] text-foreground/40">
+                      ▸ EMPTY
+                    </div>
+                  )}
                 </div>
               </div>
             ))}

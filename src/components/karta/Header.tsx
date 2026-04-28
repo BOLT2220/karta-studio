@@ -1,4 +1,5 @@
 import { PageId } from "@/pages/Index";
+import { useTheme } from "@/hooks/use-theme";
 
 const NAV: { id: PageId; label: string }[] = [
   { id: "home", label: "HOME" },
@@ -14,6 +15,9 @@ interface Props {
 }
 
 export const Header = ({ active, onNavigate }: Props) => {
+  const { theme, toggle } = useTheme();
+  const isDark = theme === "dark";
+
   return (
     <header className="sticky top-0 z-50 bg-background border-b-[3px] border-foreground">
       <div className="flex items-stretch justify-between">
@@ -48,21 +52,52 @@ export const Header = ({ active, onNavigate }: Props) => {
               {n.label}
             </button>
           ))}
+
+          {/* Theme toggle */}
+          <button
+            onClick={toggle}
+            aria-label="Toggle dark mode"
+            className="flex items-center gap-3 px-5 border-l-[3px] border-foreground hover:bg-foreground hover:text-background transition-colors group"
+          >
+            <span className={`font-display text-sm tracking-[0.2em] ${!isDark ? "text-accent" : "opacity-40"}`}>
+              LIGHT
+            </span>
+            <span className="relative inline-flex h-6 w-12 items-center border-2 border-foreground group-hover:border-background">
+              <span
+                className={`absolute top-0 bottom-0 w-[20px] bg-accent transition-all ${
+                  isDark ? "left-[calc(100%-20px)]" : "left-0"
+                }`}
+              />
+            </span>
+            <span className={`font-display text-sm tracking-[0.2em] ${isDark ? "text-accent" : "opacity-40"}`}>
+              DARK
+            </span>
+          </button>
+
           <div className="flex items-center px-6 border-l-[3px] border-foreground bg-foreground text-background font-tech text-xs tracking-[0.25em]">
             REC ●
           </div>
         </nav>
 
-        {/* Mobile selector */}
-        <select
-          value={active}
-          onChange={(e) => onNavigate(e.target.value as PageId)}
-          className="md:hidden font-display text-lg bg-background border-l-2 border-foreground px-4"
-        >
-          {NAV.map((n) => (
-            <option key={n.id} value={n.id}>{n.label}</option>
-          ))}
-        </select>
+        {/* Mobile: toggle + selector */}
+        <div className="flex md:hidden items-stretch">
+          <button
+            onClick={toggle}
+            aria-label="Toggle dark mode"
+            className="px-3 border-l-2 border-foreground font-tech text-[10px] tracking-[0.2em]"
+          >
+            {isDark ? "DARK" : "LIGHT"}
+          </button>
+          <select
+            value={active}
+            onChange={(e) => onNavigate(e.target.value as PageId)}
+            className="font-display text-lg bg-background border-l-2 border-foreground px-3"
+          >
+            {NAV.map((n) => (
+              <option key={n.id} value={n.id}>{n.label}</option>
+            ))}
+          </select>
+        </div>
       </div>
 
       {/* Marquee strip */}
