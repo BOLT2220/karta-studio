@@ -233,6 +233,114 @@
     color: hsl(var(--blood));
     animation: floatY 6s ease-in-out infinite;
   }
+
+  /* === TEXT VISUAL EFFECTS === */
+  .text-reveal {
+    position: relative;
+    display: inline-block;
+    overflow: hidden;
+    animation: textClip 0.9s cubic-bezier(0.77,0,0.175,1) both;
+  }
+  .text-reveal::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: hsl(var(--blood));
+    transform-origin: left;
+    animation: textBar 0.9s cubic-bezier(0.77,0,0.175,1) both;
+  }
+
+  .text-cascade > span {
+    display: inline-block;
+    opacity: 0;
+    transform: translateY(0.6em) skewY(6deg);
+    filter: blur(4px);
+    animation: letterDrop 0.55s cubic-bezier(0.16,1,0.3,1) both;
+  }
+
+  .text-flicker {
+    animation: textFlicker 4s steps(1) infinite;
+  }
+
+  .text-chroma {
+    display: inline-block;
+    animation: chromaShift 3.5s ease-in-out infinite;
+  }
+
+  .text-glitch-loop {
+    position: relative;
+    display: inline-block;
+  }
+  .text-glitch-loop::before,
+  .text-glitch-loop::after {
+    content: attr(data-text);
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    color: hsl(var(--blood));
+  }
+  .text-glitch-loop::before {
+    clip-path: polygon(0 0, 100% 0, 100% 33%, 0 33%);
+    animation: glitchSlice1 3s steps(2) infinite;
+  }
+  .text-glitch-loop::after {
+    clip-path: polygon(0 66%, 100% 66%, 100% 100%, 0 100%);
+    animation: glitchSlice2 3s steps(2) infinite;
+  }
+
+  .text-blink-underline {
+    position: relative;
+  }
+  .text-blink-underline::after {
+    content: '';
+    position: absolute;
+    left: 0; right: 0; bottom: -4px;
+    height: 2px;
+    background: hsl(var(--blood));
+    animation: blinkBar 1.4s steps(2) infinite;
+  }
+}
+
+@keyframes textClip {
+  0% { clip-path: inset(0 100% 0 0); }
+  100% { clip-path: inset(0 0 0 0); }
+}
+@keyframes textBar {
+  0% { transform: scaleX(0); transform-origin: left; }
+  50% { transform: scaleX(1); transform-origin: left; }
+  50.01% { transform-origin: right; }
+  100% { transform: scaleX(0); transform-origin: right; }
+}
+@keyframes letterDrop {
+  0% { opacity: 0; transform: translateY(0.6em) skewY(6deg); filter: blur(4px); }
+  100% { opacity: 1; transform: translateY(0) skewY(0); filter: blur(0); }
+}
+@keyframes textFlicker {
+  0%, 92%, 100% { opacity: 1; }
+  93% { opacity: 0.3; }
+  94% { opacity: 1; }
+  95% { opacity: 0.6; }
+  96% { opacity: 1; }
+}
+@keyframes chromaShift {
+  0%, 100% { text-shadow: 0 0 0 transparent; }
+  50% { text-shadow: -2px 0 hsl(var(--blood)), 2px 0 hsl(190 100% 55%); }
+}
+@keyframes glitchSlice1 {
+  0%, 90%, 100% { transform: translate(0,0); opacity: 0; }
+  91% { transform: translate(-3px, -1px); opacity: 0.9; }
+  93% { transform: translate(2px, 1px); opacity: 0.9; }
+  95% { transform: translate(-1px, 0); opacity: 0; }
+}
+@keyframes glitchSlice2 {
+  0%, 88%, 100% { transform: translate(0,0); opacity: 0; }
+  89% { transform: translate(2px, 1px); opacity: 0.9; }
+  92% { transform: translate(-3px, -1px); opacity: 0.9; }
+  94% { transform: translate(1px, 0); opacity: 0; }
+}
+@keyframes blinkBar {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.1; }
 }
 
 @keyframes gridPulse {

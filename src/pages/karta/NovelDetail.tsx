@@ -9,8 +9,8 @@ export const NovelDetail = ({ onNavigate }: Props) => {
   return (
     <PageShell code="P.06 / NOVEL_DETAIL" title="NOVEL">
       <div className="flex items-end justify-between border-b-[3px] border-foreground pb-4 mb-10">
-        <h1 className="font-display text-5xl md:text-8xl leading-[0.9]">
-          NOVEL<span className="text-accent">.</span>
+        <h1 className="font-display text-5xl md:text-8xl leading-[0.9] text-glitch-loop" data-text="NOVEL.">
+          <span className="text-reveal">NOVEL</span><span className="text-accent text-flicker">.</span>
         </h1>
         <span className="font-tech text-[11px] tracking-[0.3em] hidden md:block">
           ENTRY / DETAIL
@@ -52,8 +52,10 @@ export const NovelDetail = ({ onNavigate }: Props) => {
               ▲ TITLE
             </div>
             <div className="wire-box px-5 py-8 bg-background relative">
-              <div className="font-display text-4xl md:text-6xl leading-[0.95] text-foreground/40">
-                NOVEL TITLE GOES HERE
+              <div className="font-display text-4xl md:text-6xl leading-[0.95] text-foreground/60 text-cascade">
+                {"NOVEL TITLE GOES HERE".split("").map((c, i) => (
+                  <span key={i} style={{ animationDelay: `${i * 0.04}s` }}>{c === " " ? "\u00A0" : c}</span>
+                ))}
               </div>
               <div className="mt-3 font-tech text-[11px] tracking-[0.3em] text-foreground/40">
                 ▸ SUBTITLE / TAGLINE — EMPTY
@@ -74,8 +76,8 @@ export const NovelDetail = ({ onNavigate }: Props) => {
           {/* Episode list */}
           <div>
             <div className="flex items-end justify-between border-b-2 border-foreground pb-2 mb-4">
-              <h2 className="font-display text-3xl md:text-5xl leading-none">
-                EPISODE LIST<span className="text-accent">.</span>
+              <h2 className="font-display text-3xl md:text-5xl leading-none text-blink-underline">
+                <span className="text-chroma">EPISODE LIST</span><span className="text-accent text-flicker">.</span>
               </h2>
               <span className="font-tech text-[11px] tracking-[0.3em]">
                 COUNT / —
