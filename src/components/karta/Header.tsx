@@ -6,6 +6,7 @@ const NAV: { id: PageId; label: string }[] = [
   { id: "works", label: "WORKS" },
   { id: "about", label: "ABOUT" },
   { id: "blog", label: "BLOG" },
+  { id: "novel", label: "NOVEL" },
   { id: "contact", label: "CONTACT" },
 ];
 
