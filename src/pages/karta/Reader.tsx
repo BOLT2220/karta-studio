@@ -24,23 +24,25 @@ export const Reader = ({ onNavigate }: Props) => {
       {/* Reader content */}
       <article className="max-w-3xl mx-auto px-5 md:px-8 py-14 md:py-20">
         {/* Episode meta */}
-        <div className="font-tech text-[11px] tracking-[0.4em] text-accent mb-4">
+        <div className="font-tech text-[11px] tracking-[0.4em] text-accent mb-4 text-flicker">
           EP.001 / NOVEL_TITLE
         </div>
 
         {/* Chapter title */}
-        <h1 className="font-display text-4xl md:text-7xl leading-[0.95] mb-3">
-          CHAPTER TITLE GOES HERE
+        <h1 className="font-display text-4xl md:text-7xl leading-[0.95] mb-3 text-cascade">
+          {"CHAPTER TITLE GOES HERE".split("").map((c, i) => (
+            <span key={i} style={{ animationDelay: `${i * 0.05}s` }}>{c === " " ? "\u00A0" : c}</span>
+          ))}
         </h1>
-        <div className="font-tech text-[11px] tracking-[0.35em] opacity-50 mb-12">
+        <div className="font-tech text-[11px] tracking-[0.35em] opacity-50 mb-12 text-blink-underline inline-block">
           ▸ SUBTITLE / —
         </div>
 
         <div className="border-t-2 border-white/30 mb-10" />
 
         {/* Story body placeholder */}
-        <div className="space-y-6 font-tech text-sm md:text-base leading-[1.9] tracking-wide opacity-70">
-          <p>STORY TEXT WILL BE ADDED LATER.</p>
+        <div className="space-y-6 font-tech text-sm md:text-base leading-[1.9] tracking-wide opacity-80">
+          <p className="text-chroma">STORY TEXT WILL BE ADDED LATER.</p>
           <p className="opacity-40">
             — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — — —
           </p>
