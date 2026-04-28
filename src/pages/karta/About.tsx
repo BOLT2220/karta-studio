@@ -1,7 +1,21 @@
 import { PageShell } from "@/components/karta/PageShell";
 
-const ROWS_PROFILE = ["NAME", "FOUNDED", "DIVISION", "HEADQUARTERS", "STAFF", "SPECIALTY"];
-const ROWS_VISION = ["MISSION", "MANIFESTO", "AESTHETIC", "PROCESS", "OUTPUT"];
+const PROFILE: { label: string; value?: string }[] = [
+  { label: "NAME", value: "KARTA STUDIO" },
+  { label: "FOUNDERS", value: "[Apna Naam] & Ronak" },
+  { label: "ESTABLISHED", value: "2026" },
+  { label: "DIVISION", value: "ANIMATION // MANGA" },
+  { label: "HEADQUARTERS", value: "Delhi, India" },
+  { label: "SPECIALTY" },
+];
+
+const VISION: { label: string; value?: string }[] = [
+  { label: "MISSION", value: "Creating international level mangas from Indian roots." },
+  { label: "VISION", value: "Creating international level mangas from Indian roots." },
+  { label: "MANIFESTO" },
+  { label: "AESTHETIC" },
+  { label: "PROCESS" },
+];
 
 export const About = () => {
   return (
@@ -15,16 +29,22 @@ export const About = () => {
         </div>
 
         <div className="border-[3px] border-foreground">
-          {ROWS_PROFILE.map((label, i) => (
-            <div key={label} className="grid grid-cols-12 border-b-2 border-foreground last:border-b-0 min-h-[88px]">
+          {PROFILE.map((row, i) => (
+            <div key={row.label} className="grid grid-cols-12 border-b-2 border-foreground last:border-b-0 min-h-[88px]">
               <div className="col-span-4 md:col-span-3 border-r-2 border-foreground bg-foreground text-background flex items-center justify-between px-4 md:px-6 font-display text-xl md:text-2xl">
-                <span>{label}</span>
+                <span>{row.label}</span>
                 <span className="font-tech text-xs text-accent">0{i + 1}</span>
               </div>
               <div className="col-span-8 md:col-span-9 relative p-4">
-                <div className="h-full w-full pulse-wire flex items-center px-4 font-tech text-[11px] tracking-[0.35em] text-foreground/40">
-                  ▸ EMPTY_FIELD / READY_FOR_INPUT
-                </div>
+                {row.value ? (
+                  <div className="h-full w-full flex items-center px-4 font-display text-xl md:text-2xl">
+                    {row.value}
+                  </div>
+                ) : (
+                  <div className="h-full w-full pulse-wire flex items-center px-4 font-tech text-[11px] tracking-[0.35em] text-foreground/40">
+                    ▸ EMPTY_FIELD / READY_FOR_INPUT
+                  </div>
+                )}
               </div>
             </div>
           ))}
@@ -40,16 +60,22 @@ export const About = () => {
         </div>
 
         <div className="border-[3px] border-foreground">
-          {ROWS_VISION.map((label, i) => (
-            <div key={label} className="grid grid-cols-12 border-b-2 border-foreground last:border-b-0 min-h-[110px]">
+          {VISION.map((row, i) => (
+            <div key={row.label} className="grid grid-cols-12 border-b-2 border-foreground last:border-b-0 min-h-[110px]">
               <div className="col-span-4 md:col-span-3 border-r-2 border-foreground bg-foreground text-background flex items-center justify-between px-4 md:px-6 font-display text-xl md:text-2xl">
-                <span>{label}</span>
+                <span>{row.label}</span>
                 <span className="font-tech text-xs text-accent">V.{i + 1}</span>
               </div>
               <div className="col-span-8 md:col-span-9 relative p-4">
-                <div className="h-full w-full pulse-wire flex items-center px-4 font-tech text-[11px] tracking-[0.35em] text-foreground/40">
-                  ▸ DRAFT_ZONE / RAW
-                </div>
+                {row.value ? (
+                  <div className="h-full w-full flex items-center px-4 font-display text-lg md:text-2xl leading-tight">
+                    {row.value}
+                  </div>
+                ) : (
+                  <div className="h-full w-full pulse-wire flex items-center px-4 font-tech text-[11px] tracking-[0.35em] text-foreground/40">
+                    ▸ DRAFT_ZONE / RAW
+                  </div>
+                )}
               </div>
             </div>
           ))}

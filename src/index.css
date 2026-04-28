@@ -39,6 +39,34 @@
     --ink: 0 0% 0%;
     --paper: 0 0% 100%;
     --grid-line: 0 100% 41%;
+    --grid-glow: 0 100% 41% / 0;
+  }
+
+  .dark {
+    --background: 0 0% 4%;         /* #0a0a0a */
+    --foreground: 0 0% 100%;
+    --card: 0 0% 4%;
+    --card-foreground: 0 0% 100%;
+    --popover: 0 0% 4%;
+    --popover-foreground: 0 0% 100%;
+    --primary: 0 0% 100%;
+    --primary-foreground: 0 0% 4%;
+    --secondary: 0 0% 10%;
+    --secondary-foreground: 0 0% 100%;
+    --muted: 0 0% 10%;
+    --muted-foreground: 0 0% 70%;
+    --accent: 0 100% 52%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 100% 52%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 0 0% 100%;
+    --input: 0 0% 100%;
+    --ring: 0 100% 52%;
+
+    --blood: 0 100% 55%;
+    --ink: 0 0% 100%;
+    --paper: 0 0% 4%;
+    --grid-line: 0 100% 55%;
   }
 }
 
@@ -71,6 +99,15 @@
       linear-gradient(to bottom, hsl(var(--blood) / 0.18) 1px, transparent 1px);
     background-size: 56px 56px;
     animation: gridPulse 4s ease-in-out infinite, gridShift 30s linear infinite;
+  }
+  .dark .karta-grid {
+    background-image:
+      linear-gradient(to right, hsl(var(--blood) / 0.35) 1px, transparent 1px),
+      linear-gradient(to bottom, hsl(var(--blood) / 0.35) 1px, transparent 1px);
+    filter: drop-shadow(0 0 4px hsl(var(--blood) / 0.6));
+  }
+  .dark .karta-grid-fine {
+    filter: drop-shadow(0 0 2px hsl(var(--blood) / 0.5));
   }
 
   .karta-grid-fine {
