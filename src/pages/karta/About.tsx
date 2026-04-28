@@ -2,7 +2,7 @@ import { PageShell } from "@/components/karta/PageShell";
 
 const PROFILE: { label: string; value?: string }[] = [
   { label: "NAME", value: "KARTA STUDIO" },
-  { label: "FOUNDERS", value: "[Apna Naam] & Ronak" },
+  { label: "FOUNDERS", value: "Sagar & Ronak" },
   { label: "ESTABLISHED", value: "2026" },
   { label: "DIVISION", value: "ANIMATION // MANGA" },
   { label: "HEADQUARTERS", value: "Delhi, India" },
@@ -10,8 +10,8 @@ const PROFILE: { label: string; value?: string }[] = [
 ];
 
 const VISION: { label: string; value?: string }[] = [
-  { label: "MISSION", value: "Creating international level mangas from Indian roots." },
-  { label: "VISION", value: "Creating international level mangas from Indian roots." },
+  { label: "MISSION", value: "Creating international level mangas and anime from Indian roots." },
+  { label: "VISION", value: "Creating international level mangas and anime from Indian roots." },
   { label: "MANIFESTO" },
   { label: "AESTHETIC" },
   { label: "PROCESS" },
