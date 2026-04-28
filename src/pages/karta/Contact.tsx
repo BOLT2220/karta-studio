@@ -2,7 +2,7 @@ import { PageShell } from "@/components/karta/PageShell";
 import { useState } from "react";
 
 const SIDE_ROWS: { label: string; value?: string }[] = [
-  { label: "MAIL", value: "contact@kartastudio.com" },
+  { label: "MAIL", value: "bolt2220yt@gmail.com" },
   { label: "HQ", value: "Delhi, India" },
   { label: "PRESS" },
   { label: "RECRUIT" },
