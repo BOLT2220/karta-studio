@@ -1,5 +1,6 @@
 import { PageShell } from "@/components/karta/PageShell";
 import { PageId } from "@/pages/Index";
+import poster from "@/assets/the-last-glitch-poster.jpeg";
 
 interface Props {
   onNavigate: (p: PageId) => void;
@@ -7,100 +8,110 @@ interface Props {
 
 export const NovelDetail = ({ onNavigate }: Props) => {
   return (
-    <PageShell code="P.06 / NOVEL_DETAIL" title="NOVEL">
-      <div className="flex items-end justify-between border-b-[3px] border-foreground pb-4 mb-10">
-        <h1 className="font-display text-5xl md:text-8xl leading-[0.9] text-glitch-loop" data-text="NOVEL.">
-          <span className="text-reveal">NOVEL</span><span className="text-accent text-flicker">.</span>
+    <PageShell code="P.06 / NOVEL / THE_LAST_GLITCH" title="THE LAST GLITCH">
+      <div className="flex items-end justify-between border-b-[3px] border-foreground pb-4 mb-8">
+        <h1 className="font-display text-4xl md:text-7xl leading-[0.9] text-glitch-loop" data-text="THE LAST GLITCH.">
+          <span className="text-reveal">THE LAST GLITCH</span>
+          <span className="text-accent text-flicker">.</span>
         </h1>
         <span className="font-tech text-[11px] tracking-[0.3em] hidden md:block">
-          ENTRY / DETAIL
+          SERIES / S.001
         </span>
       </div>
 
+      {/* Banner poster */}
+      <div className="wire-box relative overflow-hidden mb-10 bg-background">
+        <div className="absolute inset-0 karta-grid-fine opacity-30 z-10 pointer-events-none" />
+        <div className="scanline-laser z-20" />
+        <img
+          src={poster}
+          alt="The Last Glitch — official series poster"
+          className="w-full h-auto max-h-[70vh] object-cover object-center"
+          loading="eager"
+        />
+        <div className="absolute top-3 left-3 font-tech text-[10px] tracking-[0.3em] text-accent z-20 bg-background/70 px-2 py-1">
+          ▲ KEY VISUAL / 001
+        </div>
+        <div className="absolute bottom-3 right-3 font-tech text-[10px] tracking-[0.3em] text-accent z-20 bg-background/70 px-2 py-1">
+          KARTA // S.001
+        </div>
+      </div>
+
       <div className="grid grid-cols-12 gap-6">
-        {/* Cover image placeholder 2:3 */}
+        {/* Meta sidebar */}
         <aside className="col-span-12 md:col-span-4 slide-right">
-          <div className="font-tech text-[11px] tracking-[0.35em] text-accent mb-3">
-            ▲ COVER / 2:3
+          <div className="wire-box p-4 font-tech text-[11px] tracking-[0.3em] leading-[1.9] bg-background">
+            <div className="text-accent mb-2">// META</div>
+            STATUS / ONGOING<br />
+            GENRE / SCI-FI · HORROR<br />
+            EPISODES / 1<br />
+            ORIGIN / KARTA STUDIO
           </div>
-          <div className="wire-box bg-background aspect-[2/3] relative overflow-hidden">
-            <div className="absolute inset-0 karta-grid-fine opacity-40" />
-            <div className="scanline-laser" />
-            <div className="absolute inset-0 flex items-center justify-center font-tech text-[11px] tracking-[0.4em] text-foreground/40">
-              COVER_IMAGE
-            </div>
-            <div className="absolute top-2 left-2 font-tech text-[10px] tracking-[0.3em] text-accent">
-              N.001
-            </div>
-            <div className="absolute bottom-2 right-2 font-tech text-[10px] tracking-[0.3em] text-accent">
-              ▲ EMPTY
-            </div>
-          </div>
-          <div className="mt-4 wire-box p-3 font-tech text-[10px] tracking-[0.3em] leading-relaxed">
-            <div className="text-accent mb-1">// META</div>
-            STATUS / —<br />
-            GENRE / —<br />
-            VOLUMES / —
+          <div className="mt-4 pulse-wire p-4 font-tech text-[11px] tracking-[0.3em] leading-[1.9]">
+            <div className="text-accent mb-2">// TAGLINE</div>
+            "TAKING THAT ROAD WAS THEIR BIGGEST MISTAKE."
           </div>
         </aside>
 
-        {/* Title + episodes */}
+        {/* Synopsis + Episodes */}
         <section className="col-span-12 md:col-span-8 slide-up space-y-8">
-          {/* Title */}
-          <div>
-            <div className="font-tech text-[11px] tracking-[0.35em] text-accent mb-2">
-              ▲ TITLE
-            </div>
-            <div className="wire-box px-5 py-8 bg-background relative">
-              <div className="font-display text-4xl md:text-6xl leading-[0.95] text-foreground/60 text-cascade">
-                {"NOVEL TITLE GOES HERE".split("").map((c, i) => (
-                  <span key={i} style={{ animationDelay: `${i * 0.04}s` }}>{c === " " ? "\u00A0" : c}</span>
-                ))}
-              </div>
-              <div className="mt-3 font-tech text-[11px] tracking-[0.3em] text-foreground/40">
-                ▸ SUBTITLE / TAGLINE — EMPTY
-              </div>
-            </div>
-          </div>
-
-          {/* Synopsis */}
           <div>
             <div className="font-tech text-[11px] tracking-[0.35em] text-accent mb-2">
               ▲ SYNOPSIS
             </div>
-            <div className="pulse-wire p-5 min-h-[120px] font-tech text-[11px] tracking-[0.25em] text-foreground/40 leading-relaxed">
-              SYNOPSIS_FIELD — EMPTY
+            <div className="wire-box p-5 bg-background font-tech text-[12px] md:text-sm leading-[1.9] tracking-wide">
+              Five friends take a road trip. The road they pick doesn't exist on
+              any map. The GPS shows only one word: <span className="text-accent">404</span>.
+              The brakes fail. A cat with pixel-red eyes appears. The world behind
+              them stops loading. They aren't traveling on this road — they are
+              <span className="text-accent"> inside it</span>.
             </div>
           </div>
 
-          {/* Episode list */}
           <div>
             <div className="flex items-end justify-between border-b-2 border-foreground pb-2 mb-4">
-              <h2 className="font-display text-3xl md:text-5xl leading-none text-blink-underline">
-                <span className="text-chroma">EPISODE LIST</span><span className="text-accent text-flicker">.</span>
+              <h2 className="font-display text-3xl md:text-5xl leading-none">
+                <span className="text-chroma">EPISODE LIST</span>
+                <span className="text-accent text-flicker">.</span>
               </h2>
-              <span className="font-tech text-[11px] tracking-[0.3em]">
-                COUNT / —
-              </span>
+              <span className="font-tech text-[11px] tracking-[0.3em]">COUNT / 01</span>
             </div>
+
             <ul className="border-t-2 border-foreground">
-              {Array.from({ length: 6 }).map((_, i) => (
+              <li
+                onClick={() => onNavigate("reader")}
+                className="grid grid-cols-12 border-b-2 border-foreground group cursor-pointer red-flash transition-all duration-300"
+              >
+                <div className="col-span-3 md:col-span-2 border-r-2 border-foreground/30 px-3 py-5 font-tech text-[11px] tracking-[0.3em] flex items-center">
+                  EP.001
+                </div>
+                <div className="col-span-7 md:col-span-8 px-3 py-5 flex items-center">
+                  <div className="font-display text-xl md:text-3xl leading-none group-hover:text-background">
+                    THE 404 ROAD
+                  </div>
+                </div>
+                <div className="col-span-2 md:col-span-2 px-3 py-5 flex items-center justify-end gap-3 font-tech text-[10px] tracking-[0.3em]">
+                  <span className="hidden md:inline opacity-60 group-hover:opacity-100">READ</span>
+                  <span className="font-display text-2xl text-accent group-hover:text-background">→</span>
+                </div>
+              </li>
+
+              {/* Coming soon placeholders */}
+              {Array.from({ length: 3 }).map((_, i) => (
                 <li
                   key={i}
-                  onClick={() => onNavigate("reader")}
-                  className="grid grid-cols-12 border-b-2 border-foreground group cursor-pointer red-flash transition-all duration-300"
+                  className="grid grid-cols-12 border-b-2 border-foreground opacity-50"
                 >
                   <div className="col-span-3 md:col-span-2 border-r-2 border-foreground/30 px-3 py-4 font-tech text-[11px] tracking-[0.3em] flex items-center">
-                    EP.{String(i + 1).padStart(3, "0")}
+                    EP.{String(i + 2).padStart(3, "0")}
                   </div>
                   <div className="col-span-7 md:col-span-8 px-3 py-4 flex items-center">
-                    <div className="w-full h-10 pulse-wire flex items-center px-3 font-tech text-[11px] tracking-[0.3em] text-foreground/40 group-hover:text-background">
-                      ▸ EPISODE_TITLE — EMPTY
+                    <div className="w-full h-10 pulse-wire flex items-center px-3 font-tech text-[11px] tracking-[0.3em] text-foreground/40">
+                      ▸ COMING SOON
                     </div>
                   </div>
-                  <div className="col-span-2 md:col-span-2 px-3 py-4 flex items-center justify-end gap-3 font-tech text-[10px] tracking-[0.3em]">
-                    <span className="hidden md:inline opacity-60 group-hover:opacity-100">READ</span>
-                    <span className="font-display text-2xl text-accent group-hover:text-background">→</span>
+                  <div className="col-span-2 md:col-span-2 px-3 py-4 flex items-center justify-end font-tech text-[10px] tracking-[0.3em]">
+                    —
                   </div>
                 </li>
               ))}
