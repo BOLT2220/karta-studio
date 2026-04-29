@@ -1,6 +1,12 @@
 import { PageShell } from "@/components/karta/PageShell";
+import { PageId } from "@/pages/Index";
+import tlgPoster from "@/assets/the-last-glitch-banner.jpeg";
 
-export const Home = () => {
+interface HomeProps {
+  onNavigate: (p: PageId) => void;
+}
+
+export const Home = ({ onNavigate }: HomeProps) => {
   return (
     <PageShell code="P.01 / HOME" title="HOME">
       {/* Hero */}
