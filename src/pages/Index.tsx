@@ -9,8 +9,9 @@ import { Blog } from "@/pages/karta/Blog";
 import { Contact } from "@/pages/karta/Contact";
 import { NovelDetail } from "@/pages/karta/NovelDetail";
 import { Reader } from "@/pages/karta/Reader";
+import { IntroSequence } from "@/pages/karta/IntroSequence";
 
-export type PageId = "home" | "works" | "about" | "blog" | "contact" | "novel" | "reader";
+export type PageId = "home" | "works" | "about" | "blog" | "contact" | "novel" | "reader" | "intro";
 
 const Index = () => {
   const [page, setPage] = useState<PageId>("home");
@@ -20,18 +21,21 @@ const Index = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
+  const isImmersive = page === "reader" || page === "intro";
+
   return (
     <div className="relative min-h-screen bg-background text-foreground">
       <Background />
-      <Header active={page} onNavigate={handleNavigate} />
-      {page === "home" && <Home />}
+      {!isImmersive && <Header active={page} onNavigate={handleNavigate} />}
+      {page === "home" && <Home onNavigate={handleNavigate} />}
       {page === "works" && <Works />}
       {page === "about" && <About />}
       {page === "blog" && <Blog />}
       {page === "contact" && <Contact />}
       {page === "novel" && <NovelDetail onNavigate={handleNavigate} />}
+      {page === "intro" && <IntroSequence onNavigate={handleNavigate} />}
       {page === "reader" && <Reader onNavigate={handleNavigate} />}
-      {page !== "reader" && <Footer />}
+      {!isImmersive && <Footer />}
     </div>
   );
 };

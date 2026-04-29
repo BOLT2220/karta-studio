@@ -1,6 +1,12 @@
 import { PageShell } from "@/components/karta/PageShell";
+import { PageId } from "@/pages/Index";
+import tlgPoster from "@/assets/the-last-glitch-banner.jpeg";
 
-export const Home = () => {
+interface HomeProps {
+  onNavigate: (p: PageId) => void;
+}
+
+export const Home = ({ onNavigate }: HomeProps) => {
   return (
     <PageShell code="P.01 / HOME" title="HOME">
       {/* Hero */}
@@ -56,7 +62,43 @@ export const Home = () => {
           <span className="font-tech text-[11px] tracking-[0.3em] text-accent">UPCOMING ▲ 03</span>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {[1, 2, 3].map((i) => (
+          {/* THE LAST GLITCH — featured project card */}
+          <article
+            onClick={() => onNavigate("intro")}
+            className="card-hover wire-box bg-background aspect-[3/4] relative overflow-hidden slide-up cursor-pointer group"
+            style={{ animationDelay: `0.1s` }}
+          >
+            <img
+              src={tlgPoster}
+              alt="The Last Glitch — featured KARTA STUDIO novel"
+              className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+              loading="eager"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-black/40" />
+            <div className="absolute inset-0 karta-grid-fine opacity-30" />
+            <div className="scanline-laser" />
+            <div className="absolute top-3 left-3 font-tech text-[10px] tracking-[0.3em] text-accent bg-black/60 px-2 py-1">
+              PROJECT / 01
+            </div>
+            <div className="absolute top-3 right-3 font-tech text-[10px] tracking-[0.3em] text-white bg-black/60 px-2 py-1">
+              NOVEL
+            </div>
+            <div className="absolute inset-x-0 bottom-0 border-t-2 border-foreground bg-background">
+              <div className="px-4 pt-3 pb-2 flex items-center justify-between">
+                <span className="font-display text-xl md:text-2xl leading-none">THE LAST GLITCH</span>
+                <span className="font-tech text-[10px] tracking-[0.3em] text-accent">EP.01</span>
+              </div>
+              <p className="px-4 pb-3 font-tech text-[10px] leading-[1.6] tracking-wide text-foreground/80">
+                Five friends, one road, and a digital error that rewrites reality. Can they escape the loop before they are processed?
+              </p>
+              <div className="mx-3 mb-3 border-t-2 border-accent flex items-center justify-between px-2 py-2 font-tech text-[10px] tracking-[0.3em] text-accent text-glitch-loop" data-text="▶ INITIATE">
+                ▶ INITIATE
+                <span>→</span>
+              </div>
+            </div>
+          </article>
+
+          {[2, 3].map((i) => (
             <article
               key={i}
               className="card-hover wire-box bg-background aspect-[3/4] relative overflow-hidden slide-up"

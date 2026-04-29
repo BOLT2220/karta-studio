@@ -1,6 +1,6 @@
 import { PageShell } from "@/components/karta/PageShell";
 import { PageId } from "@/pages/Index";
-import poster from "@/assets/the-last-glitch-poster.jpeg";
+import poster from "@/assets/the-last-glitch-banner.jpeg";
 
 interface Props {
   onNavigate: (p: PageId) => void;
@@ -79,7 +79,7 @@ export const NovelDetail = ({ onNavigate }: Props) => {
 
             <ul className="border-t-2 border-foreground">
               <li
-                onClick={() => onNavigate("reader")}
+                onClick={() => onNavigate("intro")}
                 className="grid grid-cols-12 border-b-2 border-foreground group cursor-pointer red-flash transition-all duration-300"
               >
                 <div className="col-span-3 md:col-span-2 border-r-2 border-foreground/30 px-3 py-5 font-tech text-[11px] tracking-[0.3em] flex items-center">
