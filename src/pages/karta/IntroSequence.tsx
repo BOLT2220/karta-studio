@@ -42,7 +42,10 @@ export const IntroSequence = ({ onNavigate }: Props) => {
     return () => clearTimeout(t);
   }, [index, done]);
 
-  const skip = () => setDone(true);
+  const skip = () => {
+    setDone(true);
+    onNavigate("reader");
+  };
 
   return (
     <main key="intro" className="page-enter fixed inset-0 z-50 bg-[#0a0a0a] text-white overflow-hidden">
