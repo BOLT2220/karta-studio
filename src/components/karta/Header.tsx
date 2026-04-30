@@ -121,6 +121,12 @@ export const Header = ({ active, onNavigate }: Props) => {
               <option key={n.id} value={n.id}>{n.label}</option>
             ))}
           </select>
+          <button
+            onClick={() => (user ? signOut() : setAuthOpen(true))}
+            className="px-3 border-l-2 border-foreground font-tech text-[10px] tracking-[0.2em]"
+          >
+            {user ? "OUT" : "LOGIN"}
+          </button>
         </div>
       </div>
 
