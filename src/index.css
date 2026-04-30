@@ -409,3 +409,20 @@
 .marquee-track {
   animation: marqueeX 22s linear infinite;
 }
+
+/* === Blinking COMING SOON badge === */
+@keyframes blinkSoft {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.25; }
+}
+.blink-soft { animation: blinkSoft 1.1s steps(2) infinite; }
+
+@keyframes blinkHard {
+  0%, 49% { opacity: 1; transform: scale(1); }
+  50%, 100% { opacity: 0.4; transform: scale(0.97); }
+}
+.coming-soon-badge {
+  animation: blinkHard 0.9s steps(1) infinite;
+  text-shadow: 0 0 8px hsl(var(--blood) / 0.9), 0 0 16px hsl(var(--blood) / 0.6);
+  box-shadow: 0 0 0 2px hsl(var(--blood)), 0 0 18px hsl(var(--blood) / 0.7);
+}
