@@ -39,13 +39,33 @@ export const StoryEngagement = ({ storyId }: Props) => {
 
   const load = async () => {
     const [{ data: cs }, { count: lc }, { data: myLike }, { data: ratings }, { data: myR }] = await Promise.all([
-      supabase.from("comments").select("id, content, created_at, user_id, profiles(username, display_name, avatar_url)").eq("story_id", storyId).order("created_at", { ascending: false }).limit(100),
+      supabase.from("comments").select("id, content, created_at, user_id").eq("story_id", storyId).order("created_at", { ascending: false }).limit(100),
       supabase.from("likes").select("id", { count: "exact", head: true }).eq("story_id", storyId),
       user ? supabase.from("likes").select("id").eq("story_id", storyId).eq("user_id", user.id).maybeSingle() : Promise.resolve({ data: null }),
       supabase.from("ratings").select("rating").eq("story_id", storyId),
       user ? supabase.from("ratings").select("rating").eq("story_id", storyId).eq("user_id", user.id).maybeSingle() : Promise.resolve({ data: null }),
     ]);
-    setComments((cs ?? []) as CommentRow[]);
+
+    let withProfiles: CommentRow[] = (cs ?? []) as CommentRow[];
+    const userIds = Array.from(new Set((cs ?? []).map((c) => c.user_id)));
+    if (userIds.length > 0) {
+      const { data: profs } = await supabase
+        .from("profiles")
+        .select("id, username, display_name, avatar_url")
+        .in("id", userIds);
+      const map = new Map((profs ?? []).map((p) => [p.id, p]));
+      withProfiles = (cs ?? []).map((c) => ({
+        ...c,
+        profiles: map.get(c.user_id)
+          ? {
+              username: map.get(c.user_id)!.username,
+              display_name: map.get(c.user_id)!.display_name,
+              avatar_url: map.get(c.user_id)!.avatar_url,
+            }
+          : null,
+      }));
+    }
+    setComments(withProfiles);
     setLikes(lc ?? 0);
     setILiked(!!myLike);
     if (ratings && ratings.length > 0) {
