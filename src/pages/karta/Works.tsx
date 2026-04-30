@@ -1,10 +1,12 @@
 import { useState } from "react";
 import { PageShell } from "@/components/karta/PageShell";
+import { ComingSoonModal } from "@/components/karta/ComingSoonModal";
 
 const FILTERS = ["ALL", "2020s", "2010s"];
 
 export const Works = () => {
   const [filter, setFilter] = useState("ALL");
+  const [openModal, setOpenModal] = useState(false);
   return (
     <PageShell code="P.02 / WORKS" title="WORKS">
       <div className="flex items-end justify-between border-b-[3px] border-foreground pb-4 mb-10">
@@ -49,9 +51,11 @@ export const Works = () => {
         {/* Grid */}
         <div className="col-span-12 md:col-span-9 grid grid-cols-2 md:grid-cols-3 gap-5">
           {Array.from({ length: 9 }).map((_, i) => (
-            <article
+            <button
+              type="button"
+              onClick={() => setOpenModal(true)}
               key={i}
-              className="card-hover wire-box bg-background aspect-[3/4] relative overflow-hidden slide-up"
+              className="card-hover wire-box bg-background aspect-[3/4] relative overflow-hidden slide-up text-left cursor-pointer"
               style={{ animationDelay: `${i * 0.05}s` }}
             >
               <div className="absolute inset-0 karta-grid-fine opacity-40" />
@@ -64,10 +68,17 @@ export const Works = () => {
                 <span className="font-display text-xl">— — —</span>
                 <span className="font-tech text-[10px] tracking-[0.3em] text-accent">{filter}</span>
               </div>
-            </article>
+            </button>
           ))}
         </div>
       </div>
+      <ComingSoonModal
+        open={openModal}
+        onOpenChange={setOpenModal}
+        title="ARCHIVE // LOCKED"
+        message="This work is still being rendered. The archive opens soon."
+        code="W/PENDING"
+      />
     </PageShell>
   );
 };

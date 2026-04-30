@@ -1,5 +1,8 @@
+import { useState } from "react";
 import { PageId } from "@/pages/Index";
 import { useTheme } from "@/hooks/use-theme";
+import { useAuth } from "@/hooks/use-auth";
+import { AuthDialog } from "./AuthDialog";
 
 const NAV: { id: PageId; label: string }[] = [
   { id: "home", label: "HOME" },
@@ -17,9 +20,13 @@ interface Props {
 
 export const Header = ({ active, onNavigate }: Props) => {
   const { theme, toggle } = useTheme();
+  const { user, signOut } = useAuth();
+  const [authOpen, setAuthOpen] = useState(false);
   const isDark = theme === "dark";
 
   return (
+    <>
+    <AuthDialog open={authOpen} onOpenChange={setAuthOpen} />
     <header className="sticky top-0 z-50 bg-background border-b-[3px] border-foreground">
       <div className="flex items-stretch justify-between">
         {/* Logo */}
@@ -75,6 +82,22 @@ export const Header = ({ active, onNavigate }: Props) => {
             </span>
           </button>
 
+          {user ? (
+            <button
+              onClick={() => signOut()}
+              className="flex items-center px-5 border-l-[3px] border-foreground font-display text-sm tracking-[0.2em] hover:bg-foreground hover:text-background transition-colors"
+            >
+              ▶ LOGOUT
+            </button>
+          ) : (
+            <button
+              onClick={() => setAuthOpen(true)}
+              className="flex items-center px-5 border-l-[3px] border-foreground font-display text-sm tracking-[0.2em] hover:bg-accent hover:text-background transition-colors"
+            >
+              ▶ LOGIN
+            </button>
+          )}
+
           <div className="flex items-center px-6 border-l-[3px] border-foreground bg-foreground text-background font-tech text-xs tracking-[0.25em]">
             REC ●
           </div>
@@ -98,6 +121,12 @@ export const Header = ({ active, onNavigate }: Props) => {
               <option key={n.id} value={n.id}>{n.label}</option>
             ))}
           </select>
+          <button
+            onClick={() => (user ? signOut() : setAuthOpen(true))}
+            className="px-3 border-l-2 border-foreground font-tech text-[10px] tracking-[0.2em]"
+          >
+            {user ? "OUT" : "LOGIN"}
+          </button>
         </div>
       </div>
 
@@ -122,5 +151,6 @@ export const Header = ({ active, onNavigate }: Props) => {
         </div>
       </div>
     </header>
+    </>
   );
 };
