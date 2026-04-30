@@ -1,4 +1,5 @@
 import { PageId } from "@/pages/Index";
+import { StoryEngagement } from "@/components/karta/StoryEngagement";
 import poster from "@/assets/the-last-glitch-poster.jpeg";
 
 interface Props {
@@ -243,6 +244,11 @@ export const Reader = ({ onNavigate }: Props) => {
           >
             ▲ RETURN TO SERIES PAGE ▲
           </button>
+        </div>
+
+        {/* Comments / Ratings / Likes — wrapped to inherit dark theme variables locally */}
+        <div className="mt-12 text-white" style={{ ["--background" as any]: "0 0% 4%", ["--foreground" as any]: "0 0% 100%" }}>
+          <StoryEngagement storyId="the-last-glitch-ep1" />
         </div>
       </article>
     </main>
