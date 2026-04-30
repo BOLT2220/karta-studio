@@ -4,6 +4,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { lovable } from "@/integrations/lovable/index";
 import { toast } from "sonner";
 import { z } from "zod";
+import { Eye, EyeOff } from "lucide-react";
 
 interface Props {
   open: boolean;
@@ -20,6 +21,7 @@ export const AuthDialog = ({ open, onOpenChange }: Props) => {
   const [password, setPassword] = useState("");
   const [username, setUsername] = useState("");
   const [busy, setBusy] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
 
   const submit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -123,15 +125,26 @@ export const AuthDialog = ({ open, onOpenChange }: Props) => {
             <div className="bg-foreground text-background px-3 py-2 font-tech text-[10px] tracking-[0.3em] flex justify-between">
               <span>PASSWORD</span><span className="text-accent">F.02</span>
             </div>
-            <input
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              className="w-full px-3 py-3 bg-background font-tech text-sm focus:outline-none focus:bg-accent focus:text-background"
-              placeholder="▸ ••••••"
-              maxLength={72}
-              autoComplete={mode === "login" ? "current-password" : "new-password"}
-            />
+            <div className="relative flex items-center bg-background focus-within:bg-accent group/pw">
+              <input
+                type={showPassword ? "text" : "password"}
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                className="w-full px-3 py-3 pr-12 bg-transparent font-tech text-sm focus:outline-none focus:text-background"
+                placeholder="▸ ••••••"
+                maxLength={72}
+                autoComplete={mode === "login" ? "current-password" : "new-password"}
+              />
+              <button
+                type="button"
+                onClick={() => setShowPassword((v) => !v)}
+                aria-label={showPassword ? "Hide password" : "Show password"}
+                className="absolute right-2 top-1/2 -translate-y-1/2 p-2 text-foreground group-focus-within/pw:text-background hover:text-accent group-focus-within/pw:hover:text-foreground transition-colors"
+                tabIndex={-1}
+              >
+                {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+              </button>
+            </div>
           </div>
 
           <button
