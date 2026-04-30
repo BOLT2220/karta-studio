@@ -102,27 +102,69 @@ export const Home = ({ onNavigate }: HomeProps) => {
             </div>
           </article>
 
-          {[2, 3].map((i) => (
-            <article
-              key={i}
-              className="card-hover wire-box bg-background aspect-[3/4] relative overflow-hidden slide-up"
-              style={{ animationDelay: `${i * 0.1}s` }}
-            >
-              <div className="absolute inset-0 karta-grid-fine opacity-50" />
-              <div className="scanline-laser" style={{ animationDelay: `${i * 0.4}s` }} />
-              <div className="absolute top-3 left-3 font-tech text-[10px] tracking-[0.3em] text-accent">PROJECT / 0{i}</div>
-              <div className="absolute top-3 right-3 font-tech text-[10px] tracking-[0.3em]">▲</div>
-              <div className="absolute inset-x-0 bottom-0 border-t-2 border-foreground bg-background">
-                <div className="px-4 py-3 flex items-center justify-between">
-                  <span className="font-display text-2xl">— — —</span>
-                  <span className="font-tech text-[10px] tracking-[0.3em] text-accent">TBA</span>
-                </div>
-                <div className="h-10 border-t border-foreground/30 pulse-wire mx-3 mb-3" />
+          {/* THE BOYZS — coming soon */}
+          <article
+            onClick={() => setBoyzsOpen(true)}
+            className="card-hover wire-box bg-background aspect-[3/4] relative overflow-hidden slide-up cursor-pointer group"
+            style={{ animationDelay: "0.2s" }}
+          >
+            <img
+              src={boyzsPoster}
+              alt="THE BOYZS — coming soon novel"
+              className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+              loading="lazy"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-black/40" />
+            <div className="absolute inset-0 karta-grid-fine opacity-30" />
+            <div className="scanline-laser" />
+            <div className="absolute top-3 left-3 font-tech text-[10px] tracking-[0.3em] text-accent bg-black/60 px-2 py-1">
+              PROJECT / 02
+            </div>
+            <div className="absolute top-3 right-3 coming-soon-badge font-tech text-[10px] tracking-[0.3em] text-white bg-accent px-2 py-1">
+              ● COMING SOON
+            </div>
+            <div className="absolute inset-x-0 bottom-0 border-t-2 border-foreground bg-background">
+              <div className="px-4 pt-3 pb-2 flex items-center justify-between">
+                <span className="font-display text-xl md:text-2xl leading-none">THE BOYZS</span>
+                <span className="font-tech text-[10px] tracking-[0.3em] text-accent">SOON</span>
               </div>
-            </article>
-          ))}
+              <p className="px-4 pb-3 font-tech text-[10px] leading-[1.6] tracking-wide text-foreground/80">
+                NOVEL / ACTION-COMEDY — A new masterpiece is loading. Stay tuned.
+              </p>
+              <div className="mx-3 mb-3 border-t-2 border-accent flex items-center justify-between px-2 py-2 font-tech text-[10px] tracking-[0.3em] text-accent">
+                ▶ PREVIEW
+                <span>→</span>
+              </div>
+            </div>
+          </article>
+
+          {/* TBA placeholder */}
+          <article
+            className="card-hover wire-box bg-background aspect-[3/4] relative overflow-hidden slide-up"
+            style={{ animationDelay: "0.3s" }}
+          >
+            <div className="absolute inset-0 karta-grid-fine opacity-50" />
+            <div className="scanline-laser" style={{ animationDelay: "0.4s" }} />
+            <div className="absolute top-3 left-3 font-tech text-[10px] tracking-[0.3em] text-accent">PROJECT / 03</div>
+            <div className="absolute top-3 right-3 font-tech text-[10px] tracking-[0.3em]">▲</div>
+            <div className="absolute inset-x-0 bottom-0 border-t-2 border-foreground bg-background">
+              <div className="px-4 py-3 flex items-center justify-between">
+                <span className="font-display text-2xl">— — —</span>
+                <span className="font-tech text-[10px] tracking-[0.3em] text-accent">TBA</span>
+              </div>
+              <div className="h-10 border-t border-foreground/30 pulse-wire mx-3 mb-3" />
+            </div>
+          </article>
         </div>
       </section>
+
+      <ComingSoonModal
+        open={boyzsOpen}
+        onOpenChange={setBoyzsOpen}
+        title="THE BOYZS // SIG/404"
+        message="Abhi is par kaam chal raha hai, ye jald hi aayegi! Tayyar raho MASTERPIECE ke liye."
+        code="EP/PRE-PROD"
+      />
     </PageShell>
   );
 };
