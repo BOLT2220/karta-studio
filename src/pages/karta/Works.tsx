@@ -72,6 +72,13 @@ export const Works = () => {
           ))}
         </div>
       </div>
+      <ComingSoonModal
+        open={openModal}
+        onOpenChange={setOpenModal}
+        title="ARCHIVE // LOCKED"
+        message="This work is still being rendered. The archive opens soon."
+        code="W/PENDING"
+      />
     </PageShell>
   );
 };

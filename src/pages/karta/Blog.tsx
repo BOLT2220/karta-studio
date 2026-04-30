@@ -1,6 +1,9 @@
+import { useState } from "react";
 import { PageShell } from "@/components/karta/PageShell";
+import { ComingSoonModal } from "@/components/karta/ComingSoonModal";
 
 export const Blog = () => {
+  const [open, setOpen] = useState(false);
   return (
     <PageShell code="P.04 / BLOG" title="BLOG">
       <div className="flex items-end justify-between border-b-[3px] border-foreground pb-4 mb-10">
@@ -16,6 +19,7 @@ export const Blog = () => {
         {Array.from({ length: 8 }).map((_, i) => (
           <li
             key={i}
+            onClick={() => setOpen(true)}
             className="grid grid-cols-12 border-b-2 border-foreground group cursor-pointer red-flash transition-all duration-300 slide-up"
             style={{ animationDelay: `${i * 0.04}s` }}
           >
@@ -38,6 +42,14 @@ export const Blog = () => {
           </li>
         ))}
       </ul>
+
+      <ComingSoonModal
+        open={open}
+        onOpenChange={setOpen}
+        title="DISPATCH // PENDING"
+        message="This bulletin is still being authored. Tune back in soon."
+        code="N/DRAFT"
+      />
     </PageShell>
   );
 };
