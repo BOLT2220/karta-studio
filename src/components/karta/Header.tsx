@@ -82,6 +82,22 @@ export const Header = ({ active, onNavigate }: Props) => {
             </span>
           </button>
 
+          {user ? (
+            <button
+              onClick={() => signOut()}
+              className="flex items-center px-5 border-l-[3px] border-foreground font-display text-sm tracking-[0.2em] hover:bg-foreground hover:text-background transition-colors"
+            >
+              ▶ LOGOUT
+            </button>
+          ) : (
+            <button
+              onClick={() => setAuthOpen(true)}
+              className="flex items-center px-5 border-l-[3px] border-foreground font-display text-sm tracking-[0.2em] hover:bg-accent hover:text-background transition-colors"
+            >
+              ▶ LOGIN
+            </button>
+          )}
+
           <div className="flex items-center px-6 border-l-[3px] border-foreground bg-foreground text-background font-tech text-xs tracking-[0.25em]">
             REC ●
           </div>
