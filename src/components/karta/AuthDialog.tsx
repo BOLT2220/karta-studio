@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { forwardRef, useState } from "react";
 import { Dialog, DialogContent, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { supabase } from "@/integrations/supabase/client";
 import { lovable } from "@/integrations/lovable/index";
@@ -15,7 +15,21 @@ const emailSchema = z.string().trim().email("Invalid email").max(255);
 const passwordSchema = z.string().min(6, "Min 6 characters").max(72);
 const usernameSchema = z.string().trim().min(2, "Min 2 chars").max(30, "Max 30 chars");
 
-export const AuthDialog = ({ open, onOpenChange }: Props) => {
+const getAuthRedirectUrl = () => {
+  if (typeof window === "undefined") return "/";
+  return `${window.location.origin}/`;
+};
+
+const isEmbeddedPreview = () => {
+  if (typeof window === "undefined") return false;
+  try {
+    return window.self !== window.top;
+  } catch {
+    return true;
+  }
+};
+
+export const AuthDialog = forwardRef<HTMLDivElement, Props>(({ open, onOpenChange }, ref) => {
   const [mode, setMode] = useState<"login" | "signup">("login");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -41,7 +55,7 @@ export const AuthDialog = ({ open, onOpenChange }: Props) => {
           email: emailV.data,
           password: pwV.data,
           options: {
-            emailRedirectTo: window.location.origin,
+            emailRedirectTo: getAuthRedirectUrl(),
             data: { username: userV.data, display_name: userV.data },
           },
         });
@@ -66,22 +80,31 @@ export const AuthDialog = ({ open, onOpenChange }: Props) => {
 
   const google = async () => {
     setBusy(true);
-    const result = await lovable.auth.signInWithOAuth("google", {
-      redirect_uri: window.location.origin,
-    });
-    if (result.error) {
-      toast.error("Google sign-in failed");
+    const redirectTo = getAuthRedirectUrl();
+    try {
+      if (isEmbeddedPreview()) {
+        const result = await lovable.auth.signInWithOAuth("google", { redirect_uri: redirectTo });
+        if (result.error) throw result.error;
+        if (result.redirected) return;
+        onOpenChange(false);
+        return;
+      }
+
+      const { error } = await supabase.auth.signInWithOAuth({
+        provider: "google",
+        options: { redirectTo },
+      });
+      if (error) throw error;
+    } catch (err: any) {
+      toast.error(err.message ?? "Google sign-in failed");
       setBusy(false);
       return;
     }
-    if (result.redirected) return;
-    onOpenChange(false);
-    setBusy(false);
   };
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="bg-background border-[3px] border-foreground p-0 max-w-md">
+      <DialogContent ref={ref} className="bg-background border-[3px] border-foreground p-0 max-w-md">
         <div className="bg-foreground text-background px-4 py-3 flex items-center justify-between border-b-2 border-accent">
           <DialogTitle className="font-display text-2xl tracking-wide">
             {mode === "login" ? "ACCESS // LOGIN" : "REGISTER // INIT"}
@@ -139,8 +162,7 @@ export const AuthDialog = ({ open, onOpenChange }: Props) => {
                 type="button"
                 onClick={() => setShowPassword((v) => !v)}
                 aria-label={showPassword ? "Hide password" : "Show password"}
-                className="absolute right-2 top-1/2 -translate-y-1/2 p-2 text-foreground group-focus-within/pw:text-background hover:text-accent group-focus-within/pw:hover:text-foreground transition-colors"
-                tabIndex={-1}
+                className="absolute right-2 top-1/2 -translate-y-1/2 border-l-2 border-accent/40 p-2 text-foreground group-focus-within/pw:text-background hover:text-accent group-focus-within/pw:hover:text-foreground focus:outline-none focus:ring-2 focus:ring-accent transition-colors"
               >
                 {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
               </button>
@@ -181,4 +203,6 @@ export const AuthDialog = ({ open, onOpenChange }: Props) => {
       </DialogContent>
     </Dialog>
   );
-};
+});
+
+AuthDialog.displayName = "AuthDialog";
