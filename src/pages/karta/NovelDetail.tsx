@@ -1,14 +1,19 @@
+import { useState } from "react";
 import { PageShell } from "@/components/karta/PageShell";
 import { PageId } from "@/pages/Index";
+import { ComingSoonModal } from "@/components/karta/ComingSoonModal";
+import { StoryEngagement } from "@/components/karta/StoryEngagement";
 import poster from "@/assets/the-last-glitch-banner.jpeg";
+import boyzsBanner from "@/assets/the-boyzs-banner.png";
 
 interface Props {
   onNavigate: (p: PageId) => void;
 }
 
 export const NovelDetail = ({ onNavigate }: Props) => {
+  const [boyzsOpen, setBoyzsOpen] = useState(false);
   return (
-    <PageShell code="P.06 / NOVEL / THE_LAST_GLITCH" title="THE LAST GLITCH">
+    <PageShell code="P.06 / NOVEL / SERIES_INDEX" title="NOVEL">
       <div className="flex items-end justify-between border-b-[3px] border-foreground pb-4 mb-8">
         <h1 className="font-display text-4xl md:text-7xl leading-[0.9] text-glitch-loop" data-text="THE LAST GLITCH.">
           <span className="text-reveal">THE LAST GLITCH</span>
