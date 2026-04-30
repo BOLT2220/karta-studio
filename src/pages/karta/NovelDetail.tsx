@@ -14,6 +14,35 @@ export const NovelDetail = ({ onNavigate }: Props) => {
   const [boyzsOpen, setBoyzsOpen] = useState(false);
   return (
     <PageShell code="P.06 / NOVEL / SERIES_INDEX" title="NOVEL">
+      {/* Featured: THE BOYZS banner */}
+      <section className="mb-12 slide-up">
+        <div className="flex items-end justify-between mb-3 font-tech text-[11px] tracking-[0.35em]">
+          <span className="text-accent">▲ FEATURED // INCOMING</span>
+          <span className="coming-soon-badge bg-accent text-white px-2 py-1">● COMING SOON</span>
+        </div>
+        <button
+          onClick={() => setBoyzsOpen(true)}
+          className="block w-full wire-box relative overflow-hidden bg-background group text-left"
+        >
+          <img
+            src={boyzsBanner}
+            alt="THE BOYZS — featured upcoming KARTA STUDIO novel banner"
+            className="w-full h-auto max-h-[55vh] object-cover object-center transition-transform duration-500 group-hover:scale-[1.02]"
+            loading="eager"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-black/20 pointer-events-none" />
+          <div className="absolute inset-0 karta-grid-fine opacity-30 pointer-events-none" />
+          <div className="scanline-laser pointer-events-none" />
+          <div className="absolute bottom-0 inset-x-0 border-t-2 border-foreground bg-background px-4 py-3 flex items-center justify-between">
+            <div>
+              <div className="font-display text-2xl md:text-4xl leading-none">THE BOYZS</div>
+              <div className="font-tech text-[10px] tracking-[0.3em] text-accent mt-1">NOVEL / ACTION-COMEDY</div>
+            </div>
+            <span className="font-display text-xl md:text-2xl text-accent">▶ PREVIEW</span>
+          </div>
+        </button>
+      </section>
+
       <div className="flex items-end justify-between border-b-[3px] border-foreground pb-4 mb-8">
         <h1 className="font-display text-4xl md:text-7xl leading-[0.9] text-glitch-loop" data-text="THE LAST GLITCH.">
           <span className="text-reveal">THE LAST GLITCH</span>
@@ -124,6 +153,16 @@ export const NovelDetail = ({ onNavigate }: Props) => {
           </div>
         </section>
       </div>
+
+      <StoryEngagement storyId="the-last-glitch" />
+
+      <ComingSoonModal
+        open={boyzsOpen}
+        onOpenChange={setBoyzsOpen}
+        title="THE BOYZS // SIG/404"
+        message="Abhi is par kaam chal raha hai, ye jald hi aayegi! Tayyar raho MASTERPIECE ke liye."
+        code="EP/PRE-PROD"
+      />
     </PageShell>
   );
 };
