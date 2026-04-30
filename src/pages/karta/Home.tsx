@@ -11,6 +11,7 @@ interface HomeProps {
 
 export const Home = ({ onNavigate }: HomeProps) => {
   const [boyzsOpen, setBoyzsOpen] = useState(false);
+  const [tbaOpen, setTbaOpen] = useState(false);
   return (
     <PageShell code="P.01 / HOME" title="HOME">
       {/* Hero */}
@@ -75,7 +76,7 @@ export const Home = ({ onNavigate }: HomeProps) => {
             <img
               src={tlgPoster}
               alt="The Last Glitch — featured KARTA STUDIO novel"
-              className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+              className="absolute inset-0 w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-105"
               loading="eager"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-black/40" />
@@ -111,7 +112,7 @@ export const Home = ({ onNavigate }: HomeProps) => {
             <img
               src={boyzsPoster}
               alt="THE BOYZS — coming soon novel"
-              className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+              className="absolute inset-0 w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-105"
               loading="lazy"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-black/40" />
@@ -139,8 +140,10 @@ export const Home = ({ onNavigate }: HomeProps) => {
           </article>
 
           {/* TBA placeholder */}
-          <article
-            className="card-hover wire-box bg-background aspect-[3/4] relative overflow-hidden slide-up"
+          <button
+            type="button"
+            onClick={() => setTbaOpen(true)}
+            className="card-hover wire-box bg-background aspect-[3/4] relative overflow-hidden slide-up text-left"
             style={{ animationDelay: "0.3s" }}
           >
             <div className="absolute inset-0 karta-grid-fine opacity-50" />
@@ -154,7 +157,7 @@ export const Home = ({ onNavigate }: HomeProps) => {
               </div>
               <div className="h-10 border-t border-foreground/30 pulse-wire mx-3 mb-3" />
             </div>
-          </article>
+          </button>
         </div>
       </section>
 
@@ -164,6 +167,13 @@ export const Home = ({ onNavigate }: HomeProps) => {
         title="THE BOYZS // SIG/404"
         message="Abhi is par kaam chal raha hai, ye jald hi aayegi! Tayyar raho MASTERPIECE ke liye."
         code="EP/PRE-PROD"
+      />
+      <ComingSoonModal
+        open={tbaOpen}
+        onOpenChange={setTbaOpen}
+        title="PROJECT // CLASSIFIED"
+        message="This slot is still encrypted. A new KARTA STUDIO transmission is coming soon."
+        code="P/TBA"
       />
     </PageShell>
   );
