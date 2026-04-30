@@ -1,4 +1,5 @@
 import { Dialog, DialogContent, DialogTitle, DialogDescription } from "@/components/ui/dialog";
+import { forwardRef } from "react";
 
 interface Props {
   open: boolean;
@@ -8,16 +9,16 @@ interface Props {
   code?: string;
 }
 
-export const ComingSoonModal = ({
+export const ComingSoonModal = forwardRef<HTMLDivElement, Props>(({
   open,
   onOpenChange,
   title = "TRANSMISSION INCOMING",
   message = "This module is offline. Stand by for the next broadcast.",
   code = "SIG/404",
-}: Props) => {
+}, ref) => {
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="bg-background border-[3px] border-foreground p-0 max-w-lg overflow-hidden">
+      <DialogContent ref={ref} className="bg-background border-[3px] border-foreground p-0 max-w-lg overflow-hidden">
         <div className="bg-foreground text-background px-4 py-3 flex items-center justify-between border-b-2 border-accent">
           <DialogTitle className="font-display text-xl tracking-wide glitch-text" data-text={title}>
             {title}
@@ -53,4 +54,6 @@ export const ComingSoonModal = ({
       </DialogContent>
     </Dialog>
   );
-};
+});
+
+ComingSoonModal.displayName = "ComingSoonModal";

@@ -1,5 +1,6 @@
 import { PageShell } from "@/components/karta/PageShell";
 import { useState } from "react";
+import { ComingSoonModal } from "@/components/karta/ComingSoonModal";
 
 const SIDE_ROWS: { label: string; value?: string }[] = [
   { label: "MAIL", value: "bolt2220yt@gmail.com" },
@@ -11,6 +12,7 @@ const SIDE_ROWS: { label: string; value?: string }[] = [
 
 export const Contact = () => {
   const [glitch, setGlitch] = useState(false);
+  const [open, setOpen] = useState(false);
   return (
     <PageShell code="P.05 / CONTACT" title="CONTACT">
       <div className="flex items-end justify-between border-b-[3px] border-foreground pb-4 mb-10">
@@ -25,7 +27,10 @@ export const Contact = () => {
       <div className="grid grid-cols-12 gap-6">
         {/* Form */}
         <form
-          onSubmit={(e) => e.preventDefault()}
+          onSubmit={(e) => {
+            e.preventDefault();
+            setOpen(true);
+          }}
           className="col-span-12 md:col-span-8 border-[3px] border-foreground slide-up"
         >
           {[
@@ -100,6 +105,13 @@ export const Contact = () => {
           </div>
         </aside>
       </div>
+      <ComingSoonModal
+        open={open}
+        onOpenChange={setOpen}
+        title="TRANSMIT // QUEUED"
+        message="The contact uplink is being wired. For now, use the listed mail channel."
+        code="MSG/PENDING"
+      />
     </PageShell>
   );
 };
