@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, type MouseEvent, type PointerEvent } from "react";
 import { PageId } from "@/pages/Index";
 import poster from "@/assets/the-last-glitch-banner.jpeg";
 
@@ -42,7 +42,7 @@ export const IntroSequence = ({ onNavigate }: Props) => {
     return () => clearTimeout(t);
   }, [index, done]);
 
-  const skip = (event?: React.MouseEvent<HTMLButtonElement> | React.PointerEvent<HTMLButtonElement>) => {
+  const skip = (event?: MouseEvent<HTMLButtonElement> | PointerEvent<HTMLButtonElement>) => {
     event?.preventDefault();
     event?.stopPropagation();
     setDone(true);
