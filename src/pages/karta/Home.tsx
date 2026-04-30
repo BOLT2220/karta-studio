@@ -1,12 +1,16 @@
+import { useState } from "react";
 import { PageShell } from "@/components/karta/PageShell";
 import { PageId } from "@/pages/Index";
+import { ComingSoonModal } from "@/components/karta/ComingSoonModal";
 import tlgPoster from "@/assets/the-last-glitch-banner.jpeg";
+import boyzsPoster from "@/assets/the-boyzs-poster.png";
 
 interface HomeProps {
   onNavigate: (p: PageId) => void;
 }
 
 export const Home = ({ onNavigate }: HomeProps) => {
+  const [boyzsOpen, setBoyzsOpen] = useState(false);
   return (
     <PageShell code="P.01 / HOME" title="HOME">
       {/* Hero */}
