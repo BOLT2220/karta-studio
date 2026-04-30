@@ -20,9 +20,13 @@ interface Props {
 
 export const Header = ({ active, onNavigate }: Props) => {
   const { theme, toggle } = useTheme();
+  const { user, signOut } = useAuth();
+  const [authOpen, setAuthOpen] = useState(false);
   const isDark = theme === "dark";
 
   return (
+    <>
+    <AuthDialog open={authOpen} onOpenChange={setAuthOpen} />
     <header className="sticky top-0 z-50 bg-background border-b-[3px] border-foreground">
       <div className="flex items-stretch justify-between">
         {/* Logo */}
