@@ -129,5 +129,6 @@ export const Header = ({ active, onNavigate }: Props) => {
         </div>
       </div>
     </header>
+    </>
   );
 };
