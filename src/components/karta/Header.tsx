@@ -1,5 +1,8 @@
+import { useState } from "react";
 import { PageId } from "@/pages/Index";
 import { useTheme } from "@/hooks/use-theme";
+import { useAuth } from "@/hooks/use-auth";
+import { AuthDialog } from "./AuthDialog";
 
 const NAV: { id: PageId; label: string }[] = [
   { id: "home", label: "HOME" },
