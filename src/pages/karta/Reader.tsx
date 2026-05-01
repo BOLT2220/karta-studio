@@ -6,7 +6,6 @@ interface Props {
   onNavigate: (p: PageId) => void;
 }
 
-// Story paragraphs for Episode 1: The 404 Road
 const STORY: string[] = [
   "Taking that road was their biggest mistake.",
   "The asphalt stretched endlessly ahead, straight and unnatural, disappearing into the mountains like a snake that had no destination. It didn't curve. It didn't bend. It just… continued.",
@@ -115,40 +114,23 @@ const STORY: string[] = [
   "This wasn't a road. This was a system. A trap. A glitch.",
   "And they weren't traveling on it. They were inside it.",
   "::Loading complete.::",
-  "::Program starting_::",
+  "::Program starting.::",
 ];
 
 const renderParagraph = (text: string, i: number) => {
-  // ::text:: → accent emphasis block
   const isAccent = text.startsWith("::") && text.endsWith("::");
-  const isLast = i === STORY.length - 1;
-
   if (isAccent) {
-    const inner = text.slice(2, -2);
-    // Last line: replace trailing _ with blinking cursor
-    if (isLast && inner.endsWith("_")) {
-      return (
-        <p
-          key={i}
-          className="font-tech text-accent text-base md:text-lg tracking-[0.35em] uppercase text-center my-8 text-flicker"
-        >
-          {inner.slice(0, -1)}
-          <span className="cursor-blink">_</span>
-        </p>
-      );
-    }
     return (
       <p
         key={i}
-        className="font-tech text-accent text-base md:text-lg tracking-[0.35em] uppercase text-center my-8"
+        className="font-display text-accent text-xl md:text-2xl tracking-[0.25em] uppercase text-center my-10"
       >
-        {inner}
+        {text.slice(2, -2)}
       </p>
     );
   }
-
   return (
-    <p key={i} className="text-white/85">
+    <p key={i} className="text-foreground/85">
       {text}
     </p>
   );
@@ -156,15 +138,14 @@ const renderParagraph = (text: string, i: number) => {
 
 export const Reader = ({ onNavigate }: Props) => {
   return (
-    <main key="reader" className="page-enter relative z-10 min-h-screen bg-[#0a0a0a] text-white">
-      {/* Top status strip */}
-      <div className="border-b-2 border-white/30 bg-[#0a0a0a] sticky top-0 z-20 backdrop-blur">
-        <div className="flex items-center justify-between px-4 md:px-6 py-3 font-tech text-[10px] md:text-[11px] tracking-[0.3em] md:tracking-[0.4em]">
-          <span className="text-accent">P.07 / EP.001</span>
-          <span className="hidden md:inline opacity-60">// READING_MODE : ACTIVE</span>
+    <main key="reader" className="page-enter relative z-10 min-h-screen bg-background text-foreground">
+      {/* Top bar */}
+      <div className="border-b hairline sticky top-0 z-20 bg-background/85 backdrop-blur">
+        <div className="max-w-3xl mx-auto px-4 md:px-6 py-3 flex items-center justify-between font-tech text-[11px] tracking-[0.3em]">
+          <span className="text-accent">EP.001 · THE 404 ROAD</span>
           <button
             onClick={() => onNavigate("novel")}
-            className="text-accent hover:text-white transition-colors"
+            className="text-foreground hover:text-accent transition-colors"
           >
             ◀ BACK
           </button>
@@ -172,82 +153,68 @@ export const Reader = ({ onNavigate }: Props) => {
       </div>
 
       {/* Poster banner */}
-      <div className="relative w-full max-w-3xl mx-auto px-4 md:px-0 pt-6">
-        <div className="relative border-2 border-white/40 overflow-hidden">
-          <div className="scanline-laser z-20" />
+      <div className="max-w-3xl mx-auto px-4 md:px-6 pt-8">
+        <div className="card-clean overflow-hidden bg-muted">
           <img
             src={poster}
             alt="The Last Glitch — Episode 1 cover"
-            className="w-full h-auto block"
+            className="w-full h-auto block object-cover object-top"
             loading="eager"
           />
-          <div className="absolute top-2 left-2 font-tech text-[10px] tracking-[0.3em] text-accent bg-black/70 px-2 py-1 z-10">
-            ▲ EP.001 / KEY VISUAL
-          </div>
-          <div className="absolute bottom-2 right-2 font-tech text-[10px] tracking-[0.3em] text-accent bg-black/70 px-2 py-1 z-10">
-            THE LAST GLITCH
-          </div>
         </div>
       </div>
 
       {/* Reader content */}
-      <article className="max-w-2xl mx-auto px-5 md:px-8 py-10 md:py-16">
-        <div className="font-tech text-[11px] tracking-[0.4em] text-accent mb-4 text-flicker">
-          THE LAST GLITCH / EP.001
+      <article className="max-w-2xl mx-auto px-5 md:px-8 py-12 md:py-16">
+        <div className="font-tech text-[11px] tracking-[0.4em] text-accent mb-3">
+          A KARTA STUDIO ORIGINAL SERIES
         </div>
 
-        <h1 className="font-display text-3xl md:text-6xl leading-[0.95] mb-3 text-cascade">
-          {"EPISODE 1: THE 404 ROAD".split("").map((c, i) => (
-            <span key={i} style={{ animationDelay: `${i * 0.04}s` }}>
-              {c === " " ? "\u00A0" : c}
-            </span>
-          ))}
+        <h1 className="font-display text-4xl md:text-6xl leading-[0.95] mb-3 tracking-tight">
+          EPISODE 1: THE 404 ROAD
         </h1>
-        <div className="font-tech text-[11px] tracking-[0.35em] opacity-60 mb-10 text-blink-underline inline-block">
-          ▸ A KARTA STUDIO ORIGINAL SERIES
+        <div className="font-tech text-[11px] tracking-[0.3em] text-muted-foreground mb-8">
+          THE LAST GLITCH
         </div>
 
-        <div className="border-t-2 border-white/30 mb-10" />
+        <div className="border-t hairline mb-10" />
 
-        {/* Story body */}
         <div
-          className="space-y-5 font-tech text-[15px] md:text-base leading-[1.85] tracking-[0.01em]"
-          style={{ fontFamily: "'Inter', 'JetBrains Mono', system-ui, sans-serif" }}
+          className="space-y-5 text-[16px] md:text-[17px] leading-[1.85]"
+          style={{ fontFamily: "'Inter', 'Helvetica Neue', system-ui, sans-serif" }}
         >
           {STORY.map((p, i) => renderParagraph(p, i))}
         </div>
 
-        <div className="border-t-2 border-white/30 mt-16 mb-8" />
+        <div className="border-t hairline mt-16 mb-8" />
 
-        {/* Prev / Next */}
         <div className="grid grid-cols-2 gap-4">
           <button
             disabled
-            className="group border-2 border-white/30 px-4 py-5 text-left opacity-40 cursor-not-allowed"
+            className="border hairline px-4 py-5 text-left opacity-40 cursor-not-allowed"
           >
             <div className="font-tech text-[10px] tracking-[0.4em] mb-2">◀ PREVIOUS</div>
-            <div className="font-display text-xl md:text-3xl leading-none">— —</div>
+            <div className="font-display text-xl md:text-2xl leading-none">— —</div>
           </button>
           <button
             disabled
-            className="group border-2 border-white/30 px-4 py-5 text-right opacity-60 cursor-not-allowed"
+            className="border hairline px-4 py-5 text-right opacity-60 cursor-not-allowed"
           >
             <div className="font-tech text-[10px] tracking-[0.4em] mb-2">NEXT ▶</div>
-            <div className="font-display text-xl md:text-3xl leading-none">SOON</div>
+            <div className="font-display text-xl md:text-2xl leading-none">SOON</div>
           </button>
         </div>
 
         <div className="mt-10 text-center">
           <button
             onClick={() => onNavigate("novel")}
-            className="font-tech text-[11px] tracking-[0.4em] text-accent hover:text-white transition-colors"
+            className="font-tech text-[11px] tracking-[0.4em] text-accent hover:underline"
           >
-            ▲ RETURN TO SERIES PAGE ▲
+            RETURN TO SERIES
           </button>
         </div>
 
-        {/* Comments / Ratings / Likes — wrapped to inherit dark theme variables locally */}
-        <div className="mt-12 text-white" style={{ ["--background" as any]: "0 0% 4%", ["--foreground" as any]: "0 0% 100%" }}>
+        <div className="mt-12">
           <StoryEngagement storyId="the-last-glitch-ep1" />
         </div>
       </article>
