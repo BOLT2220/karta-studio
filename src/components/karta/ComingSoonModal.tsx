@@ -12,43 +12,38 @@ interface Props {
 export const ComingSoonModal = forwardRef<HTMLDivElement, Props>(({
   open,
   onOpenChange,
-  title = "TRANSMISSION INCOMING",
-  message = "This module is offline. Stand by for the next broadcast.",
-  code = "SIG/404",
+  title = "Coming Soon",
+  message = "This module is offline. Stand by for the next update.",
+  code = "SIG / 404",
 }, ref) => {
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent ref={ref} className="bg-background border-[3px] border-foreground p-0 max-w-lg overflow-hidden">
-        <div className="bg-foreground text-background px-4 py-3 flex items-center justify-between border-b-2 border-accent">
-          <DialogTitle className="font-display text-xl tracking-wide glitch-text" data-text={title}>
+      <DialogContent ref={ref} className="bg-background border hairline shadow-2xl p-0 max-w-lg overflow-hidden rounded-none">
+        <div className="bg-accent text-accent-foreground px-5 py-3 flex items-center justify-between">
+          <DialogTitle className="font-display text-xl tracking-wide">
             {title}
           </DialogTitle>
-          <span className="font-tech text-[10px] tracking-[0.3em] text-accent blink-soft">● LIVE</span>
+          <span className="font-tech text-[10px] tracking-[0.3em] coming-dot">● LIVE</span>
         </div>
         <DialogDescription className="sr-only">{message}</DialogDescription>
 
-        <div className="relative p-6">
-          <div className="absolute inset-0 karta-grid-fine opacity-30 pointer-events-none" />
-          <div className="scanline-laser pointer-events-none" />
-
-          <div className="relative space-y-4">
-            <div className="font-tech text-[11px] tracking-[0.35em] text-accent">
-              ▲ {code} / SYSTEM NOTICE
-            </div>
-            <p className="font-display text-2xl md:text-3xl leading-tight">
-              {message}
-            </p>
-            <div className="border-t-2 border-foreground pt-4 flex items-center justify-between">
-              <span className="font-tech text-[10px] tracking-[0.3em] text-foreground/60">
-                STATUS / IN_PRODUCTION
-              </span>
-              <button
-                onClick={() => onOpenChange(false)}
-                className="bg-accent text-background font-display text-lg px-5 py-2 hover:bg-foreground transition-colors"
-              >
-                ACKNOWLEDGE ▶
-              </button>
-            </div>
+        <div className="p-6 space-y-5">
+          <div className="font-tech text-[11px] tracking-[0.35em] text-accent">
+            {code}
+          </div>
+          <p className="font-display text-2xl md:text-3xl leading-tight">
+            {message}
+          </p>
+          <div className="border-t hairline pt-4 flex items-center justify-between">
+            <span className="font-tech text-[10px] tracking-[0.3em] text-muted-foreground">
+              STATUS · IN PRODUCTION
+            </span>
+            <button
+              onClick={() => onOpenChange(false)}
+              className="bg-foreground text-background font-display text-base px-5 py-2 hover:bg-accent transition-colors"
+            >
+              ACKNOWLEDGE ▸
+            </button>
           </div>
         </div>
       </DialogContent>
