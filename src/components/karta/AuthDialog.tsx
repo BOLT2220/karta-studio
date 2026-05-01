@@ -20,15 +20,6 @@ const getAuthRedirectUrl = () => {
   return `${window.location.origin}/`;
 };
 
-const isEmbeddedPreview = () => {
-  if (typeof window === "undefined") return false;
-  try {
-    return window.self !== window.top;
-  } catch {
-    return true;
-  }
-};
-
 export const AuthDialog = forwardRef<HTMLDivElement, Props>(({ open, onOpenChange }, ref) => {
   const [mode, setMode] = useState<"login" | "signup">("login");
   const [email, setEmail] = useState("");
