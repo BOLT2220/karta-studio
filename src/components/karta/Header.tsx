@@ -55,7 +55,7 @@ export const Header = ({ active, onNavigate }: Props) => {
               key={n.id}
               onClick={() => onNavigate(n.id)}
               data-active={active === n.id}
-              className="nav-link font-display text-xl tracking-wider px-6 flex items-center border-l-2 border-foreground/10 hover:text-accent transition-colors"
+              className="nav-link font-display text-base lg:text-lg tracking-[0.22em] px-4 lg:px-6 flex items-center border-l-2 border-foreground/10 hover:text-accent transition-colors"
             >
               {n.label}
             </button>
