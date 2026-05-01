@@ -2,115 +2,85 @@ import { PageShell } from "@/components/karta/PageShell";
 import { useState } from "react";
 import { ComingSoonModal } from "@/components/karta/ComingSoonModal";
 
-const SIDE_ROWS: { label: string; value?: string }[] = [
-  { label: "MAIL", value: "bolt2220yt@gmail.com" },
-  { label: "HQ", value: "Delhi, India" },
-  { label: "PRESS" },
-  { label: "RECRUIT" },
-  { label: "SOCIAL" },
+const CHANNELS: { label: string; value: string }[] = [
+  { label: "Mail",    value: "bolt2220yt@gmail.com" },
+  { label: "HQ",      value: "Delhi, India" },
+  { label: "Press",   value: "press@kartastudio.in" },
+  { label: "Recruit", value: "recruit@kartastudio.in" },
 ];
 
 export const Contact = () => {
-  const [glitch, setGlitch] = useState(false);
   const [open, setOpen] = useState(false);
-  return (
-    <PageShell code="P.05 / CONTACT" title="CONTACT">
-      <div className="flex items-end justify-between border-b-[3px] border-foreground pb-4 mb-10">
-        <h1 className="font-display text-5xl md:text-8xl leading-[0.9]">
-          CON<span className="text-accent">/</span>TACT
-        </h1>
-        <span className="font-tech text-[11px] tracking-[0.3em] hidden md:block">
-          TRANSMIT
-        </span>
-      </div>
 
-      <div className="grid grid-cols-12 gap-6">
+  return (
+    <PageShell title="CONTACT">
+      <div className="grid grid-cols-12 gap-10 md:gap-16">
         {/* Form */}
         <form
-          onSubmit={(e) => {
-            e.preventDefault();
-            setOpen(true);
-          }}
-          className="col-span-12 md:col-span-8 border-[3px] border-foreground slide-up"
+          onSubmit={(e) => { e.preventDefault(); setOpen(true); }}
+          className="col-span-12 md:col-span-8 slide-up space-y-6"
         >
           {[
-            { label: "NAME", code: "F.01" },
-            { label: "ORG", code: "F.02" },
-            { label: "MAIL", code: "F.03" },
-            { label: "SUBJECT", code: "F.04" },
+            { name: "name",    label: "Name" },
+            { name: "org",     label: "Organisation" },
+            { name: "mail",    label: "Email" },
+            { name: "subject", label: "Subject" },
           ].map((f) => (
-            <div key={f.label} className="grid grid-cols-12 border-b-2 border-foreground">
-              <div className="col-span-4 md:col-span-3 bg-foreground text-background flex items-center justify-between px-4 py-5 font-display text-2xl">
-                <span>{f.label}</span>
-                <span className="font-tech text-xs text-accent">{f.code}</span>
-              </div>
+            <div key={f.name} className="grid grid-cols-12 gap-3 items-center">
+              <label className="col-span-12 md:col-span-3 font-display text-base tracking-wide">
+                {f.label}
+              </label>
               <input
-                type="text"
-                className="col-span-8 md:col-span-9 px-4 py-5 bg-background font-tech text-sm tracking-[0.2em] focus:outline-none focus:bg-accent focus:text-background placeholder:text-foreground/30"
-                placeholder="▸ INPUT_HERE"
+                type={f.name === "mail" ? "email" : "text"}
+                required
+                className="col-span-12 md:col-span-9 border-b hairline bg-transparent py-3 text-base focus:outline-none focus:border-accent"
+                placeholder="—"
               />
             </div>
           ))}
-          <div className="grid grid-cols-12 border-b-2 border-foreground">
-            <div className="col-span-4 md:col-span-3 bg-foreground text-background flex items-center justify-between px-4 py-5 font-display text-2xl">
-              <span>MSG</span>
-              <span className="font-tech text-xs text-accent">F.05</span>
-            </div>
+
+          <div className="grid grid-cols-12 gap-3">
+            <label className="col-span-12 md:col-span-3 font-display text-base tracking-wide pt-3">
+              Message
+            </label>
             <textarea
               rows={6}
-              className="col-span-8 md:col-span-9 px-4 py-5 bg-background font-tech text-sm tracking-[0.2em] focus:outline-none focus:bg-accent focus:text-background placeholder:text-foreground/30 resize-none"
-              placeholder="▸ MESSAGE_BODY"
+              required
+              className="col-span-12 md:col-span-9 border hairline bg-transparent p-4 text-base focus:outline-none focus:border-accent resize-none"
+              placeholder="Write your message…"
             />
           </div>
 
-          <button
-            type="submit"
-            onMouseEnter={() => setGlitch(true)}
-            onMouseLeave={() => setGlitch(false)}
-            className="relative w-full bg-accent text-background font-display text-4xl md:text-7xl py-8 hover:bg-foreground transition-colors overflow-hidden"
-          >
-            <span className="glitch-text" data-text="SEND ▲">SEND ▲</span>
-            {glitch && (
-              <>
-                <span className="absolute inset-0 flex items-center justify-center text-foreground/80 translate-x-1 -translate-y-1">SEND ▲</span>
-                <span className="absolute inset-0 flex items-center justify-center text-background/40 -translate-x-2 translate-y-1">SEND ▲</span>
-              </>
-            )}
-          </button>
+          <div className="flex justify-end pt-4">
+            <button
+              type="submit"
+              className="bg-accent text-accent-foreground px-10 py-4 font-display text-lg tracking-[0.2em] hover:bg-foreground transition-colors"
+            >
+              SEND ▸
+            </button>
+          </div>
         </form>
 
         {/* Sidebar table */}
         <aside className="col-span-12 md:col-span-4 slide-up" style={{ animationDelay: "0.15s" }}>
-          <div className="font-tech text-[11px] tracking-[0.35em] text-accent mb-4">▲ CHANNELS</div>
-          <div className="border-[3px] border-foreground">
-            {SIDE_ROWS.map((r, i) => (
-              <div key={r.label} className="border-b-2 border-foreground last:border-b-0">
-                <div className="bg-foreground text-background px-4 py-3 flex items-center justify-between font-display text-xl">
-                  <span>{r.label}</span>
-                  <span className="font-tech text-[10px] text-accent">C.{i + 1}</span>
-                </div>
-                <div className="p-3">
-                  {r.value ? (
-                    <div className="h-12 border-2 border-accent flex items-center px-3 font-tech text-[11px] tracking-[0.2em] break-all">
-                      {r.value}
-                    </div>
-                  ) : (
-                    <div className="h-12 pulse-wire flex items-center px-3 font-tech text-[10px] tracking-[0.3em] text-foreground/40">
-                      ▸ EMPTY
-                    </div>
-                  )}
-                </div>
+          <div className="font-display text-2xl mb-4">Channels</div>
+          <div className="border-y hairline divide-y hairline">
+            {CHANNELS.map((r) => (
+              <div key={r.label} className="grid grid-cols-12 gap-3 py-4">
+                <div className="col-span-4 font-display text-base">{r.label}</div>
+                <div className="col-span-8 text-sm text-muted-foreground break-all">{r.value}</div>
               </div>
             ))}
           </div>
         </aside>
       </div>
+
       <ComingSoonModal
         open={open}
         onOpenChange={setOpen}
-        title="TRANSMIT // QUEUED"
-        message="The contact uplink is being wired. For now, use the listed mail channel."
-        code="MSG/PENDING"
+        title="Message queued"
+        message="The contact uplink is being wired. For now, please reach us via the listed mail channel."
+        code="MSG / PENDING"
       />
     </PageShell>
   );

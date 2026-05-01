@@ -5,50 +5,27 @@ import { PageId } from "@/pages/Index";
 import tlgPoster from "@/assets/the-last-glitch-banner.jpeg";
 import boyzsPoster from "@/assets/the-boyzs-poster.png";
 
-const FILTERS = ["ALL", "2020s", "2010s"];
+const FILTERS = ["2026", "2027", "Upcoming"] as const;
+type Filter = typeof FILTERS[number];
 
 interface Work {
   code: string;
   title: string;
   category: string;
-  year: string;
-  era: string;
+  year: Filter;
   status: "LIVE" | "SOON" | "ARCHIVE";
   poster?: string;
+  objectPos?: "top" | "center";
   action?: PageId;
 }
 
 const WORKS: Work[] = [
-  {
-    code: "W.001",
-    title: "THE LAST GLITCH",
-    category: "NOVEL / SCI-FI · HORROR",
-    year: "2026",
-    era: "2020s",
-    status: "LIVE",
-    poster: tlgPoster,
-    action: "novel",
-  },
-  {
-    code: "W.002",
-    title: "THE BOYZS",
-    category: "NOVEL / ACTION-COMEDY",
-    year: "2026",
-    era: "2020s",
-    status: "SOON",
-    poster: boyzsPoster,
-  },
-  {
-    code: "W.003",
-    title: "KARTA ARCHIVE",
-    category: "ANTHOLOGY / RAW RENDER",
-    year: "2025",
-    era: "2020s",
-    status: "ARCHIVE",
-  },
-  { code: "W.004", title: "PROJECT // CLASSIFIED", category: "ANIMATION / TBA", year: "2026", era: "2020s", status: "SOON" },
-  { code: "W.005", title: "PROJECT // CLASSIFIED", category: "MANGA / TBA", year: "2025", era: "2020s", status: "SOON" },
-  { code: "W.006", title: "PROJECT // CLASSIFIED", category: "STORYBOARD / TBA", year: "2024", era: "2020s", status: "SOON" },
+  { code: "W.001", title: "THE LAST GLITCH", category: "NOVEL", year: "2026", status: "LIVE", poster: tlgPoster, objectPos: "center", action: "intro" },
+  { code: "W.002", title: "KARTA ARCHIVE",   category: "ANTHOLOGY", year: "2026", status: "ARCHIVE" },
+  { code: "W.003", title: "THE BOYZS",       category: "NOVEL", year: "2027", status: "SOON", poster: boyzsPoster, objectPos: "top" },
+  { code: "W.004", title: "PROJECT // CLASSIFIED", category: "ANIMATION", year: "Upcoming", status: "SOON" },
+  { code: "W.005", title: "PROJECT // CLASSIFIED", category: "MANGA",     year: "Upcoming", status: "SOON" },
+  { code: "W.006", title: "PROJECT // CLASSIFIED", category: "STORYBOARD", year: "Upcoming", status: "SOON" },
 ];
 
 interface Props {
@@ -56,105 +33,116 @@ interface Props {
 }
 
 export const Works = ({ onNavigate }: Props = {}) => {
-  const [filter, setFilter] = useState("ALL");
+  const [filter, setFilter] = useState<Filter | "ALL">("ALL");
   const [openModal, setOpenModal] = useState(false);
-  const [modalTitle, setModalTitle] = useState("ARCHIVE // LOCKED");
+  const [modalTitle, setModalTitle] = useState("ARCHIVE");
 
-  const visible = WORKS.filter((w) => filter === "ALL" || w.era === filter);
+  const visible = WORKS.filter((w) => filter === "ALL" || w.year === filter);
+
+  // Group by year for the timeline display
+  const grouped = (filter === "ALL" ? FILTERS : [filter]).map((y) => ({
+    year: y,
+    items: visible.filter((w) => w.year === y),
+  })).filter((g) => g.items.length > 0);
 
   const handleClick = (w: Work) => {
-    if (w.action && onNavigate) {
-      onNavigate(w.action);
-      return;
-    }
-    setModalTitle(`${w.title} // LOCKED`);
+    if (w.action && onNavigate) { onNavigate(w.action); return; }
+    setModalTitle(w.title);
     setOpenModal(true);
   };
 
   return (
-    <PageShell code="P.02 / WORKS" title="WORKS">
-      <div className="flex items-end justify-between border-b-[3px] border-foreground pb-4 mb-10">
-        <h1 className="font-display text-5xl md:text-8xl leading-[0.9]">
-          WORKS<span className="text-accent">.</span>
-        </h1>
-        <span className="font-tech text-[11px] tracking-[0.3em] hidden md:block">ARCHIVE</span>
-      </div>
-
-      <div className="grid grid-cols-12 gap-6">
-        <aside className="col-span-12 md:col-span-3 slide-right">
-          <div className="font-tech text-[11px] tracking-[0.35em] text-accent mb-4">▲ TIMELINE FILTER</div>
-          <div className="flex md:flex-col gap-2 border-2 border-foreground">
-            {FILTERS.map((f) => (
-              <button
-                key={f}
-                onClick={() => setFilter(f)}
-                className={`group relative text-left w-full px-4 py-4 border-b-2 border-foreground last:border-b-0 font-display text-2xl md:text-3xl leading-none transition-all duration-300 ${
-                  filter === f
-                    ? "bg-foreground text-accent"
-                    : "text-accent hover:bg-accent hover:text-background hover:scale-[1.03] hover:translate-x-2"
-                }`}
-              >
-                {f}
-                <span className="block font-tech text-[10px] tracking-[0.3em] text-foreground/60 mt-1 group-hover:text-background">
-                  ▸ ARCHIVE
-                </span>
-              </button>
-            ))}
-          </div>
-          <div className="mt-6 wire-box p-4 font-tech text-[11px] tracking-[0.25em] leading-relaxed">
-            <div className="text-accent mb-2">// SYS</div>
-            INDEX_OPEN<br />
-            STREAM / RAW<br />
-            ENTRIES / {visible.length.toString().padStart(2, "0")}
-          </div>
-        </aside>
-
-        <div className="col-span-12 md:col-span-9 grid grid-cols-2 md:grid-cols-3 gap-5">
-          {visible.map((w, i) => (
+    <PageShell title="WORKS">
+      {/* Timeline filter */}
+      <div className="border-y hairline mb-12">
+        <div className="flex items-center justify-center gap-6 md:gap-12 py-5 overflow-x-auto">
+          <button
+            onClick={() => setFilter("ALL")}
+            className={`font-display text-2xl md:text-3xl tracking-tight transition-colors ${filter === "ALL" ? "text-accent" : "text-foreground hover:text-accent"}`}
+          >
+            ALL
+          </button>
+          {FILTERS.map((f) => (
             <button
-              type="button"
-              onClick={() => handleClick(w)}
-              key={w.code}
-              className="card-hover wire-box bg-background aspect-[3/4] relative overflow-hidden slide-up text-left cursor-pointer group"
-              style={{ animationDelay: `${i * 0.05}s` }}
+              key={f}
+              onClick={() => setFilter(f)}
+              className={`font-display text-2xl md:text-3xl tracking-tight transition-colors ${filter === f ? "text-accent" : "text-foreground hover:text-accent"}`}
             >
-              {w.poster ? (
-                <img
-                  src={w.poster}
-                  alt={`${w.title} poster`}
-                  className="absolute inset-0 w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-105"
-                  loading="lazy"
-                />
-              ) : (
-                <div className="absolute inset-0 karta-grid-fine opacity-50" />
-              )}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-black/30" />
-              <div className="scanline-laser" style={{ animationDelay: `${(i % 4) * 0.3}s` }} />
-              <div className="absolute top-2 left-2 font-tech text-[10px] tracking-[0.3em] text-accent bg-black/60 px-2 py-1">
-                {w.code}
-              </div>
-              <div className="absolute top-2 right-2 font-tech text-[10px] tracking-[0.3em] text-white bg-black/60 px-2 py-1">
-                {w.status === "LIVE" ? "▶ LIVE" : w.status === "SOON" ? "● SOON" : "■ ARCHIVE"}
-              </div>
-              <div className="absolute inset-x-0 bottom-0 border-t-2 border-foreground bg-background px-3 py-2">
-                <div className="flex items-center justify-between">
-                  <span className="font-display text-base md:text-lg leading-none truncate">{w.title}</span>
-                  <span className="font-tech text-[10px] tracking-[0.3em] text-accent">{w.year}</span>
-                </div>
-                <div className="font-tech text-[9px] tracking-[0.25em] text-foreground/70 mt-1 truncate">
-                  {w.category}
-                </div>
-              </div>
+              {f}
             </button>
           ))}
         </div>
       </div>
+
+      {/* Timeline list */}
+      <div className="space-y-16">
+        {grouped.map(({ year, items }) => (
+          <section key={year} className="grid grid-cols-12 gap-6">
+            <div className="col-span-12 md:col-span-2">
+              <div className="font-display text-5xl md:text-7xl text-foreground leading-none">{year}</div>
+              <div className="mt-2 font-tech text-[11px] tracking-[0.3em] text-muted-foreground">
+                {items.length} {items.length === 1 ? "work" : "works"}
+              </div>
+            </div>
+
+            <div className="col-span-12 md:col-span-10 grid grid-cols-2 md:grid-cols-3 gap-5 md:gap-6">
+              {items.map((w, i) => (
+                <button
+                  type="button"
+                  onClick={() => handleClick(w)}
+                  key={w.code}
+                  className="card-clean text-left overflow-hidden slide-up"
+                  style={{ animationDelay: `${i * 0.05}s` }}
+                >
+                  <div className="relative aspect-[3/4] bg-muted overflow-hidden">
+                    {w.poster ? (
+                      <img
+                        src={w.poster}
+                        alt={`${w.title} poster`}
+                        className={`w-full h-full object-cover ${w.objectPos === "top" ? "object-top" : "object-center"} transition-transform duration-500 hover:scale-[1.03]`}
+                        loading="lazy"
+                      />
+                    ) : (
+                      <div className="w-full h-full flex items-center justify-center text-muted-foreground font-display text-2xl">
+                        — — —
+                      </div>
+                    )}
+                    {w.status === "SOON" && (
+                      <span className="absolute top-3 left-3 bg-accent text-accent-foreground px-2 py-1 font-tech text-[10px] tracking-[0.3em] coming-dot">
+                        ● COMING SOON
+                      </span>
+                    )}
+                    {w.status === "LIVE" && (
+                      <span className="absolute top-3 left-3 bg-foreground text-background px-2 py-1 font-tech text-[10px] tracking-[0.3em]">
+                        ▶ LIVE
+                      </span>
+                    )}
+                  </div>
+                  <div className="px-3 py-3">
+                    <div className="font-display text-base md:text-lg leading-tight truncate">{w.title}</div>
+                    <span className="mt-1 inline-block border border-accent text-accent px-2 py-0.5 font-tech text-[10px] tracking-[0.25em]">
+                      {w.category}
+                    </span>
+                  </div>
+                </button>
+              ))}
+            </div>
+          </section>
+        ))}
+
+        {grouped.length === 0 && (
+          <div className="text-center py-16 font-tech text-sm tracking-[0.3em] text-muted-foreground">
+            ▸ NO WORKS FOR THIS YEAR
+          </div>
+        )}
+      </div>
+
       <ComingSoonModal
         open={openModal}
         onOpenChange={setOpenModal}
         title={modalTitle}
-        message="This work is still being rendered. The archive opens soon."
-        code="W/PENDING"
+        message="Details about this work will be released soon."
+        code="W / PENDING"
       />
     </PageShell>
   );

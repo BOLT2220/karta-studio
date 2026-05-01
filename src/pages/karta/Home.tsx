@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { PageShell } from "@/components/karta/PageShell";
 import { PageId } from "@/pages/Index";
 import { ComingSoonModal } from "@/components/karta/ComingSoonModal";
 import tlgPoster from "@/assets/the-last-glitch-banner.jpeg";
@@ -9,172 +8,155 @@ interface HomeProps {
   onNavigate: (p: PageId) => void;
 }
 
+interface Card {
+  code: string;
+  title: string;
+  category: string;
+  year: string;
+  status: "LIVE" | "SOON" | "TBA";
+  poster?: string;
+  action?: PageId;
+  onClick?: () => void;
+  objectPos?: "top" | "center";
+}
+
 export const Home = ({ onNavigate }: HomeProps) => {
   const [boyzsOpen, setBoyzsOpen] = useState(false);
   const [tbaOpen, setTbaOpen] = useState(false);
+
+  const cards: Card[] = [
+    {
+      code: "W.001",
+      title: "THE LAST GLITCH",
+      category: "NOVEL · SCI-FI / HORROR",
+      year: "2026",
+      status: "LIVE",
+      poster: tlgPoster,
+      action: "intro",
+      objectPos: "center",
+    },
+    {
+      code: "W.002",
+      title: "THE BOYZS",
+      category: "NOVEL · ACTION-COMEDY",
+      year: "2027",
+      status: "SOON",
+      poster: boyzsPoster,
+      onClick: () => setBoyzsOpen(true),
+      objectPos: "top",
+    },
+    {
+      code: "W.003",
+      title: "PROJECT // CLASSIFIED",
+      category: "ANIMATION · TBA",
+      year: "Upcoming",
+      status: "TBA",
+      onClick: () => setTbaOpen(true),
+    },
+  ];
+
   return (
-    <PageShell code="P.01 / HOME" title="HOME">
-      {/* Hero */}
-      <section className="grid grid-cols-12 gap-4 mb-16">
-        <div className="col-span-12 md:col-span-8 slide-up">
-          <div className="font-tech text-xs tracking-[0.4em] text-accent mb-4">
-            ▲ DIVISION 01 — RAW RENDER LIVE
-          </div>
-          <h1 className="font-display text-[14vw] md:text-[7vw] leading-[0.9] tracking-tight">
-            ANI<span className="text-accent">/</span>MATION<br />
-            <span className="text-accent">&amp;</span> MANGA.
-          </h1>
-        </div>
-        <div className="col-span-12 md:col-span-4 slide-up flex flex-col gap-3" style={{ animationDelay: "0.15s" }}>
-          {["DIRECTOR", "STORYBOARD", "KEY ANIMATION", "COMPOSITE"].map((t, i) => (
-            <div key={i} className="flex items-center justify-between border-2 border-foreground px-4 py-3 font-tech text-xs tracking-[0.25em] hover:bg-foreground hover:text-background transition-colors">
-              <span>{t}</span>
-              <span className="text-accent">0{i + 1}</span>
+    <main className="page-enter">
+      {/* Hero — clean, editorial */}
+      <section className="border-b hairline">
+        <div className="max-w-[1400px] mx-auto px-6 md:px-12 py-16 md:py-24 grid grid-cols-12 gap-8">
+          <div className="col-span-12 md:col-span-8 slide-up">
+            <div className="font-tech text-xs tracking-[0.4em] text-accent mb-5">
+              ANIMATION · MANGA · NOVEL — EST. 2026
             </div>
-          ))}
+            <h1 className="font-display text-5xl sm:text-6xl md:text-8xl lg:text-9xl leading-[0.92] tracking-tight">
+              STORIES BUILT<br />
+              <span className="text-accent">FOR THE WORLD</span>,<br />
+              FROM <span className="underline decoration-accent decoration-4 underline-offset-8">INDIA</span>.
+            </h1>
+            <p className="mt-8 max-w-xl text-base md:text-lg text-muted-foreground leading-relaxed">
+              KARTA STUDIO is an independent animation, manga and novel house —
+              crafting international-level series with a distinctly Indian voice.
+            </p>
+          </div>
+          <div className="col-span-12 md:col-span-4 slide-up flex flex-col justify-end gap-3" style={{ animationDelay: "0.15s" }}>
+            {[
+              { k: "DIRECTION", v: "01" },
+              { k: "STORYBOARD", v: "02" },
+              { k: "KEY ANIMATION", v: "03" },
+              { k: "POST / COMPOSITE", v: "04" },
+            ].map((t) => (
+              <div key={t.k} className="flex items-center justify-between border-b hairline py-3 font-tech text-xs tracking-[0.25em]">
+                <span>{t.k}</span>
+                <span className="text-accent">{t.v}</span>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
-      {/* Hero canvas — scanline laser */}
-      <section className="slide-up" style={{ animationDelay: "0.25s" }}>
-        <div className="flex items-center justify-between mb-3 font-tech text-[11px] tracking-[0.35em]">
-          <span>▲ CANVAS_01 / RAW RENDER FEED</span>
-          <span className="text-accent">SCAN_ACTIVE ●</span>
-        </div>
-        <div className="relative wire-box bg-background h-[60vh] overflow-hidden">
-          {/* sub grid */}
-          <div className="absolute inset-0 karta-grid-fine" />
-          {/* scanning laser */}
-          <div className="scanline-laser" />
-          {/* central watermark */}
-          <div className="absolute inset-0 flex items-center justify-center">
-            <span className="font-display text-[18vw] md:text-[12vw] leading-none text-foreground/[0.04] select-none">
-              KARTA
-            </span>
-          </div>
-          {/* HUD */}
-          <div className="absolute top-4 left-4 font-tech text-[10px] tracking-[0.3em] text-accent">FRAME 0247 / 1024</div>
-          <div className="absolute top-4 right-4 font-tech text-[10px] tracking-[0.3em]">XY 1920×1080</div>
-          <div className="absolute bottom-4 left-4 font-tech text-[10px] tracking-[0.3em]">▲ LAYER 04 / KEY</div>
-          <div className="absolute bottom-4 right-4 font-tech text-[10px] tracking-[0.3em] text-accent">REC ●</div>
-        </div>
-      </section>
-
-      {/* Focus area */}
-      <section className="mt-20">
-        <div className="flex items-end justify-between border-b-[3px] border-foreground pb-4 mb-8">
-          <h2 className="font-display text-4xl md:text-6xl">FOCUS</h2>
-          <span className="font-tech text-[11px] tracking-[0.3em] text-accent">UPCOMING ▲ 03</span>
-        </div>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {/* THE LAST GLITCH — featured project card */}
-          <article
-            onClick={() => onNavigate("intro")}
-            className="card-hover wire-box bg-background aspect-[3/4] relative overflow-hidden slide-up cursor-pointer group"
-            style={{ animationDelay: `0.1s` }}
-          >
-            <img
-              src={tlgPoster}
-              alt="The Last Glitch — featured KARTA STUDIO novel"
-              className="absolute inset-0 w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-105"
-              loading="eager"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-black/40" />
-            <div className="absolute inset-0 karta-grid-fine opacity-30" />
-            <div className="scanline-laser" />
-            <div className="absolute top-3 left-3 font-tech text-[10px] tracking-[0.3em] text-accent bg-black/60 px-2 py-1">
-              PROJECT / 01
-            </div>
-            <div className="absolute top-3 right-3 font-tech text-[10px] tracking-[0.3em] text-white bg-black/60 px-2 py-1">
-              NOVEL
-            </div>
-            <div className="absolute inset-x-0 bottom-0 border-t-2 border-foreground bg-background">
-              <div className="px-4 pt-3 pb-2 flex items-center justify-between">
-                <span className="font-display text-xl md:text-2xl leading-none">THE LAST GLITCH</span>
-                <span className="font-tech text-[10px] tracking-[0.3em] text-accent">EP.01</span>
-              </div>
-              <p className="px-4 pb-3 font-tech text-[10px] leading-[1.6] tracking-wide text-foreground/80">
-                Five friends, one road, and a digital error that rewrites reality. Can they escape the loop before they are processed?
-              </p>
-              <div className="mx-3 mb-3 border-t-2 border-accent flex items-center justify-between px-2 py-2 font-tech text-[10px] tracking-[0.3em] text-accent text-glitch-loop" data-text="▶ INITIATE">
-                ▶ INITIATE
-                <span>→</span>
-              </div>
-            </div>
-          </article>
-
-          {/* THE BOYZS — coming soon */}
-          <article
-            onClick={() => setBoyzsOpen(true)}
-            className="card-hover wire-box bg-background aspect-[3/4] relative overflow-hidden slide-up cursor-pointer group"
-            style={{ animationDelay: "0.2s" }}
-          >
-            <img
-              src={boyzsPoster}
-              alt="THE BOYZS — coming soon novel"
-              className="absolute inset-0 w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-105"
-              loading="lazy"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-black/40" />
-            <div className="absolute inset-0 karta-grid-fine opacity-30" />
-            <div className="scanline-laser" />
-            <div className="absolute top-3 left-3 font-tech text-[10px] tracking-[0.3em] text-accent bg-black/60 px-2 py-1">
-              PROJECT / 02
-            </div>
-            <div className="absolute top-3 right-3 coming-soon-badge font-tech text-[10px] tracking-[0.3em] text-white bg-accent px-2 py-1">
-              ● COMING SOON
-            </div>
-            <div className="absolute inset-x-0 bottom-0 border-t-2 border-foreground bg-background">
-              <div className="px-4 pt-3 pb-2 flex items-center justify-between">
-                <span className="font-display text-xl md:text-2xl leading-none">THE BOYZS</span>
-                <span className="font-tech text-[10px] tracking-[0.3em] text-accent">SOON</span>
-              </div>
-              <p className="px-4 pb-3 font-tech text-[10px] leading-[1.6] tracking-wide text-foreground/80">
-                NOVEL / ACTION-COMEDY — A new masterpiece is loading. Stay tuned.
-              </p>
-              <div className="mx-3 mb-3 border-t-2 border-accent flex items-center justify-between px-2 py-2 font-tech text-[10px] tracking-[0.3em] text-accent">
-                ▶ PREVIEW
-                <span>→</span>
-              </div>
-            </div>
-          </article>
-
-          {/* TBA placeholder */}
+      {/* WORKS strip — Madhouse-style */}
+      <section className="max-w-[1400px] mx-auto px-6 md:px-12 py-16 md:py-24">
+        <div className="flex items-end justify-between mb-10">
+          <h2 className="font-display text-4xl md:text-6xl tracking-tight leading-none">WORKS</h2>
           <button
-            type="button"
-            onClick={() => setTbaOpen(true)}
-            className="card-hover wire-box bg-background aspect-[3/4] relative overflow-hidden slide-up text-left"
-            style={{ animationDelay: "0.3s" }}
+            onClick={() => onNavigate("works")}
+            className="font-display text-sm tracking-[0.25em] text-foreground hover:text-accent transition-colors"
           >
-            <div className="absolute inset-0 karta-grid-fine opacity-50" />
-            <div className="scanline-laser" style={{ animationDelay: "0.4s" }} />
-            <div className="absolute top-3 left-3 font-tech text-[10px] tracking-[0.3em] text-accent">PROJECT / 03</div>
-            <div className="absolute top-3 right-3 font-tech text-[10px] tracking-[0.3em]">▲</div>
-            <div className="absolute inset-x-0 bottom-0 border-t-2 border-foreground bg-background">
-              <div className="px-4 py-3 flex items-center justify-between">
-                <span className="font-display text-2xl">— — —</span>
-                <span className="font-tech text-[10px] tracking-[0.3em] text-accent">TBA</span>
-              </div>
-              <div className="h-10 border-t border-foreground/30 pulse-wire mx-3 mb-3" />
-            </div>
+            MORE ▸
           </button>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 md:gap-8">
+          {cards.map((c, i) => (
+            <article
+              key={c.code}
+              onClick={c.onClick ?? (c.action ? () => onNavigate(c.action!) : undefined)}
+              className="card-clean cursor-pointer slide-up overflow-hidden"
+              style={{ animationDelay: `${0.1 + i * 0.08}s` }}
+            >
+              <div className="relative aspect-[3/4] bg-muted overflow-hidden">
+                {c.poster ? (
+                  <img
+                    src={c.poster}
+                    alt={`${c.title} poster`}
+                    className={`w-full h-full object-cover ${c.objectPos === "top" ? "object-top" : "object-center"} transition-transform duration-500 hover:scale-[1.03]`}
+                    loading={i === 0 ? "eager" : "lazy"}
+                  />
+                ) : (
+                  <div className="w-full h-full flex items-center justify-center text-muted-foreground font-display text-3xl">
+                    KARTA
+                  </div>
+                )}
+                {c.status !== "LIVE" && (
+                  <span className="absolute top-3 left-3 bg-accent text-accent-foreground px-2 py-1 font-tech text-[10px] tracking-[0.3em] coming-dot">
+                    ● {c.status === "SOON" ? "COMING SOON" : "TBA"}
+                  </span>
+                )}
+              </div>
+              <div className="px-4 py-4">
+                <div className="font-display text-lg md:text-xl leading-tight">{c.title}</div>
+                <div className="mt-1 inline-block border border-accent text-accent px-2 py-0.5 font-tech text-[10px] tracking-[0.25em]">
+                  {c.category.split("·")[0].trim()}
+                </div>
+                <div className="mt-2 font-tech text-[11px] text-muted-foreground tracking-wide">
+                  {c.category} · {c.year}
+                </div>
+              </div>
+            </article>
+          ))}
         </div>
       </section>
 
       <ComingSoonModal
         open={boyzsOpen}
         onOpenChange={setBoyzsOpen}
-        title="THE BOYZS // SIG/404"
-        message="Abhi is par kaam chal raha hai, ye jald hi aayegi! Tayyar raho MASTERPIECE ke liye."
-        code="EP/PRE-PROD"
+        title="THE BOYZS"
+        message="Currently in pre-production. A new KARTA STUDIO masterpiece is on its way — stay tuned."
+        code="EP / PRE-PROD"
       />
       <ComingSoonModal
         open={tbaOpen}
         onOpenChange={setTbaOpen}
         title="PROJECT // CLASSIFIED"
-        message="This slot is still encrypted. A new KARTA STUDIO transmission is coming soon."
-        code="P/TBA"
+        message="Details about this project will be revealed soon."
+        code="P / TBA"
       />
-    </PageShell>
+    </main>
   );
 };
