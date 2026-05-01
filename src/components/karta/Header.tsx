@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { PageId } from "@/pages/Index";
-import { useTheme } from "@/hooks/use-theme";
 import { useAuth } from "@/hooks/use-auth";
 import { AuthDialog } from "./AuthDialog";
 
@@ -8,7 +7,7 @@ const NAV: { id: PageId; label: string }[] = [
   { id: "home", label: "HOME" },
   { id: "works", label: "WORKS" },
   { id: "about", label: "ABOUT" },
-  { id: "blog", label: "BLOG" },
+  { id: "blog", label: "NEWS" },
   { id: "novel", label: "NOVEL" },
   { id: "contact", label: "CONTACT" },
 ];
@@ -19,138 +18,79 @@ interface Props {
 }
 
 export const Header = ({ active, onNavigate }: Props) => {
-  const { theme, toggle } = useTheme();
   const { user, signOut } = useAuth();
   const [authOpen, setAuthOpen] = useState(false);
-  const isDark = theme === "dark";
 
   return (
     <>
-    <AuthDialog open={authOpen} onOpenChange={setAuthOpen} />
-    <header className="sticky top-0 z-50 bg-background border-b-[3px] border-foreground">
-      <div className="flex items-stretch justify-between">
-        {/* Logo */}
-        <button
-          onClick={() => onNavigate("home")}
-          className="group relative flex items-center gap-2 px-5 py-3 border-r-[3px] border-foreground hover:bg-foreground hover:text-background transition-colors"
-        >
-          <span className="font-display text-2xl md:text-3xl leading-none glitch-text" data-text="KARTA">
-            KARTA
-          </span>
-          <span className="font-display text-2xl md:text-3xl leading-none text-accent">
-            ●
-          </span>
-          <span className="font-display text-2xl md:text-3xl leading-none glitch-text" data-text="STUDIO">
-            STUDIO
-          </span>
-          <span className="hidden md:block font-tech text-[10px] tracking-[0.3em] text-accent ml-2">
-            / EST. /
-          </span>
-        </button>
-
-        {/* Nav */}
-        <nav className="hidden md:flex items-stretch">
-          {NAV.map((n) => (
-            <button
-              key={n.id}
-              onClick={() => onNavigate(n.id)}
-              data-active={active === n.id}
-              className="nav-link font-display text-base lg:text-lg tracking-[0.22em] px-4 lg:px-6 flex items-center border-l-2 border-foreground/10 hover:text-accent transition-colors"
-            >
-              {n.label}
-            </button>
-          ))}
-
-          {/* Theme toggle */}
+      <AuthDialog open={authOpen} onOpenChange={setAuthOpen} />
+      <header className="sticky top-0 z-50 header-blur">
+        <div className="max-w-[1400px] mx-auto px-4 md:px-8 h-16 md:h-20 flex items-center justify-between gap-4">
+          {/* Logo — fully responsive, never crops */}
           <button
-            onClick={toggle}
-            aria-label="Toggle dark mode"
-            className="flex items-center gap-3 px-5 border-l-[3px] border-foreground hover:bg-foreground hover:text-background transition-colors group"
+            onClick={() => onNavigate("home")}
+            className="flex items-center gap-2 group min-w-0 shrink"
+            aria-label="KARTA STUDIO home"
           >
-            <span className={`font-display text-sm tracking-[0.2em] ${!isDark ? "text-accent" : "opacity-40"}`}>
-              LIGHT
+            <span className="font-display text-xl sm:text-2xl md:text-3xl leading-none tracking-tight text-accent whitespace-nowrap">
+              KARTA
             </span>
-            <span className="relative inline-flex h-6 w-12 items-center border-2 border-foreground group-hover:border-background">
-              <span
-                className={`absolute top-0 bottom-0 w-[20px] bg-accent transition-all ${
-                  isDark ? "left-[calc(100%-20px)]" : "left-0"
-                }`}
-              />
-            </span>
-            <span className={`font-display text-sm tracking-[0.2em] ${isDark ? "text-accent" : "opacity-40"}`}>
-              DARK
+            <span className="font-display text-xl sm:text-2xl md:text-3xl leading-none tracking-tight whitespace-nowrap">
+              STUDIO
             </span>
           </button>
 
-          {user ? (
-            <button
-              onClick={() => signOut()}
-              className="flex items-center px-5 border-l-[3px] border-foreground font-display text-sm tracking-[0.2em] hover:bg-foreground hover:text-background transition-colors"
-            >
-              ▶ LOGOUT
-            </button>
-          ) : (
-            <button
-              onClick={() => setAuthOpen(true)}
-              className="flex items-center px-5 border-l-[3px] border-foreground font-display text-sm tracking-[0.2em] hover:bg-accent hover:text-background transition-colors"
-            >
-              ▶ LOGIN
-            </button>
-          )}
-
-          <div className="flex items-center px-6 border-l-[3px] border-foreground bg-foreground text-background font-tech text-xs tracking-[0.25em]">
-            REC ●
-          </div>
-        </nav>
-
-        {/* Mobile: toggle + selector */}
-        <div className="flex md:hidden items-stretch">
-          <button
-            onClick={toggle}
-            aria-label="Toggle dark mode"
-            className="px-3 border-l-2 border-foreground font-tech text-[10px] tracking-[0.2em]"
-          >
-            {isDark ? "DARK" : "LIGHT"}
-          </button>
-          <select
-            value={active}
-            onChange={(e) => onNavigate(e.target.value as PageId)}
-            className="font-display text-lg bg-background border-l-2 border-foreground px-3"
-          >
+          {/* Desktop nav with gap-10 */}
+          <nav className="hidden lg:flex items-center gap-10">
             {NAV.map((n) => (
-              <option key={n.id} value={n.id}>{n.label}</option>
+              <button
+                key={n.id}
+                onClick={() => onNavigate(n.id)}
+                data-active={active === n.id}
+                className="nav-link font-display text-sm tracking-[0.18em] text-foreground hover:text-accent"
+              >
+                {n.label}
+              </button>
             ))}
-          </select>
-          <button
-            onClick={() => (user ? signOut() : setAuthOpen(true))}
-            className="px-3 border-l-2 border-foreground font-tech text-[10px] tracking-[0.2em]"
-          >
-            {user ? "OUT" : "LOGIN"}
-          </button>
-        </div>
-      </div>
 
-      {/* Marquee strip */}
-      <div className="bg-foreground text-background overflow-hidden border-t-2 border-accent">
-        <div className="marquee-track flex whitespace-nowrap py-1 font-tech text-[11px] tracking-[0.35em]">
-          {Array.from({ length: 2 }).map((_, i) => (
-            <div key={i} className="flex shrink-0">
-              {[
-                "INTERNAL PORTAL // PRODUCTION COMMITTEE",
-                "BUILD 04.27 // FRAME 24FPS",
-                "KARTA STUDIO // ANIMATION DIVISION",
-                "SECURE CHANNEL // RAW RENDER",
-                "DIRECTOR // STORYBOARD // KEY ANIMATION",
-              ].map((t, j) => (
-                <span key={j} className="px-8 flex items-center gap-3">
-                  <span className="text-accent">▲</span>{t}
-                </span>
+            {user ? (
+              <button
+                onClick={() => signOut()}
+                className="ml-2 inline-flex items-center justify-center border border-foreground px-4 py-2 font-display text-xs tracking-[0.2em] hover:bg-foreground hover:text-background transition-colors"
+              >
+                LOGOUT
+              </button>
+            ) : (
+              <button
+                onClick={() => setAuthOpen(true)}
+                className="ml-2 inline-flex items-center justify-center bg-accent text-accent-foreground px-4 py-2 font-display text-xs tracking-[0.2em] hover:bg-foreground transition-colors"
+              >
+                LOGIN
+              </button>
+            )}
+          </nav>
+
+          {/* Mobile / tablet selector */}
+          <div className="flex lg:hidden items-center gap-2 min-w-0">
+            <select
+              value={active}
+              onChange={(e) => onNavigate(e.target.value as PageId)}
+              aria-label="Navigate"
+              className="font-display text-sm bg-background border border-foreground px-2 py-1.5 max-w-[8rem]"
+            >
+              {NAV.map((n) => (
+                <option key={n.id} value={n.id}>{n.label}</option>
               ))}
-            </div>
-          ))}
+            </select>
+            <button
+              onClick={() => (user ? signOut() : setAuthOpen(true))}
+              className="bg-accent text-accent-foreground px-3 py-1.5 font-display text-xs tracking-[0.2em]"
+            >
+              {user ? "OUT" : "LOGIN"}
+            </button>
+          </div>
         </div>
-      </div>
-    </header>
+      </header>
     </>
   );
 };

@@ -12,158 +12,113 @@ interface Props {
 
 export const NovelDetail = ({ onNavigate }: Props) => {
   const [boyzsOpen, setBoyzsOpen] = useState(false);
+
   return (
-    <PageShell code="P.06 / NOVEL / SERIES_INDEX" title="NOVEL">
-      {/* Featured: THE BOYZS banner */}
-      <section className="mb-12 slide-up">
-        <div className="flex items-end justify-between mb-3 font-tech text-[11px] tracking-[0.35em]">
-          <span className="text-accent">▲ FEATURED // INCOMING</span>
-          <span className="coming-soon-badge bg-accent text-white px-2 py-1">● COMING SOON</span>
-        </div>
+    <PageShell title="NOVEL">
+      {/* THE BOYZS — featured banner (top-cover, no crop) */}
+      <section className="mb-16 slide-up">
         <button
           onClick={() => setBoyzsOpen(true)}
-          className="block w-full wire-box relative overflow-hidden bg-background group text-left"
+          className="block w-full text-left card-clean overflow-hidden group"
         >
-          <div className="w-full h-[320px] sm:h-[420px] md:h-[520px] lg:h-[550px] overflow-hidden">
+          <div className="relative w-full h-[260px] sm:h-[360px] md:h-[460px] lg:h-[520px] overflow-hidden bg-muted">
             <img
               src={boyzsBanner}
-              alt="THE BOYZS — featured upcoming KARTA STUDIO novel banner"
-              className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-[1.02]"
+              alt="THE BOYZS — upcoming KARTA STUDIO novel"
+              className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-[1.02]"
               loading="eager"
             />
+            <span className="absolute top-4 left-4 bg-accent text-accent-foreground px-3 py-1.5 font-tech text-[11px] tracking-[0.3em] coming-dot">
+              ● COMING SOON
+            </span>
           </div>
-          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-black/20 pointer-events-none" />
-          <div className="absolute inset-0 karta-grid-fine opacity-30 pointer-events-none" />
-          <div className="scanline-laser pointer-events-none" />
-          <div className="absolute bottom-0 inset-x-0 border-t-2 border-foreground bg-background px-4 py-3 flex items-center justify-between">
+          <div className="px-5 py-4 flex items-end justify-between">
             <div>
-              <div className="font-display text-2xl md:text-4xl leading-none">THE BOYZS</div>
-              <div className="font-tech text-[10px] tracking-[0.3em] text-accent mt-1">NOVEL / ACTION-COMEDY</div>
+              <div className="font-display text-2xl md:text-4xl tracking-tight leading-none">THE BOYZS</div>
+              <div className="mt-1 font-tech text-[11px] tracking-[0.3em] text-muted-foreground">
+                NOVEL · ACTION-COMEDY · 2027
+              </div>
             </div>
-            <span className="font-display text-xl md:text-2xl text-accent">▶ PREVIEW</span>
+            <span className="hidden sm:inline font-display text-base text-accent">PREVIEW ▸</span>
           </div>
         </button>
       </section>
 
-      <div className="flex items-end justify-between border-b-[3px] border-foreground pb-4 mb-8">
-        <h1 className="font-display text-4xl md:text-7xl leading-[0.9] text-glitch-loop" data-text="THE LAST GLITCH.">
-          <span className="text-reveal">THE LAST GLITCH</span>
-          <span className="text-accent text-flicker">.</span>
-        </h1>
-        <span className="font-tech text-[11px] tracking-[0.3em] hidden md:block">
-          SERIES / S.001
-        </span>
-      </div>
-
-      {/* Banner poster */}
-      <div className="wire-box relative overflow-hidden mb-10 bg-background">
-        <div className="absolute inset-0 karta-grid-fine opacity-30 z-10 pointer-events-none" />
-        <div className="scanline-laser z-20" />
-        <img
-          src={poster}
-          alt="The Last Glitch — official series poster"
-          className="w-full h-auto max-h-[70vh] object-cover object-center"
-          loading="eager"
-        />
-        <div className="absolute top-3 left-3 font-tech text-[10px] tracking-[0.3em] text-accent z-20 bg-background/70 px-2 py-1">
-          ▲ KEY VISUAL / 001
-        </div>
-        <div className="absolute bottom-3 right-3 font-tech text-[10px] tracking-[0.3em] text-accent z-20 bg-background/70 px-2 py-1">
-          KARTA // S.001
-        </div>
-      </div>
-
-      <div className="grid grid-cols-12 gap-6">
-        {/* Meta sidebar */}
-        <aside className="col-span-12 md:col-span-4 slide-right">
-          <div className="wire-box p-4 font-tech text-[11px] tracking-[0.3em] leading-[1.9] bg-background">
-            <div className="text-accent mb-2">// META</div>
-            STATUS / ONGOING<br />
-            GENRE / SCI-FI · HORROR<br />
-            EPISODES / 1<br />
-            ORIGIN / KARTA STUDIO
+      {/* THE LAST GLITCH — main entry */}
+      <section className="grid grid-cols-12 gap-10">
+        <div className="col-span-12 md:col-span-5">
+          <div className="card-clean overflow-hidden bg-muted">
+            <img
+              src={poster}
+              alt="The Last Glitch — series poster"
+              className="w-full h-auto object-cover object-center"
+              loading="eager"
+            />
           </div>
-          <div className="mt-4 pulse-wire p-4 font-tech text-[11px] tracking-[0.3em] leading-[1.9]">
-            <div className="text-accent mb-2">// TAGLINE</div>
+          <div className="mt-6 border-y hairline divide-y hairline text-sm">
+            {[
+              ["Status", "Ongoing"],
+              ["Genre", "Sci-fi · Horror"],
+              ["Episodes", "1 of —"],
+              ["Origin", "KARTA STUDIO"],
+            ].map(([k, v]) => (
+              <div key={k} className="grid grid-cols-12 gap-3 py-3">
+                <span className="col-span-5 font-display tracking-wide">{k}</span>
+                <span className="col-span-7 text-muted-foreground">{v}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div className="col-span-12 md:col-span-7">
+          <h2 className="font-display text-4xl md:text-6xl leading-[0.95] tracking-tight">
+            THE LAST GLITCH<span className="text-accent">.</span>
+          </h2>
+          <p className="mt-2 font-tech text-xs tracking-[0.3em] text-accent">
             "TAKING THAT ROAD WAS THEIR BIGGEST MISTAKE."
-          </div>
-        </aside>
+          </p>
 
-        {/* Synopsis + Episodes */}
-        <section className="col-span-12 md:col-span-8 slide-up space-y-8">
-          <div>
-            <div className="font-tech text-[11px] tracking-[0.35em] text-accent mb-2">
-              ▲ SYNOPSIS
-            </div>
-            <div className="wire-box p-5 bg-background font-tech text-[12px] md:text-sm leading-[1.9] tracking-wide">
-              Five friends take a road trip. The road they pick doesn't exist on
-              any map. The GPS shows only one word: <span className="text-accent">404</span>.
-              The brakes fail. A cat with pixel-red eyes appears. The world behind
-              them stops loading. They aren't traveling on this road — they are
-              <span className="text-accent"> inside it</span>.
-            </div>
-          </div>
+          <p className="mt-8 text-base md:text-lg leading-relaxed text-foreground">
+            Five friends take a road trip. The road they pick doesn't exist on
+            any map. The GPS shows only one word: <span className="text-accent font-semibold">404</span>.
+            The brakes fail. A cat with pixel-red eyes appears. The world behind
+            them stops loading. They aren't traveling on this road —
+            they are <span className="text-accent font-semibold">inside it</span>.
+          </p>
 
-          <div>
-            <div className="flex items-end justify-between border-b-2 border-foreground pb-2 mb-4">
-              <h2 className="font-display text-3xl md:text-5xl leading-none">
-                <span className="text-chroma">EPISODE LIST</span>
-                <span className="text-accent text-flicker">.</span>
-              </h2>
-              <span className="font-tech text-[11px] tracking-[0.3em]">COUNT / 01</span>
-            </div>
-
-            <ul className="border-t-2 border-foreground">
-              <li
-                onClick={() => onNavigate("intro")}
-                className="grid grid-cols-12 border-b-2 border-foreground group cursor-pointer red-flash transition-all duration-300"
-              >
-                <div className="col-span-3 md:col-span-2 border-r-2 border-foreground/30 px-3 py-5 font-tech text-[11px] tracking-[0.3em] flex items-center">
-                  EP.001
-                </div>
-                <div className="col-span-7 md:col-span-8 px-3 py-5 flex items-center">
-                  <div className="font-display text-xl md:text-3xl leading-none group-hover:text-background">
-                    THE 404 ROAD
-                  </div>
-                </div>
-                <div className="col-span-2 md:col-span-2 px-3 py-5 flex items-center justify-end gap-3 font-tech text-[10px] tracking-[0.3em]">
-                  <span className="hidden md:inline opacity-60 group-hover:opacity-100">READ</span>
-                  <span className="font-display text-2xl text-accent group-hover:text-background">→</span>
-                </div>
+          <h3 className="mt-12 mb-4 font-display text-2xl md:text-3xl tracking-tight">
+            Episodes
+          </h3>
+          <ul className="border-y hairline divide-y hairline">
+            <li
+              onClick={() => onNavigate("intro")}
+              className="grid grid-cols-12 gap-3 py-5 px-2 cursor-pointer hover:bg-muted transition-colors group"
+            >
+              <span className="col-span-2 font-tech text-xs tracking-[0.3em] text-accent self-center">EP.001</span>
+              <span className="col-span-8 font-display text-lg md:text-2xl tracking-tight">THE 404 ROAD</span>
+              <span className="col-span-2 text-right font-display text-xl text-accent group-hover:translate-x-1 transition-transform">▸</span>
+            </li>
+            {Array.from({ length: 3 }).map((_, i) => (
+              <li key={i} className="grid grid-cols-12 gap-3 py-5 px-2 opacity-50">
+                <span className="col-span-2 font-tech text-xs tracking-[0.3em] self-center">
+                  EP.{String(i + 2).padStart(3, "0")}
+                </span>
+                <span className="col-span-8 font-display text-lg md:text-2xl tracking-tight">— Coming Soon —</span>
+                <span className="col-span-2 text-right font-display text-xl">·</span>
               </li>
-
-              {/* Coming soon placeholders */}
-              {Array.from({ length: 3 }).map((_, i) => (
-                <li
-                  key={i}
-                  className="grid grid-cols-12 border-b-2 border-foreground opacity-50"
-                >
-                  <div className="col-span-3 md:col-span-2 border-r-2 border-foreground/30 px-3 py-4 font-tech text-[11px] tracking-[0.3em] flex items-center">
-                    EP.{String(i + 2).padStart(3, "0")}
-                  </div>
-                  <div className="col-span-7 md:col-span-8 px-3 py-4 flex items-center">
-                    <div className="w-full h-10 pulse-wire flex items-center px-3 font-tech text-[11px] tracking-[0.3em] text-foreground/40">
-                      ▸ COMING SOON
-                    </div>
-                  </div>
-                  <div className="col-span-2 md:col-span-2 px-3 py-4 flex items-center justify-end font-tech text-[10px] tracking-[0.3em]">
-                    —
-                  </div>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </section>
-      </div>
+            ))}
+          </ul>
+        </div>
+      </section>
 
       <StoryEngagement storyId="the-last-glitch" />
 
       <ComingSoonModal
         open={boyzsOpen}
         onOpenChange={setBoyzsOpen}
-        title="THE BOYZS // SIG/404"
-        message="Abhi is par kaam chal raha hai, ye jald hi aayegi! Tayyar raho MASTERPIECE ke liye."
-        code="EP/PRE-PROD"
+        title="THE BOYZS"
+        message="Currently in pre-production. A new KARTA STUDIO masterpiece is on its way — stay tuned."
+        code="EP / PRE-PROD"
       />
     </PageShell>
   );

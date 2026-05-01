@@ -127,31 +127,29 @@ export const StoryEngagement = ({ storyId }: Props) => {
   };
 
   return (
-    <section className="mt-16 border-t-[3px] border-foreground pt-10">
-      <div className="flex items-end justify-between border-b-2 border-foreground pb-3 mb-6">
-        <h2 className="font-display text-3xl md:text-5xl leading-none">
-          REACTIONS<span className="text-accent">.</span>
+    <section className="mt-16 border-t hairline pt-10">
+      <div className="flex items-end justify-between border-b hairline pb-3 mb-6">
+        <h2 className="font-display text-3xl md:text-4xl leading-none tracking-tight">
+          Reactions<span className="text-accent">.</span>
         </h2>
-        <span className="font-tech text-[11px] tracking-[0.3em] text-accent">CHANNEL_OPEN</span>
+        <span className="font-tech text-[11px] tracking-[0.3em] text-accent">CHANNEL OPEN</span>
       </div>
 
       {/* Stats row */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
-        {/* Like */}
         <button
           onClick={toggleLike}
-          className={`border-2 border-foreground px-4 py-4 flex items-center justify-between font-display text-xl transition-colors ${iLiked ? "bg-accent text-background" : "hover:bg-foreground hover:text-background"}`}
+          className={`border hairline px-4 py-4 flex items-center justify-between font-display text-lg transition-colors ${iLiked ? "bg-accent text-accent-foreground border-accent" : "hover:bg-muted"}`}
         >
           <span>▲ UPVOTE</span>
           <span className="font-tech text-sm tracking-[0.2em]">{likes}</span>
         </button>
 
-        {/* Rating */}
-        <div className="border-2 border-foreground px-4 py-4">
+        <div className="border hairline px-4 py-4">
           <div className="flex items-center justify-between mb-2">
             <span className="font-tech text-[10px] tracking-[0.3em] text-accent">RATE</span>
-            <span className="font-tech text-[10px] tracking-[0.2em]">
-              {avgRating !== null ? `${avgRating.toFixed(1)}/5 · ${ratingCount}` : "NO_DATA"}
+            <span className="font-tech text-[10px] tracking-[0.2em] text-muted-foreground">
+              {avgRating !== null ? `${avgRating.toFixed(1)}/5 · ${ratingCount}` : "NO DATA"}
             </span>
           </div>
           <div className="flex gap-1">
@@ -160,7 +158,7 @@ export const StoryEngagement = ({ storyId }: Props) => {
                 key={n}
                 onClick={() => rate(n)}
                 aria-label={`Rate ${n} stars`}
-                className={`flex-1 h-9 border-2 border-foreground font-display text-lg transition-colors ${n <= myRating ? "bg-accent text-background" : "hover:bg-foreground hover:text-background"}`}
+                className={`flex-1 h-9 border hairline font-display text-lg transition-colors ${n <= myRating ? "bg-accent text-accent-foreground border-accent" : "hover:bg-muted"}`}
               >
                 ★
               </button>
@@ -168,8 +166,7 @@ export const StoryEngagement = ({ storyId }: Props) => {
           </div>
         </div>
 
-        {/* Auth status */}
-        <div className="border-2 border-foreground px-4 py-4 flex items-center justify-between">
+        <div className="border hairline px-4 py-4 flex items-center justify-between">
           <span className="font-tech text-[10px] tracking-[0.3em] text-accent">USER</span>
           {user ? (
             <span className="font-tech text-xs tracking-[0.2em] truncate">
@@ -180,60 +177,58 @@ export const StoryEngagement = ({ storyId }: Props) => {
               onClick={() => setAuthOpen(true)}
               className="font-display text-base hover:text-accent"
             >
-              ▶ LOGIN
+              SIGN IN ▸
             </button>
           )}
         </div>
       </div>
 
-      {/* Comment form */}
-      <form onSubmit={post} className="border-[3px] border-foreground mb-6">
-        <div className="bg-foreground text-background px-4 py-2 flex items-center justify-between font-tech text-[10px] tracking-[0.3em]">
-          <span>POST_COMMENT</span>
+      <form onSubmit={post} className="border hairline mb-6">
+        <div className="bg-muted text-foreground px-4 py-2 flex items-center justify-between font-tech text-[10px] tracking-[0.3em] border-b hairline">
+          <span>POST COMMENT</span>
           <span className="text-accent">{draft.length}/2000</span>
         </div>
         <textarea
           value={draft}
           onChange={(e) => setDraft(e.target.value.slice(0, 2000))}
           rows={3}
-          placeholder={user ? "▸ TRANSMIT_MESSAGE" : "▸ LOGIN TO COMMENT"}
+          placeholder={user ? "Write your message…" : "Sign in to comment"}
           disabled={!user}
-          className="w-full px-4 py-3 bg-background font-tech text-sm tracking-wide focus:outline-none focus:bg-accent/10 placeholder:text-foreground/30 resize-none disabled:opacity-60"
+          className="w-full px-4 py-3 bg-background text-sm leading-relaxed focus:outline-none placeholder:text-muted-foreground resize-none disabled:opacity-60"
         />
         <button
           type="submit"
           disabled={busy || !draft.trim()}
-          className="w-full bg-accent text-background font-display text-xl py-3 hover:bg-foreground transition-colors disabled:opacity-50"
+          className="w-full bg-accent text-accent-foreground font-display text-lg tracking-[0.18em] py-3 hover:bg-foreground transition-colors disabled:opacity-50"
         >
-          {user ? (busy ? "..." : "▶ SEND") : "▶ LOGIN TO COMMENT"}
+          {user ? (busy ? "..." : "SEND ▸") : "SIGN IN TO COMMENT"}
         </button>
       </form>
 
-      {/* Comment list */}
       <div className="space-y-3">
         {comments.length === 0 && (
-          <div className="border-2 border-dashed border-foreground/30 px-4 py-8 text-center font-tech text-[11px] tracking-[0.3em] text-foreground/40">
-            ▸ NO TRANSMISSIONS YET — BE THE FIRST
+          <div className="border border-dashed hairline px-4 py-8 text-center font-tech text-[11px] tracking-[0.3em] text-muted-foreground">
+            NO COMMENTS YET — BE THE FIRST
           </div>
         )}
         {comments.map((c) => {
-          const handle = c.profiles?.display_name || c.profiles?.username || "ANON";
+          const handle = c.profiles?.display_name || c.profiles?.username || "Anon";
           const initials = handle.slice(0, 2).toUpperCase();
           return (
-            <article key={c.id} className="border-2 border-foreground bg-background">
-              <header className="bg-foreground text-background px-3 py-2 flex items-center justify-between">
+            <article key={c.id} className="border hairline bg-background">
+              <header className="bg-muted px-3 py-2 flex items-center justify-between border-b hairline">
                 <div className="flex items-center gap-2">
                   {c.profiles?.avatar_url ? (
-                    <img src={c.profiles.avatar_url} alt={handle} className="w-6 h-6 object-cover border border-accent" />
+                    <img src={c.profiles.avatar_url} alt={handle} className="w-6 h-6 object-cover border hairline" />
                   ) : (
-                    <span className="w-6 h-6 bg-accent text-background flex items-center justify-center font-tech text-[10px] tracking-wider">
+                    <span className="w-6 h-6 bg-accent text-accent-foreground flex items-center justify-center font-tech text-[10px]">
                       {initials}
                     </span>
                   )}
                   <span className="font-display text-sm tracking-wide">{handle}</span>
                 </div>
                 <div className="flex items-center gap-3">
-                  <span className="font-tech text-[10px] tracking-[0.2em] text-accent">
+                  <span className="font-tech text-[10px] tracking-[0.2em] text-muted-foreground">
                     {formatDistanceToNow(new Date(c.created_at), { addSuffix: true })}
                   </span>
                   {user?.id === c.user_id && (
@@ -243,7 +238,7 @@ export const StoryEngagement = ({ storyId }: Props) => {
                   )}
                 </div>
               </header>
-              <p className="px-4 py-3 font-tech text-[13px] leading-[1.7] whitespace-pre-wrap break-words">
+              <p className="px-4 py-3 text-[14px] leading-[1.7] whitespace-pre-wrap break-words">
                 {c.content}
               </p>
             </article>

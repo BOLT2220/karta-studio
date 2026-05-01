@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { Background } from "@/components/karta/Background";
 import { Header } from "@/components/karta/Header";
 import { Footer } from "@/components/karta/Footer";
+import { LoadingScreen } from "@/components/karta/LoadingScreen";
 import { Home } from "@/pages/karta/Home";
 import { Works } from "@/pages/karta/Works";
 import { About } from "@/pages/karta/About";
@@ -25,7 +25,7 @@ const Index = () => {
 
   return (
     <div className="relative min-h-screen bg-background text-foreground">
-      <Background />
+      <LoadingScreen />
       {!isImmersive && <Header active={page} onNavigate={handleNavigate} />}
       {page === "home" && <Home onNavigate={handleNavigate} />}
       {page === "works" && <Works onNavigate={handleNavigate} />}
@@ -35,7 +35,7 @@ const Index = () => {
       {page === "novel" && <NovelDetail onNavigate={handleNavigate} />}
       {page === "intro" && <IntroSequence onNavigate={handleNavigate} />}
       {page === "reader" && <Reader onNavigate={handleNavigate} />}
-      {!isImmersive && <Footer />}
+      {!isImmersive && <Footer onNavigate={handleNavigate as (p: "works" | "about" | "blog" | "contact") => void} />}
     </div>
   );
 };

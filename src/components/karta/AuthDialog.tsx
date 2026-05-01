@@ -63,7 +63,7 @@ export const AuthDialog = forwardRef<HTMLDivElement, Props>(({ open, onOpenChang
         onOpenChange(false);
       }
     } catch (err: any) {
-      toast.error(err.message ?? "Authentication failed");
+      toast.error(err?.message ?? "Authentication failed");
     } finally {
       setBusy(false);
     }
@@ -73,71 +73,69 @@ export const AuthDialog = forwardRef<HTMLDivElement, Props>(({ open, onOpenChang
     setBusy(true);
     const redirectTo = getAuthRedirectUrl();
     try {
-      // Always use Lovable-managed Google OAuth (no client secret setup required).
       const result = await lovable.auth.signInWithOAuth("google", { redirect_uri: redirectTo });
       if (result.error) throw result.error;
       if (result.redirected) return;
       onOpenChange(false);
     } catch (err: any) {
-      toast.error(err.message ?? "Google sign-in failed");
+      const msg = (err?.message || "").toLowerCase();
+      if (msg.includes("oauth secret") || msg.includes("unsupported provider") || msg.includes("validation_failed")) {
+        toast.error("Admin Alert: Google sign-in is not yet configured.", {
+          description: "Please use email & password for now, or contact the studio admin.",
+        });
+      } else {
+        toast.error(err?.message ?? "Google sign-in failed");
+      }
+    } finally {
       setBusy(false);
-      return;
     }
   };
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent ref={ref} className="bg-background border-[3px] border-foreground p-0 max-w-md">
-        <div className="bg-foreground text-background px-4 py-3 flex items-center justify-between border-b-2 border-accent">
-          <DialogTitle className="font-display text-2xl tracking-wide">
-            {mode === "login" ? "ACCESS // LOGIN" : "REGISTER // INIT"}
+      <DialogContent ref={ref} className="bg-background border hairline shadow-2xl p-0 max-w-md overflow-hidden rounded-none">
+        <div className="bg-accent text-accent-foreground px-5 py-3 flex items-center justify-between">
+          <DialogTitle className="font-display text-xl tracking-wide">
+            {mode === "login" ? "Sign in" : "Create account"}
           </DialogTitle>
-          <span className="font-tech text-[10px] tracking-[0.3em] text-accent">SECURE ●</span>
+          <span className="font-tech text-[10px] tracking-[0.3em] opacity-90">SECURE</span>
         </div>
-        <DialogDescription className="sr-only">
-          Authentication form
-        </DialogDescription>
+        <DialogDescription className="sr-only">Authentication</DialogDescription>
 
-        <form onSubmit={submit} className="p-5 space-y-3">
+        <form onSubmit={submit} className="p-6 space-y-4">
           {mode === "signup" && (
-            <div className="border-2 border-foreground">
-              <div className="bg-foreground text-background px-3 py-2 font-tech text-[10px] tracking-[0.3em] flex justify-between">
-                <span>USERNAME</span><span className="text-accent">F.00</span>
-              </div>
+            <div>
+              <label className="block font-display text-xs tracking-[0.25em] mb-1.5">USERNAME</label>
               <input
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
-                className="w-full px-3 py-3 bg-background font-tech text-sm focus:outline-none focus:bg-accent focus:text-background"
-                placeholder="▸ handle"
+                className="w-full border hairline px-3 py-3 bg-background text-sm focus:outline-none focus:border-accent"
+                placeholder="your handle"
                 maxLength={30}
               />
             </div>
           )}
-          <div className="border-2 border-foreground">
-            <div className="bg-foreground text-background px-3 py-2 font-tech text-[10px] tracking-[0.3em] flex justify-between">
-              <span>EMAIL</span><span className="text-accent">F.01</span>
-            </div>
+          <div>
+            <label className="block font-display text-xs tracking-[0.25em] mb-1.5">EMAIL</label>
             <input
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="w-full px-3 py-3 bg-background font-tech text-sm focus:outline-none focus:bg-accent focus:text-background"
-              placeholder="▸ user@domain.net"
+              className="w-full border hairline px-3 py-3 bg-background text-sm focus:outline-none focus:border-accent"
+              placeholder="user@domain.com"
               maxLength={255}
               autoComplete="email"
             />
           </div>
-          <div className="border-2 border-foreground">
-            <div className="bg-foreground text-background px-3 py-2 font-tech text-[10px] tracking-[0.3em] flex justify-between">
-              <span>PASSWORD</span><span className="text-accent">F.02</span>
-            </div>
-            <div className="relative flex items-center bg-background focus-within:bg-accent group/pw">
+          <div>
+            <label className="block font-display text-xs tracking-[0.25em] mb-1.5">PASSWORD</label>
+            <div className="relative">
               <input
                 type={showPassword ? "text" : "password"}
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="w-full px-3 py-3 pr-12 bg-transparent font-tech text-sm focus:outline-none focus:text-background"
-                placeholder="▸ ••••••"
+                className="w-full border hairline pl-3 pr-11 py-3 bg-background text-sm focus:outline-none focus:border-accent"
+                placeholder="••••••"
                 maxLength={72}
                 autoComplete={mode === "login" ? "current-password" : "new-password"}
               />
@@ -145,7 +143,7 @@ export const AuthDialog = forwardRef<HTMLDivElement, Props>(({ open, onOpenChang
                 type="button"
                 onClick={() => setShowPassword((v) => !v)}
                 aria-label={showPassword ? "Hide password" : "Show password"}
-                className="absolute right-2 top-1/2 -translate-y-1/2 border-l-2 border-accent/40 p-2 text-foreground group-focus-within/pw:text-background hover:text-accent group-focus-within/pw:hover:text-foreground focus:outline-none focus:ring-2 focus:ring-accent transition-colors"
+                className="absolute right-2 top-1/2 -translate-y-1/2 p-2 text-muted-foreground hover:text-accent focus:outline-none"
               >
                 {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
               </button>
@@ -155,32 +153,32 @@ export const AuthDialog = forwardRef<HTMLDivElement, Props>(({ open, onOpenChang
           <button
             type="submit"
             disabled={busy}
-            className="w-full bg-accent text-background font-display text-2xl py-4 hover:bg-foreground transition-colors disabled:opacity-50"
+            className="w-full bg-accent text-accent-foreground font-display text-lg tracking-[0.18em] py-3.5 hover:bg-foreground transition-colors disabled:opacity-50"
           >
-            {busy ? "..." : mode === "login" ? "▶ INITIATE" : "▶ REGISTER"}
+            {busy ? "..." : mode === "login" ? "SIGN IN ▸" : "CREATE ACCOUNT ▸"}
           </button>
 
-          <div className="flex items-center gap-2 py-1">
-            <div className="flex-1 h-px bg-foreground/20" />
-            <span className="font-tech text-[10px] tracking-[0.3em] text-foreground/50">OR</span>
-            <div className="flex-1 h-px bg-foreground/20" />
+          <div className="flex items-center gap-3 py-1">
+            <div className="flex-1 h-px hairline border-t" />
+            <span className="font-tech text-[10px] tracking-[0.3em] text-muted-foreground">OR</span>
+            <div className="flex-1 h-px hairline border-t" />
           </div>
 
           <button
             type="button"
             onClick={google}
             disabled={busy}
-            className="w-full border-2 border-foreground py-3 font-display text-lg hover:bg-foreground hover:text-background transition-colors disabled:opacity-50"
+            className="w-full border border-foreground py-3 font-display text-base tracking-[0.18em] hover:bg-foreground hover:text-background transition-colors disabled:opacity-50"
           >
-            ▲ CONTINUE WITH GOOGLE
+            CONTINUE WITH GOOGLE
           </button>
 
           <button
             type="button"
             onClick={() => setMode(mode === "login" ? "signup" : "login")}
-            className="w-full text-center font-tech text-[11px] tracking-[0.3em] text-accent hover:underline pt-2"
+            className="w-full text-center font-tech text-[11px] tracking-[0.3em] text-accent hover:underline pt-1"
           >
-            {mode === "login" ? "▸ NEW HERE? CREATE ACCOUNT" : "▸ ALREADY REGISTERED? LOGIN"}
+            {mode === "login" ? "NEW HERE? CREATE ACCOUNT" : "ALREADY REGISTERED? SIGN IN"}
           </button>
         </form>
       </DialogContent>
