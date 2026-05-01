@@ -28,7 +28,7 @@ const Index = () => {
       <Background />
       {!isImmersive && <Header active={page} onNavigate={handleNavigate} />}
       {page === "home" && <Home onNavigate={handleNavigate} />}
-      {page === "works" && <Works />}
+      {page === "works" && <Works onNavigate={handleNavigate} />}
       {page === "about" && <About />}
       {page === "blog" && <Blog />}
       {page === "contact" && <Contact />}

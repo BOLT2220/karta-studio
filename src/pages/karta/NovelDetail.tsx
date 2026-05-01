@@ -24,11 +24,11 @@ export const NovelDetail = ({ onNavigate }: Props) => {
           onClick={() => setBoyzsOpen(true)}
           className="block w-full wire-box relative overflow-hidden bg-background group text-left"
         >
-          <div className="w-full aspect-[16/9] md:aspect-[21/9] overflow-hidden">
+          <div className="w-full h-[320px] sm:h-[420px] md:h-[520px] lg:h-[550px] overflow-hidden">
             <img
               src={boyzsBanner}
               alt="THE BOYZS — featured upcoming KARTA STUDIO novel banner"
-              className="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-[1.02]"
+              className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-[1.02]"
               loading="eager"
             />
           </div>
