@@ -72,7 +72,14 @@ export const IntroSequence = ({ onNavigate }: Props) => {
       <div className="absolute top-0 left-0 right-0 border-b-2 border-white/30 px-4 md:px-6 py-3 flex items-center justify-between font-tech text-[10px] md:text-[11px] tracking-[0.35em] z-20 bg-black/40 backdrop-blur">
         <span className="text-accent">▲ KARTA // INTRO_SEQUENCE</span>
         <span className="hidden md:inline opacity-60">// LOADING SERIES PROTOCOL</span>
-        <button type="button" onClick={skip} onPointerUp={skip} className="relative z-30 text-accent hover:text-white transition-colors">SKIP ▶</button>
+     <button 
+  type="button" 
+  onClick={skip} 
+  onPointerUp={skip} 
+  className="fixed top-4 right-6 z-[9999] cursor-pointer pointer-events-auto bg-red-600/30 border-2 border-red-500 px-4 py-2 font-black text-[12px] text-white hover:bg-red-600 transition-all shadow-[0_0_15px_rgba(255,0,0,0.5)] uppercase tracking-tighter"
+>
+  SKIP_SYSTEM_INT //
+</button>
       </div>
       <div className="absolute bottom-0 left-0 right-0 border-t-2 border-white/30 px-4 md:px-6 py-3 flex items-center justify-between font-tech text-[10px] tracking-[0.3em] z-20 bg-black/40 backdrop-blur">
         <span className="text-accent">REC ●</span>
