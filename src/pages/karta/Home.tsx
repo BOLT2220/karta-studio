@@ -39,10 +39,10 @@ export const Home = ({ onNavigate }: HomeProps) => {
       code: "W.002",
       title: "THE BOYZS",
       category: "NOVEL · ACTION-COMEDY",
-      year: "2027",
-      status: "SOON",
+      year: "2026",
+      status: "LIVE",
       poster: boyzsPoster,
-      onClick: () => setBoyzsOpen(true),
+      action: "boyzs",
       objectPos: "top",
     },
     {
