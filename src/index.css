@@ -219,3 +219,16 @@
   0% { transform: translateX(0); }
   100% { transform: translateX(-50%); }
 }
+
+/* Terminal blinking cursor — used at end of BOYZS reader */
+.terminal-cursor {
+  display: inline-block;
+  color: hsl(var(--accent));
+  font-weight: 700;
+  margin-left: 2px;
+  animation: terminalBlink 1s steps(2, start) infinite;
+}
+@keyframes terminalBlink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
