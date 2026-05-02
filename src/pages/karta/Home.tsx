@@ -42,7 +42,7 @@ export const Home = ({ onNavigate }: HomeProps) => {
       year: "2026",
       status: "LIVE",
       poster: boyzsPoster,
-      action: "boyzs",
+      action: "boyzs-intro",
       objectPos: "top",
     },
     {
