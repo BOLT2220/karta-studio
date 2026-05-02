@@ -22,7 +22,7 @@ interface Work {
 const WORKS: Work[] = [
   { code: "W.001", title: "THE LAST GLITCH", category: "NOVEL", year: "2026", status: "LIVE", poster: tlgPoster, objectPos: "center", action: "intro" },
   { code: "W.002", title: "KARTA ARCHIVE",   category: "ANTHOLOGY", year: "2026", status: "ARCHIVE" },
-  { code: "W.003", title: "THE BOYZS", category: "NOVEL", year: "2026", status: "LIVE", poster: boyzsPoster, objectPos: "top", action: "boyzs-intro" },
+  { code: "W.003", title: "THE BOYZS", category: "NOVEL", year: "2026", status: "LIVE", poster: boyzsPoster, objectPos: "top", action: "boyzs" },
   { code: "W.004", title: "PROJECT // CLASSIFIED", category: "ANIMATION", year: "Upcoming", status: "SOON" },
   { code: "W.005", title: "PROJECT // CLASSIFIED", category: "MANGA",     year: "Upcoming", status: "SOON" },
   { code: "W.006", title: "PROJECT // CLASSIFIED", category: "STORYBOARD", year: "Upcoming", status: "SOON" },
