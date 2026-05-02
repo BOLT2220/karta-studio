@@ -38,7 +38,8 @@ const Index = () => {
       {page === "novel" && <NovelDetail onNavigate={handleNavigate} />}
       {page === "intro" && <IntroSequence onNavigate={handleNavigate} />}
       {page === "reader" && <Reader onNavigate={handleNavigate} />}
-      {(page === "boyzs" || page === "boyzs-intro") && <BoyzsIntro onNavigate={handleNavigate} />}
+      {page === "boyzs" && <BoyzsDetail onNavigate={handleNavigate} />}
+      {page === "boyzs-intro" && <BoyzsIntro onNavigate={handleNavigate} />}
       {page === "boyzs-reader" && <BoyzsReader onNavigate={handleNavigate} />}
       {!isImmersive && <Footer onNavigate={handleNavigate as (p: "works" | "about" | "blog" | "contact") => void} />}
     </div>
