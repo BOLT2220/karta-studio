@@ -12,6 +12,7 @@ import { Reader } from "@/pages/karta/Reader";
 import { IntroSequence } from "@/pages/karta/IntroSequence";
 import { BoyzsIntro } from "@/pages/karta/BoyzsIntro";
 import { BoyzsReader } from "@/pages/karta/BoyzsReader";
+import { BoyzsDetail } from "@/pages/karta/boyzsDetail";
 
 export type PageId = "home" | "works" | "about" | "blog" | "contact" | "novel" | "reader" | "intro" | "boyzs" | "boyzs-intro" | "boyzs-reader";
 
