@@ -37,6 +37,7 @@ const Index = () => {
       {page === "blog" && <Blog />}
       {page === "contact" && <Contact />}
       {page === "novel" && <NovelDetail onNavigate={handleNavigate} />}
+      {page === "glitch" && <LastGlitchDetail onNavigate={handleNavigate} />}
       {page === "intro" && <IntroSequence onNavigate={handleNavigate} />}
       {page === "reader" && <Reader onNavigate={handleNavigate} />}
       {page === "boyzs" && <BoyzsDetail onNavigate={handleNavigate} />}
