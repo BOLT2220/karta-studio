@@ -1,7 +1,5 @@
-import { useState } from "react";
 import { PageShell } from "@/components/karta/PageShell";
 import { PageId } from "@/pages/Index";
-import { ComingSoonModal } from "@/components/karta/ComingSoonModal";
 import { StoryEngagement } from "@/components/karta/StoryEngagement";
 import poster from "@/assets/the-last-glitch-banner.jpeg";
 import boyzsBanner from "@/assets/the-boyzs-banner.png";
