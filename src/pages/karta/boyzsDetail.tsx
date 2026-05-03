@@ -1,7 +1,5 @@
-import { useState } from "react";
 import { PageShell } from "@/components/karta/PageShell";
 import { PageId } from "@/pages/Index";
-import { ComingSoonModal } from "@/components/karta/ComingSoonModal";
 import { StoryEngagement } from "@/components/karta/StoryEngagement";
 import poster from "@/assets/the-boyzs-poster.png";
 
@@ -10,8 +8,6 @@ interface Props {
 }
 
 export const BoyzsDetail = ({ onNavigate }: Props) => {
-  const [comingSoon, setComingSoon] = useState(false);
-
   return (
     <PageShell title="NOVEL">
       <section className="grid grid-cols-12 gap-10 slide-up">
@@ -55,6 +51,26 @@ export const BoyzsDetail = ({ onNavigate }: Props) => {
             <span className="text-accent font-semibold">cricket bat</span> and their wits.
           </p>
 
+          <div className="mt-6 flex flex-wrap gap-2">
+            {["ACTION", "COMEDY", "SURVIVAL", "2026"].map((t) => (
+              <span
+                key={t}
+                className="border border-accent text-accent px-2 py-0.5 font-tech text-[10px] tracking-[0.25em]"
+              >
+                {t}
+              </span>
+            ))}
+          </div>
+
+          <div className="mt-8">
+            <button
+              onClick={() => onNavigate("boyzs-intro")}
+              className="bg-accent text-accent-foreground font-display text-base px-6 py-3 hover:bg-foreground hover:text-background transition-colors"
+            >
+              READ EP.001 ▸
+            </button>
+          </div>
+
           <h3 className="mt-12 mb-4 font-display text-2xl md:text-3xl tracking-tight">
             Episodes
           </h3>
@@ -64,16 +80,18 @@ export const BoyzsDetail = ({ onNavigate }: Props) => {
               className="grid grid-cols-12 gap-3 py-5 px-2 cursor-pointer hover:bg-muted transition-colors group"
             >
               <span className="col-span-2 font-tech text-xs tracking-[0.3em] text-accent self-center">EP.001</span>
-              <span className="col-span-8 font-display text-lg md:text-2xl tracking-tight">THE HALLWAY</span>
-              <span className="col-span-2 text-right font-display text-xl text-accent group-hover:translate-x-1 transition-transform">▸</span>
+              <span className="col-span-7 font-display text-lg md:text-2xl tracking-tight">THE HALLWAY</span>
+              <span className="col-span-2 self-center font-tech text-[10px] tracking-[0.25em] text-muted-foreground">2026.05</span>
+              <span className="col-span-1 text-right font-display text-xl text-accent group-hover:translate-x-1 transition-transform">▸</span>
             </li>
             {Array.from({ length: 3 }).map((_, i) => (
               <li key={i} className="grid grid-cols-12 gap-3 py-5 px-2 opacity-50">
                 <span className="col-span-2 font-tech text-xs tracking-[0.3em] self-center">
                   EP.{String(i + 2).padStart(3, "0")}
                 </span>
-                <span className="col-span-8 font-display text-lg md:text-2xl tracking-tight">— Coming Soon —</span>
-                <span className="col-span-2 text-right font-display text-xl">·</span>
+                <span className="col-span-7 font-display text-lg md:text-2xl tracking-tight">— Coming Soon —</span>
+                <span className="col-span-2 self-center font-tech text-[10px] tracking-[0.25em] text-muted-foreground">TBA</span>
+                <span className="col-span-1 text-right font-display text-xl">·</span>
               </li>
             ))}
           </ul>
@@ -81,14 +99,6 @@ export const BoyzsDetail = ({ onNavigate }: Props) => {
       </section>
 
       <StoryEngagement storyId="the-boyzs" />
-
-      <ComingSoonModal
-        open={comingSoon}
-        onOpenChange={setComingSoon}
-        title="THE BOYZS"
-        message="Next episode is in the works."
-        code="EP / PROD"
-      />
     </PageShell>
   );
 };
