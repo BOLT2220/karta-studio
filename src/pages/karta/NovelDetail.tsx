@@ -113,13 +113,6 @@ export const NovelDetail = ({ onNavigate }: Props) => {
 
       <StoryEngagement storyId="the-last-glitch" />
 
-      <ComingSoonModal
-        open={boyzsOpen}
-        onOpenChange={setBoyzsOpen}
-        title="THE BOYZS"
-        message="Currently in pre-production. A new KARTA STUDIO masterpiece is on its way — stay tuned."
-        code="EP / PRE-PROD"
-      />
     </PageShell>
   );
 };
