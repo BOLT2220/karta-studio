@@ -13,8 +13,9 @@ import { IntroSequence } from "@/pages/karta/IntroSequence";
 import { BoyzsIntro } from "@/pages/karta/BoyzsIntro";
 import { BoyzsReader } from "@/pages/karta/BoyzsReader";
 import { BoyzsDetail } from "@/pages/karta/boyzsDetail";
+import { LastGlitchDetail } from "@/pages/karta/LastGlitchDetail";
 
-export type PageId = "home" | "works" | "about" | "blog" | "contact" | "novel" | "reader" | "intro" | "boyzs" | "boyzs-intro" | "boyzs-reader";
+export type PageId = "home" | "works" | "about" | "blog" | "contact" | "novel" | "reader" | "intro" | "glitch" | "boyzs" | "boyzs-intro" | "boyzs-reader";
 
 const Index = () => {
   const [page, setPage] = useState<PageId>("home");
@@ -36,6 +37,7 @@ const Index = () => {
       {page === "blog" && <Blog />}
       {page === "contact" && <Contact />}
       {page === "novel" && <NovelDetail onNavigate={handleNavigate} />}
+      {page === "glitch" && <LastGlitchDetail onNavigate={handleNavigate} />}
       {page === "intro" && <IntroSequence onNavigate={handleNavigate} />}
       {page === "reader" && <Reader onNavigate={handleNavigate} />}
       {page === "boyzs" && <BoyzsDetail onNavigate={handleNavigate} />}

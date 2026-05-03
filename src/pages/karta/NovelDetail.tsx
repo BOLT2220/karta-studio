@@ -1,116 +1,97 @@
 import { PageShell } from "@/components/karta/PageShell";
 import { PageId } from "@/pages/Index";
-import { StoryEngagement } from "@/components/karta/StoryEngagement";
-import poster from "@/assets/the-last-glitch-banner.jpeg";
-import boyzsBanner from "@/assets/the-boyzs-banner.png";
+import tlgPoster from "@/assets/the-last-glitch-banner.jpeg";
+import boyzsPoster from "@/assets/the-boyzs-poster.png";
 
 interface Props {
   onNavigate: (p: PageId) => void;
 }
 
-export const NovelDetail = ({ onNavigate }: Props) => {
-  
+interface NovelEntry {
+  id: PageId;
+  title: string;
+  teaser: string;
+  meta: string;
+  poster: string;
+  objectPos?: "top" | "center";
+}
 
+const NOVELS: NovelEntry[] = [
+  {
+    id: "glitch",
+    title: "THE LAST GLITCH",
+    teaser:
+      "Five friends, one road that doesn't exist on any map. The GPS shows only 404. Reality stops loading.",
+    meta: "SCI-FI · HORROR · 2026",
+    poster: tlgPoster,
+    objectPos: "center",
+  },
+  {
+    id: "boyzs",
+    title: "THE BOYZS",
+    teaser:
+      "A normal day spirals into chaos when zombies invade the boys' hostel. No plan. No weapons. Just chaos.",
+    meta: "ACTION · COMEDY · 2026",
+    poster: boyzsPoster,
+    objectPos: "top",
+  },
+];
+
+export const NovelDetail = ({ onNavigate }: Props) => {
   return (
     <PageShell title="NOVEL">
-      {/* THE BOYZS — featured banner (top-cover, no crop) */}
-      <section className="mb-16 slide-up">
-        <button
-          onClick={() => onNavigate("boyzs")}
-          className="block w-full text-left card-clean overflow-hidden group"
-        >
-          <div className="relative w-full h-[260px] sm:h-[360px] md:h-[460px] lg:h-[520px] overflow-hidden bg-muted">
-            <img
-              src={boyzsBanner}
-              alt="THE BOYZS — upcoming KARTA STUDIO novel"
-              className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-[1.02]"
-              loading="eager"
-            />
-            <span className="absolute top-4 left-4 bg-foreground text-background px-3 py-1.5 font-tech text-[11px] tracking-[0.3em]">
-              ▶ LIVE
-            </span>
+      <section className="space-y-6 slide-up">
+        <header className="flex items-end justify-between border-b hairline pb-4">
+          <div>
+            <h2 className="font-display text-3xl md:text-5xl tracking-tight leading-none">
+              DIRECTORY<span className="text-accent">.</span>
+            </h2>
+            <p className="mt-2 font-tech text-[11px] tracking-[0.3em] text-muted-foreground">
+              {NOVELS.length} TITLES · KARTA STUDIO
+            </p>
           </div>
-          <div className="px-5 py-4 flex items-end justify-between">
-            <div>
-              <div className="font-display text-2xl md:text-4xl tracking-tight leading-none">THE BOYZS</div>
-              <div className="mt-1 font-tech text-[11px] tracking-[0.3em] text-muted-foreground">
-                NOVEL · ACTION-COMEDY · 2027
-              </div>
-            </div>
-            <span className="hidden sm:inline font-display text-base text-accent">PREVIEW ▸</span>
-          </div>
-        </button>
-      </section>
+          <span className="hidden sm:inline font-tech text-[11px] tracking-[0.3em] text-accent">
+            ● LIVE INDEX
+          </span>
+        </header>
 
-      {/* THE LAST GLITCH — main entry */}
-      <section className="grid grid-cols-12 gap-10">
-        <div className="col-span-12 md:col-span-5">
-          <div className="card-clean overflow-hidden bg-muted">
-            <img
-              src={poster}
-              alt="The Last Glitch — series poster"
-              className="w-full h-auto object-cover object-center"
-              loading="eager"
-            />
-          </div>
-          <div className="mt-6 border-y hairline divide-y hairline text-sm">
-            {[
-              ["Status", "Ongoing"],
-              ["Genre", "Sci-fi · Horror"],
-              ["Episodes", "1 of —"],
-              ["Origin", "KARTA STUDIO"],
-            ].map(([k, v]) => (
-              <div key={k} className="grid grid-cols-12 gap-3 py-3">
-                <span className="col-span-5 font-display tracking-wide">{k}</span>
-                <span className="col-span-7 text-muted-foreground">{v}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        <div className="col-span-12 md:col-span-7">
-          <h2 className="font-display text-4xl md:text-6xl leading-[0.95] tracking-tight">
-            THE LAST GLITCH<span className="text-accent">.</span>
-          </h2>
-          <p className="mt-2 font-tech text-xs tracking-[0.3em] text-accent">
-            "TAKING THAT ROAD WAS THEIR BIGGEST MISTAKE."
-          </p>
-
-          <p className="mt-8 text-base md:text-lg leading-relaxed text-foreground">
-            Five friends take a road trip. The road they pick doesn't exist on
-            any map. The GPS shows only one word: <span className="text-accent font-semibold">404</span>.
-            The brakes fail. A cat with pixel-red eyes appears. The world behind
-            them stops loading. They aren't traveling on this road —
-            they are <span className="text-accent font-semibold">inside it</span>.
-          </p>
-
-          <h3 className="mt-12 mb-4 font-display text-2xl md:text-3xl tracking-tight">
-            Episodes
-          </h3>
-          <ul className="border-y hairline divide-y hairline">
-            <li
-              onClick={() => onNavigate("intro")}
-              className="grid grid-cols-12 gap-3 py-5 px-2 cursor-pointer hover:bg-muted transition-colors group"
-            >
-              <span className="col-span-2 font-tech text-xs tracking-[0.3em] text-accent self-center">EP.001</span>
-              <span className="col-span-8 font-display text-lg md:text-2xl tracking-tight">THE 404 ROAD</span>
-              <span className="col-span-2 text-right font-display text-xl text-accent group-hover:translate-x-1 transition-transform">▸</span>
+        <ul className="divide-y hairline border-b hairline">
+          {NOVELS.map((n, i) => (
+            <li key={n.id}>
+              <button
+                onClick={() => onNavigate(n.id)}
+                className="w-full text-left grid grid-cols-12 gap-4 md:gap-6 py-5 px-2 hover:bg-muted transition-colors group"
+                style={{ animationDelay: `${i * 0.05}s` }}
+              >
+                <div className="col-span-3 sm:col-span-2">
+                  <div className="aspect-[3/4] bg-muted overflow-hidden card-clean">
+                    <img
+                      src={n.poster}
+                      alt={`${n.title} poster`}
+                      className={`w-full h-full object-cover ${n.objectPos === "top" ? "object-top" : "object-center"}`}
+                      loading="lazy"
+                    />
+                  </div>
+                </div>
+                <div className="col-span-8 sm:col-span-9 flex flex-col justify-center">
+                  <div className="font-tech text-[10px] tracking-[0.3em] text-accent">
+                    {n.meta}
+                  </div>
+                  <div className="mt-1 font-display text-2xl md:text-4xl leading-tight tracking-tight">
+                    {n.title}
+                  </div>
+                  <p className="mt-2 text-sm md:text-base text-muted-foreground leading-relaxed line-clamp-3">
+                    {n.teaser}
+                  </p>
+                </div>
+                <div className="col-span-1 self-center text-right font-display text-2xl md:text-3xl text-accent group-hover:translate-x-1 transition-transform">
+                  ▸
+                </div>
+              </button>
             </li>
-            {Array.from({ length: 3 }).map((_, i) => (
-              <li key={i} className="grid grid-cols-12 gap-3 py-5 px-2 opacity-50">
-                <span className="col-span-2 font-tech text-xs tracking-[0.3em] self-center">
-                  EP.{String(i + 2).padStart(3, "0")}
-                </span>
-                <span className="col-span-8 font-display text-lg md:text-2xl tracking-tight">— Coming Soon —</span>
-                <span className="col-span-2 text-right font-display text-xl">·</span>
-              </li>
-            ))}
-          </ul>
-        </div>
+          ))}
+        </ul>
       </section>
-
-      <StoryEngagement storyId="the-last-glitch" />
-
     </PageShell>
   );
 };

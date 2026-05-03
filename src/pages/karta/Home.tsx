@@ -32,7 +32,7 @@ export const Home = ({ onNavigate }: HomeProps) => {
       year: "2026",
       status: "LIVE",
       poster: tlgPoster,
-      action: "intro",
+      action: "glitch",
       objectPos: "center",
     },
     {
@@ -42,7 +42,7 @@ export const Home = ({ onNavigate }: HomeProps) => {
       year: "2026",
       status: "LIVE",
       poster: boyzsPoster,
-      action: "boyzs-intro",
+      action: "boyzs",
       objectPos: "top",
     },
     {
