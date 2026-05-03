@@ -75,23 +75,25 @@ export const BoyzsDetail = ({ onNavigate }: Props) => {
             Episodes
           </h3>
           <ul className="border-y hairline divide-y hairline">
-            <li
-              onClick={() => onNavigate("boyzs-intro")}
-              className="grid grid-cols-12 gap-3 py-5 px-2 cursor-pointer hover:bg-muted transition-colors group"
-            >
-              <span className="col-span-2 font-tech text-xs tracking-[0.3em] text-accent self-center">EP.001</span>
-              <span className="col-span-7 font-display text-lg md:text-2xl tracking-tight">THE HALLWAY</span>
-              <span className="col-span-2 self-center font-tech text-[10px] tracking-[0.25em] text-muted-foreground">2026.05</span>
-              <span className="col-span-1 text-right font-display text-xl text-accent group-hover:translate-x-1 transition-transform">▸</span>
+            <li className="grid grid-cols-12 gap-3 py-5 px-2 items-center group">
+              <span className="col-span-2 font-tech text-xs tracking-[0.3em] text-accent">EP.001</span>
+              <span className="col-span-5 font-display text-lg md:text-xl tracking-tight">THE HALLWAY</span>
+              <span className="col-span-2 font-tech text-[10px] tracking-[0.25em] text-muted-foreground">2026.05</span>
+              <button
+                onClick={() => onNavigate("boyzs-reader")}
+                className="col-span-3 justify-self-end bg-foreground text-background font-display text-xs tracking-[0.2em] px-4 py-2 hover:bg-accent transition-colors"
+              >
+                READ ▸
+              </button>
             </li>
             {Array.from({ length: 3 }).map((_, i) => (
-              <li key={i} className="grid grid-cols-12 gap-3 py-5 px-2 opacity-50">
-                <span className="col-span-2 font-tech text-xs tracking-[0.3em] self-center">
+              <li key={i} className="grid grid-cols-12 gap-3 py-5 px-2 items-center opacity-50">
+                <span className="col-span-2 font-tech text-xs tracking-[0.3em]">
                   EP.{String(i + 2).padStart(3, "0")}
                 </span>
-                <span className="col-span-7 font-display text-lg md:text-2xl tracking-tight">— Coming Soon —</span>
-                <span className="col-span-2 self-center font-tech text-[10px] tracking-[0.25em] text-muted-foreground">TBA</span>
-                <span className="col-span-1 text-right font-display text-xl">·</span>
+                <span className="col-span-5 font-display text-lg md:text-xl tracking-tight">— Coming Soon —</span>
+                <span className="col-span-2 font-tech text-[10px] tracking-[0.25em] text-muted-foreground">TBA</span>
+                <span className="col-span-3 justify-self-end font-display text-xs tracking-[0.2em] text-muted-foreground">·</span>
               </li>
             ))}
           </ul>
