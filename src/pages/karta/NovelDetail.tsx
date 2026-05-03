@@ -11,14 +11,14 @@ interface Props {
 }
 
 export const NovelDetail = ({ onNavigate }: Props) => {
-  const [boyzsOpen, setBoyzsOpen] = useState(false);
+  
 
   return (
     <PageShell title="NOVEL">
       {/* THE BOYZS — featured banner (top-cover, no crop) */}
       <section className="mb-16 slide-up">
         <button
-          onClick={() => setBoyzsOpen(true)}
+          onClick={() => onNavigate("boyzs")}
           className="block w-full text-left card-clean overflow-hidden group"
         >
           <div className="relative w-full h-[260px] sm:h-[360px] md:h-[460px] lg:h-[520px] overflow-hidden bg-muted">
@@ -28,8 +28,8 @@ export const NovelDetail = ({ onNavigate }: Props) => {
               className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-[1.02]"
               loading="eager"
             />
-            <span className="absolute top-4 left-4 bg-accent text-accent-foreground px-3 py-1.5 font-tech text-[11px] tracking-[0.3em] coming-dot">
-              ● COMING SOON
+            <span className="absolute top-4 left-4 bg-foreground text-background px-3 py-1.5 font-tech text-[11px] tracking-[0.3em]">
+              ▶ LIVE
             </span>
           </div>
           <div className="px-5 py-4 flex items-end justify-between">
