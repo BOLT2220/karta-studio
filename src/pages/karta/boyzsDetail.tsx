@@ -64,7 +64,7 @@ export const BoyzsDetail = ({ onNavigate }: Props) => {
 
           <div className="mt-8">
             <button
-              onClick={() => onNavigate("boyzs-intro")}
+              onClick={() => onNavigate("boyzs-reader")}
               className="bg-accent text-accent-foreground font-display text-base px-6 py-3 hover:bg-foreground hover:text-background transition-colors"
             >
               READ EP.001 ▸
