@@ -13,8 +13,8 @@ export const BoyzsDetail = ({ onNavigate }: Props) => {
   const [comingSoon, setComingSoon] = useState(false);
 
   return (
-    <PageShell title="THE BOYZS">
-      <section className="grid grid-cols-12 gap-10">
+    <PageShell title="NOVEL">
+      <section className="grid grid-cols-12 gap-10 slide-up">
         <div className="col-span-12 md:col-span-5">
           <div className="card-clean overflow-hidden bg-muted">
             <img
