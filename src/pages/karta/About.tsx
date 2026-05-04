@@ -49,22 +49,50 @@ export const About = () => {
       </section>
 
       {/* Vision */}
-      <section className="grid grid-cols-12 gap-10 md:gap-16">
+      <section className="grid grid-cols-12 gap-10 md:gap-16 mb-20">
         <div className="col-span-12 md:col-span-3">
           <h2 className="font-display text-5xl md:text-7xl text-accent leading-none">VISION</h2>
         </div>
         <div className="col-span-12 md:col-span-9 space-y-6 text-base md:text-lg leading-relaxed">
-          <p>
-            We are building a new home for original animation and manga that
-            speaks the language of the world while staying anchored in our roots.
+          <p className="font-display text-2xl md:text-3xl tracking-tight">
+            WELCOME TO KARTA STUDIO.
           </p>
           <p>
-            Every frame, every panel, every sentence is crafted with the discipline
-            of a film studio and the heart of an independent atelier.
+            We are building our own Anime, Manga, and Novel universe. Our mission
+            is to redefine storytelling with high-octane action and deep narratives.
           </p>
           <blockquote className="border-l-4 border-accent pl-5 italic text-xl md:text-2xl text-foreground">
             "Stories are how a culture talks to the future."
           </blockquote>
+        </div>
+      </section>
+
+      {/* Connect / Social Links */}
+      <section className="grid grid-cols-12 gap-10 md:gap-16">
+        <div className="col-span-12 md:col-span-3">
+          <h2 className="font-display text-5xl md:text-7xl text-accent leading-none">CONNECT</h2>
+        </div>
+        <div className="col-span-12 md:col-span-9">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            {[
+              { label: "YOUTUBE", handle: "@karta_studios", href: "https://youtube.com/@karta_studios?si=Na0LFGdRVhb0HiMC" },
+              { label: "DISCORD", handle: "Join the server", href: "https://discord.gg/9BT2bYZYWt" },
+              { label: "TAPAS", handle: "THE LAST GLITCH", href: "https://tapas.io/series/THE-LAST-GLITCH" },
+            ].map((s) => (
+              <a
+                key={s.label}
+                href={s.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group block border hairline p-5 hover:bg-accent hover:text-accent-foreground transition-colors"
+              >
+                <div className="font-display text-xl tracking-[0.2em]">{s.label}</div>
+                <div className="font-tech text-[11px] tracking-[0.2em] mt-2 opacity-70 group-hover:opacity-100">
+                  {s.handle} →
+                </div>
+              </a>
+            ))}
+          </div>
         </div>
       </section>
     </PageShell>

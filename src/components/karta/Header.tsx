@@ -32,6 +32,11 @@ export const Header = ({ active, onNavigate }: Props) => {
             className="flex items-center gap-2 group min-w-0 shrink"
             aria-label="KARTA STUDIO home"
           >
+            <img
+              src="/karta-logo.png"
+              alt="KARTA STUDIO"
+              className="h-9 sm:h-10 md:h-12 w-auto object-contain"
+            />
             <span className="font-display text-xl sm:text-2xl md:text-3xl leading-none tracking-tight text-accent whitespace-nowrap">
               KARTA
             </span>
