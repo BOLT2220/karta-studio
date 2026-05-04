@@ -215,15 +215,15 @@ export const Home = ({ onNavigate }: HomeProps) => {
 
       {/* JOIN THE REVOLUTION */}
       <section className="border-t hairline bg-foreground text-background">
-        <div className="max-w-[1400px] mx-auto px-6 md:px-12 py-20 md:py-28 grid grid-cols-12 gap-8">
+        <div className="max-w-[1400px] mx-auto px-4 sm:px-6 md:px-12 py-14 sm:py-20 md:py-28 grid grid-cols-12 gap-6 md:gap-8">
           <div className="col-span-12 md:col-span-8 slide-up">
-            <div className="font-tech text-xs tracking-[0.4em] text-accent mb-5">
+            <div className="font-tech text-[10px] sm:text-xs tracking-[0.3em] sm:tracking-[0.4em] text-accent mb-4 sm:mb-5">
               ▸ OPEN CALL — UNPAID / VISIONARY
             </div>
             <h2 className="font-display text-4xl sm:text-5xl md:text-7xl leading-[0.95] tracking-tight">
               JOIN THE <span className="text-accent">REVOLUTION</span>.
             </h2>
-            <p className="mt-6 max-w-xl text-base md:text-lg opacity-80 leading-relaxed">
+            <p className="mt-5 sm:mt-6 max-w-xl text-sm sm:text-base md:text-lg opacity-80 leading-relaxed">
               We are looking for <span className="text-accent font-semibold">30+ FREE Visionary Artists & Writers</span> who
               want to build something legendary. No pay, no gatekeeping — just pure
               storytelling and the chance to shape KARTA STUDIO from day one.
@@ -234,7 +234,7 @@ export const Home = ({ onNavigate }: HomeProps) => {
               href="https://discord.gg/9BT2bYZYWt"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-3 bg-accent text-accent-foreground px-8 py-5 font-display text-lg tracking-[0.25em] hover:opacity-90 transition-opacity"
+              className="w-full md:w-auto inline-flex items-center justify-center gap-3 bg-accent text-accent-foreground px-6 sm:px-8 py-4 sm:py-5 font-display text-base sm:text-lg tracking-[0.25em] hover:opacity-90 transition-opacity min-h-[44px]"
             >
               JOIN NOW <span aria-hidden>▸</span>
             </a>
