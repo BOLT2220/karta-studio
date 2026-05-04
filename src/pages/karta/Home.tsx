@@ -143,6 +143,105 @@ export const Home = ({ onNavigate }: HomeProps) => {
         </div>
       </section>
 
+      {/* ROADMAP */}
+      <section className="border-t hairline">
+        <div className="max-w-[1400px] mx-auto px-6 md:px-12 py-16 md:py-24">
+          <div className="flex items-end justify-between mb-12">
+            <h2 className="font-display text-4xl md:text-6xl tracking-tight leading-none">
+              KARTA STUDIO <span className="text-accent">ROADMAP</span>
+            </h2>
+            <span className="font-tech text-[11px] tracking-[0.3em] text-muted-foreground hidden md:block">
+              ▸ 2026 — BEYOND
+            </span>
+          </div>
+
+          <div className="relative grid grid-cols-12 gap-6">
+            {/* vertical line */}
+            <div className="hidden md:block absolute left-[8.333%] top-2 bottom-2 w-px bg-border" />
+
+            {[
+              {
+                phase: "PHASE 01",
+                status: "ACTIVE",
+                title: "THE BOYZS",
+                desc: "Our flagship action-comedy novel is live. New episodes rolling out as the universe expands.",
+              },
+              {
+                phase: "PHASE 02",
+                status: "IN DEVELOPMENT",
+                title: "NEW MANGA & NOVELS",
+                desc: "Expanding the KARTA library with original manga series and new novels across genres.",
+              },
+              {
+                phase: "PHASE 03",
+                status: "VISION",
+                title: "PROJECT // MASTERPIECE",
+                desc: "Our long-term mission: a full-scale original anime production made in India for the world.",
+              },
+            ].map((p, i) => (
+              <div
+                key={p.phase}
+                className="col-span-12 md:col-span-12 grid grid-cols-12 gap-6 slide-up"
+                style={{ animationDelay: `${i * 0.1}s` }}
+              >
+                <div className="col-span-12 md:col-span-2 relative">
+                  <div className="hidden md:block absolute left-1/2 -translate-x-1/2 top-2 w-3 h-3 rounded-full bg-accent ring-4 ring-background" />
+                  <div className="font-tech text-xs tracking-[0.3em] text-accent md:text-center">{p.phase}</div>
+                </div>
+                <div className="col-span-12 md:col-span-10 border hairline p-6 md:p-8 hover:border-accent transition-colors">
+                  <div className="flex items-center gap-3 mb-3">
+                    <span
+                      className={`font-tech text-[10px] tracking-[0.3em] px-2 py-1 ${
+                        p.status === "ACTIVE"
+                          ? "bg-accent text-accent-foreground coming-dot"
+                          : "border border-border text-muted-foreground"
+                      }`}
+                    >
+                      {p.status === "ACTIVE" ? "● " : ""}{p.status}
+                    </span>
+                  </div>
+                  <h3 className="font-display text-2xl md:text-4xl tracking-tight leading-none mb-3">
+                    {p.title}
+                  </h3>
+                  <p className="text-sm md:text-base text-muted-foreground leading-relaxed max-w-2xl">
+                    {p.desc}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* JOIN THE REVOLUTION */}
+      <section className="border-t hairline bg-foreground text-background">
+        <div className="max-w-[1400px] mx-auto px-6 md:px-12 py-20 md:py-28 grid grid-cols-12 gap-8">
+          <div className="col-span-12 md:col-span-8 slide-up">
+            <div className="font-tech text-xs tracking-[0.4em] text-accent mb-5">
+              ▸ OPEN CALL — UNPAID / VISIONARY
+            </div>
+            <h2 className="font-display text-4xl sm:text-5xl md:text-7xl leading-[0.95] tracking-tight">
+              JOIN THE <span className="text-accent">REVOLUTION</span>.
+            </h2>
+            <p className="mt-6 max-w-xl text-base md:text-lg opacity-80 leading-relaxed">
+              We are looking for <span className="text-accent font-semibold">30+ FREE Visionary Artists & Writers</span> who
+              want to build something legendary. No pay, no gatekeeping — just pure
+              storytelling and the chance to shape KARTA STUDIO from day one.
+            </p>
+          </div>
+          <div className="col-span-12 md:col-span-4 slide-up flex md:items-end md:justify-end" style={{ animationDelay: "0.15s" }}>
+            <a
+              href="https://discord.gg/9BT2bYZYWt"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-3 bg-accent text-accent-foreground px-8 py-5 font-display text-lg tracking-[0.25em] hover:opacity-90 transition-opacity"
+            >
+              JOIN NOW <span aria-hidden>▸</span>
+            </a>
+          </div>
+        </div>
+      </section>
+
       <ComingSoonModal
         open={boyzsOpen}
         onOpenChange={setBoyzsOpen}
