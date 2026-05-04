@@ -68,9 +68,9 @@ export const About = () => {
       </section>
 
       {/* Connect / Social Links */}
-      <section className="grid grid-cols-12 gap-10 md:gap-16">
+      <section className="grid grid-cols-12 gap-6 sm:gap-10 md:gap-16">
         <div className="col-span-12 md:col-span-3">
-          <h2 className="font-display text-5xl md:text-7xl text-accent leading-none">CONNECT</h2>
+          <h2 className="font-display text-4xl sm:text-5xl md:text-7xl text-accent leading-none">CONNECT</h2>
         </div>
         <div className="col-span-12 md:col-span-9">
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
