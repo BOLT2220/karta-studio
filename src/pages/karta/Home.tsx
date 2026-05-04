@@ -145,9 +145,9 @@ export const Home = ({ onNavigate }: HomeProps) => {
 
       {/* ROADMAP */}
       <section className="border-t hairline">
-        <div className="max-w-[1400px] mx-auto px-6 md:px-12 py-16 md:py-24">
-          <div className="flex items-end justify-between mb-12">
-            <h2 className="font-display text-4xl md:text-6xl tracking-tight leading-none">
+        <div className="max-w-[1400px] mx-auto px-4 sm:px-6 md:px-12 py-12 sm:py-16 md:py-24">
+          <div className="flex items-end justify-between mb-8 sm:mb-12">
+            <h2 className="font-display text-3xl sm:text-4xl md:text-6xl tracking-tight leading-none">
               KARTA STUDIO <span className="text-accent">ROADMAP</span>
             </h2>
             <span className="font-tech text-[11px] tracking-[0.3em] text-muted-foreground hidden md:block">
