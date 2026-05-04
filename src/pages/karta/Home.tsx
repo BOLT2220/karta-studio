@@ -91,9 +91,9 @@ export const Home = ({ onNavigate }: HomeProps) => {
       </section>
 
       {/* WORKS strip — Madhouse-style */}
-      <section className="max-w-[1400px] mx-auto px-6 md:px-12 py-16 md:py-24">
-        <div className="flex items-end justify-between mb-10">
-          <h2 className="font-display text-4xl md:text-6xl tracking-tight leading-none">WORKS</h2>
+      <section className="max-w-[1400px] mx-auto px-4 sm:px-6 md:px-12 py-12 sm:py-16 md:py-24">
+        <div className="flex items-end justify-between mb-8 sm:mb-10">
+          <h2 className="font-display text-3xl sm:text-4xl md:text-6xl tracking-tight leading-none">WORKS</h2>
           <button
             onClick={() => onNavigate("works")}
             className="font-display text-sm tracking-[0.25em] text-foreground hover:text-accent transition-colors"
