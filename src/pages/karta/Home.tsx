@@ -59,17 +59,17 @@ export const Home = ({ onNavigate }: HomeProps) => {
     <main className="page-enter">
       {/* Hero — clean, editorial */}
       <section className="border-b hairline">
-        <div className="max-w-[1400px] mx-auto px-6 md:px-12 py-16 md:py-24 grid grid-cols-12 gap-8">
+        <div className="max-w-[1400px] mx-auto px-4 sm:px-6 md:px-12 py-10 sm:py-16 md:py-24 grid grid-cols-12 gap-6 md:gap-8">
           <div className="col-span-12 md:col-span-8 slide-up">
-            <div className="font-tech text-xs tracking-[0.4em] text-accent mb-5">
+            <div className="font-tech text-[10px] sm:text-xs tracking-[0.3em] sm:tracking-[0.4em] text-accent mb-4 sm:mb-5">
               ANIMATION · MANGA · NOVEL — EST. 2026
             </div>
-            <h1 className="font-display text-5xl sm:text-6xl md:text-8xl lg:text-9xl leading-[0.92] tracking-tight">
+            <h1 className="font-display text-4xl sm:text-6xl md:text-8xl lg:text-9xl leading-[0.95] tracking-tight">
               STORIES BUILT<br />
               <span className="text-accent">FOR THE WORLD</span>,<br />
               FROM <span className="underline decoration-accent decoration-4 underline-offset-8">INDIA</span>.
             </h1>
-            <p className="mt-8 max-w-xl text-base md:text-lg text-muted-foreground leading-relaxed">
+            <p className="mt-6 sm:mt-8 max-w-xl text-sm sm:text-base md:text-lg text-muted-foreground leading-relaxed">
               KARTA STUDIO is an independent animation, manga and novel house —
               crafting international-level series with a distinctly Indian voice.
             </p>
