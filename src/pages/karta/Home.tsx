@@ -188,7 +188,7 @@ export const Home = ({ onNavigate }: HomeProps) => {
                   <div className="hidden md:block absolute left-1/2 -translate-x-1/2 top-2 w-3 h-3 rounded-full bg-accent ring-4 ring-background" />
                   <div className="font-tech text-xs tracking-[0.3em] text-accent md:text-center">{p.phase}</div>
                 </div>
-                <div className="col-span-12 md:col-span-10 border hairline p-6 md:p-8 hover:border-accent transition-colors">
+                <div className="col-span-12 md:col-span-10 border hairline p-5 sm:p-6 md:p-8 hover:border-accent transition-colors">
                   <div className="flex items-center gap-3 mb-3">
                     <span
                       className={`font-tech text-[10px] tracking-[0.3em] px-2 py-1 ${
@@ -200,7 +200,7 @@ export const Home = ({ onNavigate }: HomeProps) => {
                       {p.status === "ACTIVE" ? "● " : ""}{p.status}
                     </span>
                   </div>
-                  <h3 className="font-display text-2xl md:text-4xl tracking-tight leading-none mb-3">
+                  <h3 className="font-display text-2xl sm:text-3xl md:text-4xl tracking-tight leading-none mb-3">
                     {p.title}
                   </h3>
                   <p className="text-sm md:text-base text-muted-foreground leading-relaxed max-w-2xl">
