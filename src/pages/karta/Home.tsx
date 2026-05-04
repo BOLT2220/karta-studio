@@ -59,17 +59,17 @@ export const Home = ({ onNavigate }: HomeProps) => {
     <main className="page-enter">
       {/* Hero — clean, editorial */}
       <section className="border-b hairline">
-        <div className="max-w-[1400px] mx-auto px-6 md:px-12 py-16 md:py-24 grid grid-cols-12 gap-8">
+        <div className="max-w-[1400px] mx-auto px-4 sm:px-6 md:px-12 py-10 sm:py-16 md:py-24 grid grid-cols-12 gap-6 md:gap-8">
           <div className="col-span-12 md:col-span-8 slide-up">
-            <div className="font-tech text-xs tracking-[0.4em] text-accent mb-5">
+            <div className="font-tech text-[10px] sm:text-xs tracking-[0.3em] sm:tracking-[0.4em] text-accent mb-4 sm:mb-5">
               ANIMATION · MANGA · NOVEL — EST. 2026
             </div>
-            <h1 className="font-display text-5xl sm:text-6xl md:text-8xl lg:text-9xl leading-[0.92] tracking-tight">
+            <h1 className="font-display text-4xl sm:text-6xl md:text-8xl lg:text-9xl leading-[0.95] tracking-tight">
               STORIES BUILT<br />
               <span className="text-accent">FOR THE WORLD</span>,<br />
               FROM <span className="underline decoration-accent decoration-4 underline-offset-8">INDIA</span>.
             </h1>
-            <p className="mt-8 max-w-xl text-base md:text-lg text-muted-foreground leading-relaxed">
+            <p className="mt-6 sm:mt-8 max-w-xl text-sm sm:text-base md:text-lg text-muted-foreground leading-relaxed">
               KARTA STUDIO is an independent animation, manga and novel house —
               crafting international-level series with a distinctly Indian voice.
             </p>
@@ -91,9 +91,9 @@ export const Home = ({ onNavigate }: HomeProps) => {
       </section>
 
       {/* WORKS strip — Madhouse-style */}
-      <section className="max-w-[1400px] mx-auto px-6 md:px-12 py-16 md:py-24">
-        <div className="flex items-end justify-between mb-10">
-          <h2 className="font-display text-4xl md:text-6xl tracking-tight leading-none">WORKS</h2>
+      <section className="max-w-[1400px] mx-auto px-4 sm:px-6 md:px-12 py-12 sm:py-16 md:py-24">
+        <div className="flex items-end justify-between mb-8 sm:mb-10">
+          <h2 className="font-display text-3xl sm:text-4xl md:text-6xl tracking-tight leading-none">WORKS</h2>
           <button
             onClick={() => onNavigate("works")}
             className="font-display text-sm tracking-[0.25em] text-foreground hover:text-accent transition-colors"
@@ -145,9 +145,9 @@ export const Home = ({ onNavigate }: HomeProps) => {
 
       {/* ROADMAP */}
       <section className="border-t hairline">
-        <div className="max-w-[1400px] mx-auto px-6 md:px-12 py-16 md:py-24">
-          <div className="flex items-end justify-between mb-12">
-            <h2 className="font-display text-4xl md:text-6xl tracking-tight leading-none">
+        <div className="max-w-[1400px] mx-auto px-4 sm:px-6 md:px-12 py-12 sm:py-16 md:py-24">
+          <div className="flex items-end justify-between mb-8 sm:mb-12">
+            <h2 className="font-display text-3xl sm:text-4xl md:text-6xl tracking-tight leading-none">
               KARTA STUDIO <span className="text-accent">ROADMAP</span>
             </h2>
             <span className="font-tech text-[11px] tracking-[0.3em] text-muted-foreground hidden md:block">
@@ -188,7 +188,7 @@ export const Home = ({ onNavigate }: HomeProps) => {
                   <div className="hidden md:block absolute left-1/2 -translate-x-1/2 top-2 w-3 h-3 rounded-full bg-accent ring-4 ring-background" />
                   <div className="font-tech text-xs tracking-[0.3em] text-accent md:text-center">{p.phase}</div>
                 </div>
-                <div className="col-span-12 md:col-span-10 border hairline p-6 md:p-8 hover:border-accent transition-colors">
+                <div className="col-span-12 md:col-span-10 border hairline p-5 sm:p-6 md:p-8 hover:border-accent transition-colors">
                   <div className="flex items-center gap-3 mb-3">
                     <span
                       className={`font-tech text-[10px] tracking-[0.3em] px-2 py-1 ${
@@ -200,7 +200,7 @@ export const Home = ({ onNavigate }: HomeProps) => {
                       {p.status === "ACTIVE" ? "● " : ""}{p.status}
                     </span>
                   </div>
-                  <h3 className="font-display text-2xl md:text-4xl tracking-tight leading-none mb-3">
+                  <h3 className="font-display text-2xl sm:text-3xl md:text-4xl tracking-tight leading-none mb-3">
                     {p.title}
                   </h3>
                   <p className="text-sm md:text-base text-muted-foreground leading-relaxed max-w-2xl">
@@ -215,15 +215,15 @@ export const Home = ({ onNavigate }: HomeProps) => {
 
       {/* JOIN THE REVOLUTION */}
       <section className="border-t hairline bg-foreground text-background">
-        <div className="max-w-[1400px] mx-auto px-6 md:px-12 py-20 md:py-28 grid grid-cols-12 gap-8">
+        <div className="max-w-[1400px] mx-auto px-4 sm:px-6 md:px-12 py-14 sm:py-20 md:py-28 grid grid-cols-12 gap-6 md:gap-8">
           <div className="col-span-12 md:col-span-8 slide-up">
-            <div className="font-tech text-xs tracking-[0.4em] text-accent mb-5">
+            <div className="font-tech text-[10px] sm:text-xs tracking-[0.3em] sm:tracking-[0.4em] text-accent mb-4 sm:mb-5">
               ▸ OPEN CALL — UNPAID / VISIONARY
             </div>
             <h2 className="font-display text-4xl sm:text-5xl md:text-7xl leading-[0.95] tracking-tight">
               JOIN THE <span className="text-accent">REVOLUTION</span>.
             </h2>
-            <p className="mt-6 max-w-xl text-base md:text-lg opacity-80 leading-relaxed">
+            <p className="mt-5 sm:mt-6 max-w-xl text-sm sm:text-base md:text-lg opacity-80 leading-relaxed">
               We are looking for <span className="text-accent font-semibold">30+ FREE Visionary Artists & Writers</span> who
               want to build something legendary. No pay, no gatekeeping — just pure
               storytelling and the chance to shape KARTA STUDIO from day one.
@@ -234,7 +234,7 @@ export const Home = ({ onNavigate }: HomeProps) => {
               href="https://discord.gg/9BT2bYZYWt"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-3 bg-accent text-accent-foreground px-8 py-5 font-display text-lg tracking-[0.25em] hover:opacity-90 transition-opacity"
+              className="w-full md:w-auto inline-flex items-center justify-center gap-3 bg-accent text-accent-foreground px-6 sm:px-8 py-4 sm:py-5 font-display text-base sm:text-lg tracking-[0.25em] hover:opacity-90 transition-opacity min-h-[44px]"
             >
               JOIN NOW <span aria-hidden>▸</span>
             </a>

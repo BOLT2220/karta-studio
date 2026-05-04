@@ -30,13 +30,13 @@ export const About = () => {
       </div>
 
       {/* Profile editorial */}
-      <section className="grid grid-cols-12 gap-10 md:gap-16 mb-20">
+      <section className="grid grid-cols-12 gap-6 sm:gap-10 md:gap-16 mb-14 sm:mb-20">
         <div className="col-span-12 md:col-span-3">
-          <h2 className="font-display text-5xl md:text-7xl text-accent leading-none">PROFILE</h2>
+          <h2 className="font-display text-4xl sm:text-5xl md:text-7xl text-accent leading-none">PROFILE</h2>
         </div>
         <div className="col-span-12 md:col-span-9 divide-y hairline border-y hairline">
           {PROFILE.map((row) => (
-            <div key={row.label} className="grid grid-cols-12 gap-4 py-5">
+            <div key={row.label} className="grid grid-cols-12 gap-2 sm:gap-4 py-4 sm:py-5">
               <div className="col-span-12 md:col-span-4 font-display text-base md:text-lg tracking-wide">
                 {row.label}
               </div>
@@ -49,28 +49,28 @@ export const About = () => {
       </section>
 
       {/* Vision */}
-      <section className="grid grid-cols-12 gap-10 md:gap-16 mb-20">
+      <section className="grid grid-cols-12 gap-6 sm:gap-10 md:gap-16 mb-14 sm:mb-20">
         <div className="col-span-12 md:col-span-3">
-          <h2 className="font-display text-5xl md:text-7xl text-accent leading-none">VISION</h2>
+          <h2 className="font-display text-4xl sm:text-5xl md:text-7xl text-accent leading-none">VISION</h2>
         </div>
-        <div className="col-span-12 md:col-span-9 space-y-6 text-base md:text-lg leading-relaxed">
-          <p className="font-display text-2xl md:text-3xl tracking-tight">
+        <div className="col-span-12 md:col-span-9 space-y-5 sm:space-y-6 text-base md:text-lg leading-relaxed">
+          <p className="font-display text-xl sm:text-2xl md:text-3xl tracking-tight">
             WELCOME TO KARTA STUDIO.
           </p>
-          <p>
+          <p className="text-sm sm:text-base md:text-lg">
             We are building our own Anime, Manga, and Novel universe. Our mission
             is to redefine storytelling with high-octane action and deep narratives.
           </p>
-          <blockquote className="border-l-4 border-accent pl-5 italic text-xl md:text-2xl text-foreground">
+          <blockquote className="border-l-4 border-accent pl-4 sm:pl-5 italic text-lg sm:text-xl md:text-2xl text-foreground">
             "Stories are how a culture talks to the future."
           </blockquote>
         </div>
       </section>
 
       {/* Connect / Social Links */}
-      <section className="grid grid-cols-12 gap-10 md:gap-16">
+      <section className="grid grid-cols-12 gap-6 sm:gap-10 md:gap-16">
         <div className="col-span-12 md:col-span-3">
-          <h2 className="font-display text-5xl md:text-7xl text-accent leading-none">CONNECT</h2>
+          <h2 className="font-display text-4xl sm:text-5xl md:text-7xl text-accent leading-none">CONNECT</h2>
         </div>
         <div className="col-span-12 md:col-span-9">
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
