@@ -65,9 +65,23 @@
 
   body { overflow-x: hidden; }
 
+  /* Reserve space for mobile sticky bottom nav (56px + safe-area) */
+  @media (max-width: 1023px) {
+    body { padding-bottom: calc(56px + env(safe-area-inset-bottom)); }
+  }
+
+  img, video { max-width: 100%; height: auto; }
+
   h1, h2, h3, h4, h5, h6 {
     font-family: 'Anton', 'Bebas Neue', 'Oswald', Impact, sans-serif;
     letter-spacing: 0;
+  }
+
+  /* Touch targets: ensure links/buttons are tappable on mobile */
+  @media (max-width: 1023px) {
+    button, a[role="button"], a.btn, .touch-target {
+      min-height: 44px;
+    }
   }
 }
 
