@@ -1,6 +1,8 @@
+import { useState } from "react";
 import { PageShell } from "@/components/karta/PageShell";
 import { PageId } from "@/pages/Index";
 import { StoryEngagement } from "@/components/karta/StoryEngagement";
+import { LanguageSelectModal } from "@/components/karta/LanguageSelectModal";
 import poster from "@/assets/the-last-glitch-banner.jpeg";
 
 interface Props {
@@ -8,6 +10,12 @@ interface Props {
 }
 
 export const LastGlitchDetail = ({ onNavigate }: Props) => {
+  const [pickLang, setPickLang] = useState(false);
+  const openReader = () => setPickLang(true);
+  const handleSelect = (lang: "en" | "hi") => {
+    setPickLang(false);
+    onNavigate(lang === "hi" ? "reader-hi" : "reader");
+  };
   return (
     <PageShell title="NOVEL">
       <section className="grid grid-cols-12 gap-10 slide-up">
@@ -67,7 +75,7 @@ export const LastGlitchDetail = ({ onNavigate }: Props) => {
 
           <div className="mt-8">
             <button
-              onClick={() => onNavigate("reader")}
+              onClick={openReader}
               className="bg-accent text-accent-foreground font-display text-base px-6 py-3 hover:bg-foreground hover:text-background transition-colors"
             >
               READ EP.001 ▸
@@ -83,7 +91,7 @@ export const LastGlitchDetail = ({ onNavigate }: Props) => {
               <span className="col-span-5 font-display text-lg md:text-xl tracking-tight">THE 404 ROAD</span>
               <span className="col-span-2 font-tech text-[10px] tracking-[0.25em] text-muted-foreground">2026.05</span>
               <button
-                onClick={() => onNavigate("reader")}
+                onClick={openReader}
                 className="col-span-3 justify-self-end bg-foreground text-background font-display text-xs tracking-[0.2em] px-4 py-2 hover:bg-accent transition-colors"
               >
                 READ ▸
@@ -104,6 +112,7 @@ export const LastGlitchDetail = ({ onNavigate }: Props) => {
       </section>
 
       <StoryEngagement storyId="the-last-glitch" />
+      <LanguageSelectModal open={pickLang} onClose={() => setPickLang(false)} onSelect={handleSelect} />
     </PageShell>
   );
 };
