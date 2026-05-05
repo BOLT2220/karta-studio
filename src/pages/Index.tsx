@@ -9,13 +9,18 @@ import { Blog } from "@/pages/karta/Blog";
 import { Contact } from "@/pages/karta/Contact";
 import { NovelDetail } from "@/pages/karta/NovelDetail";
 import { Reader } from "@/pages/karta/Reader";
+import { ReaderHi } from "@/pages/karta/ReaderHi";
 import { IntroSequence } from "@/pages/karta/IntroSequence";
 import { BoyzsIntro } from "@/pages/karta/BoyzsIntro";
 import { BoyzsReader } from "@/pages/karta/BoyzsReader";
+import { BoyzsReaderEn } from "@/pages/karta/BoyzsReaderEn";
 import { BoyzsDetail } from "@/pages/karta/boyzsDetail";
 import { LastGlitchDetail } from "@/pages/karta/LastGlitchDetail";
 
-export type PageId = "home" | "works" | "about" | "blog" | "contact" | "novel" | "reader" | "intro" | "glitch" | "boyzs" | "boyzs-intro" | "boyzs-reader";
+export type PageId =
+  | "home" | "works" | "about" | "blog" | "contact"
+  | "novel" | "reader" | "reader-hi" | "intro" | "glitch"
+  | "boyzs" | "boyzs-intro" | "boyzs-reader" | "boyzs-reader-en";
 
 const Index = () => {
   const [page, setPage] = useState<PageId>("home");
@@ -25,7 +30,10 @@ const Index = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
-  const isImmersive = page === "reader" || page === "intro" || page === "boyzs-intro" || page === "boyzs-reader";
+  const isImmersive =
+    page === "reader" || page === "reader-hi" ||
+    page === "intro" || page === "boyzs-intro" ||
+    page === "boyzs-reader" || page === "boyzs-reader-en";
 
   return (
     <div className="relative min-h-screen bg-background text-foreground">
@@ -40,9 +48,11 @@ const Index = () => {
       {page === "glitch" && <LastGlitchDetail onNavigate={handleNavigate} />}
       {page === "intro" && <IntroSequence onNavigate={handleNavigate} />}
       {page === "reader" && <Reader onNavigate={handleNavigate} />}
+      {page === "reader-hi" && <ReaderHi onNavigate={handleNavigate} />}
       {page === "boyzs" && <BoyzsDetail onNavigate={handleNavigate} />}
       {page === "boyzs-intro" && <BoyzsIntro onNavigate={handleNavigate} />}
       {page === "boyzs-reader" && <BoyzsReader onNavigate={handleNavigate} />}
+      {page === "boyzs-reader-en" && <BoyzsReaderEn onNavigate={handleNavigate} />}
       {!isImmersive && <Footer onNavigate={handleNavigate as (p: "works" | "about" | "blog" | "contact") => void} />}
     </div>
   );
