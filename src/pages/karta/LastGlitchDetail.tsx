@@ -1,6 +1,8 @@
+import { useState } from "react";
 import { PageShell } from "@/components/karta/PageShell";
 import { PageId } from "@/pages/Index";
 import { StoryEngagement } from "@/components/karta/StoryEngagement";
+import { LanguageSelectModal } from "@/components/karta/LanguageSelectModal";
 import poster from "@/assets/the-last-glitch-banner.jpeg";
 
 interface Props {
@@ -8,6 +10,12 @@ interface Props {
 }
 
 export const LastGlitchDetail = ({ onNavigate }: Props) => {
+  const [pickLang, setPickLang] = useState(false);
+  const openReader = () => setPickLang(true);
+  const handleSelect = (lang: "en" | "hi") => {
+    setPickLang(false);
+    onNavigate(lang === "hi" ? "reader-hi" : "reader");
+  };
   return (
     <PageShell title="NOVEL">
       <section className="grid grid-cols-12 gap-10 slide-up">
